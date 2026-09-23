@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Known Linux beta issues
+    url: https://tapzap.app/linux-beta/docs/KNOWN-ISSUES.md
+    about: Check known limitations and recovery notes before filing.
+  - name: Private support or security report
+    url: https://tapzap.app/contact
+    about: Use this for sensitive details; GitHub issues are public.

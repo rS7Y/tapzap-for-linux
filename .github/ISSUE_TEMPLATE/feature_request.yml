@@ -1,0 +1,36 @@
+name: Feature request
+description: Suggest a specific improvement for Tap Zap on Linux
+title: "[Feature] "
+labels: [enhancement, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is for Linux beta improvements, not private support or security reports.
+        Check existing issues before filing a duplicate.
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you change?
+      description: Describe the behavior you want, not just a feature name.
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: Why would this help?
+      description: A concrete use case or current limitation is useful.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Relevant Linux setup (optional)
+      placeholder: e.g. Sway on Fedora, or all Linux builds
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Public report check
+      options:
+        - label: I checked this public report and attachments for private information.
+          required: true

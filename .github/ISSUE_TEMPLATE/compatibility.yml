@@ -1,0 +1,75 @@
+name: Compatibility
+description: A build does not install, launch, or work with your Linux setup
+title: "[Compatibility] "
+labels: [compatibility, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for a distro, desktop, session, GPU, or display compatibility problem.
+        This issue is public. Share only errors you have reviewed and redacted.
+  - type: dropdown
+    id: build
+    attributes:
+      label: Build you tried
+      options:
+        - Omarchy / Hyprland
+        - X11
+        - GNOME Wayland
+        - KDE Plasma Wayland
+        - Sway
+        - Not sure which build to use
+    validations:
+      required: true
+  - type: input
+    id: distro
+    attributes:
+      label: Distribution and version
+      placeholder: e.g. Ubuntu 26.04
+    validations:
+      required: true
+  - type: input
+    id: desktop
+    attributes:
+      label: Desktop, version, and session
+      description: Include X11 or Wayland if known. "Not sure" is fine.
+      placeholder: e.g. KDE Plasma 6 on Wayland
+    validations:
+      required: true
+  - type: input
+    id: gpu
+    attributes:
+      label: GPU and display setup
+      description: GPU driving the display, internal/external, and number of displays if known.
+      placeholder: e.g. Intel Arc, laptop panel plus one external monitor
+  - type: dropdown
+    id: check
+    attributes:
+      label: Did the setup check pass?
+      description: Omarchy uses python3 install.py; other builds use ./run.sh --check.
+      options:
+        - Yes
+        - No
+        - I could not run it
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What did not work?
+      description: Include what happened and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: Relevant setup error (optional)
+      description: Paste only a short excerpt after removing personal paths, hostnames, keys, and other identifiers.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Public report check
+      options:
+        - label: I checked this public report and attachments for private information.
+          required: true

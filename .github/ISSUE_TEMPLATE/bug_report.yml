@@ -1,0 +1,93 @@
+name: Bug report
+description: A Linux beta crash, filtering, restoration, or interface problem
+title: "[Bug] "
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check the known issues and existing reports first. This issue will be public.
+        Do not intentionally trigger crashes or unplug a display to complete this form.
+        Remove license keys, personal paths, hostnames, and other identifiers from anything you share.
+  - type: dropdown
+    id: build
+    attributes:
+      label: Linux build
+      options:
+        - Omarchy / Hyprland
+        - X11
+        - GNOME Wayland
+        - KDE Plasma Wayland
+        - Sway
+        - Not sure
+    validations:
+      required: true
+  - type: input
+    id: release
+    attributes:
+      label: Release
+      description: Shown in the ZIP name, if known.
+      placeholder: 20260907-beta1
+  - type: input
+    id: distro
+    attributes:
+      label: Distribution and version
+      placeholder: e.g. Fedora 42
+    validations:
+      required: true
+  - type: input
+    id: desktop
+    attributes:
+      label: Desktop and session
+      description: Include the desktop version and X11 or Wayland if known.
+      placeholder: e.g. GNOME 48 on Wayland
+    validations:
+      required: true
+  - type: input
+    id: display
+    attributes:
+      label: GPU and display setup
+      description: GPU driving the display, internal/external, and number of displays if known.
+      placeholder: e.g. AMD 780M, one external SDR monitor
+  - type: textarea
+    id: happened
+    attributes:
+      label: What happened?
+      description: Describe the result you observed, including any effect on screen colors.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: What were you doing before it happened?
+      description: The exact steps or controls used. Do not reproduce a crash or unplug a monitor just to fill this in.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: dropdown
+    id: restoration
+    attributes:
+      label: Did OFF and Quit restore normal colors?
+      options:
+        - Yes, both restored normal colors
+        - OFF did not restore normal colors
+        - Quit did not restore normal colors
+        - I could not safely check
+        - Not relevant to this issue
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Relevant error or screenshot (optional)
+      description: Only a short, reviewed excerpt. Remove personal paths, hostnames, keys, and other identifiers first.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Public report check
+      options:
+        - label: I checked this public report and attachments for private information.
+          required: true
