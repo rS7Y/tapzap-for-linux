@@ -51,6 +51,15 @@ class IssueFormTests(unittest.TestCase):
             for link in config["contact_links"]
         ))
 
+    def test_bug_form_identifies_the_affected_control(self):
+        form = yaml.safe_load((TEMPLATES / "bug_report.yml").read_text())
+        controls = next(field for field in form["body"] if field.get("id") == "affected")
+        self.assertEqual(controls["type"], "dropdown")
+        self.assertTrue(controls["attributes"]["multiple"])
+        self.assertIn("Warmth", controls["attributes"]["options"])
+        self.assertIn("Full red", controls["attributes"]["options"])
+        self.assertIn("Software brightness", controls["attributes"]["options"])
+
     def test_readme_and_security_note_keep_private_material_out(self):
         readme = (ROOT / "README.md").read_text()
         security = (ROOT / "SECURITY.md").read_text()

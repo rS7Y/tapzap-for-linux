@@ -49,6 +49,21 @@ body:
       label: GPU and display setup
       description: GPU driving the display, internal/external, and number of displays if known.
       placeholder: e.g. AMD 780M, one external SDR monitor
+  - type: dropdown
+    id: affected
+    attributes:
+      label: What is affected?
+      multiple: true
+      options:
+        - Warmth
+        - Full red
+        - Software brightness
+        - OFF or Quit restoration
+        - Crash or launch
+        - Interface
+        - Other
+    validations:
+      required: true
   - type: textarea
     id: happened
     attributes:
