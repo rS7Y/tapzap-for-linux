@@ -48,8 +48,8 @@ body:
       label: Did the setup check pass?
       description: Omarchy uses python3 install.py; other builds use ./run.sh --check.
       options:
-        - Yes
-        - No
+        - "Yes"
+        - "No"
         - I could not run it
         - Not sure
     validations:

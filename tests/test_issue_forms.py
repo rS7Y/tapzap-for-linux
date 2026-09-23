@@ -37,6 +37,11 @@ class IssueFormTests(unittest.TestCase):
                 for field in form["body"]:
                     self.assertIn(field["type"], {"markdown", "input", "textarea", "dropdown", "checkboxes"})
                     self.assertIn("attributes", field)
+                    if field["type"] == "dropdown":
+                        self.assertTrue(all(
+                            isinstance(option, str)
+                            for option in field["attributes"]["options"]
+                        ))
 
     def test_chooser_disables_blank_public_issues_and_offers_private_route(self):
         config = yaml.safe_load((TEMPLATES / "config.yml").read_text())
