@@ -43,6 +43,6 @@ agreement is required. By submitting a contribution, you confirm you have the
 right to submit it under these terms.
 
 For ordinary bugs, compatibility, and feature requests, use the
-[GitHub issue forms](https://github.com/rS7Y/tapzap-linux/issues/new/choose).
+[GitHub issue forms](https://github.com/rS7Y/tapzap-for-linux/issues/new/choose).
 Do not publish vulnerabilities, personal information, or secrets there. Use
 the private route in [SECURITY.md](SECURITY.md) for sensitive reports.

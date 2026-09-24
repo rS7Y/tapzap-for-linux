@@ -35,7 +35,7 @@ import hashlib,json,os,sys
 from pathlib import Path
 root=Path(sys.argv[1]); output=Path(sys.argv[2])
 manifest=root/'docs/SOURCE-MANIFEST.json'
-info={'source_repository':'https://github.com/rS7Y/tapzap-linux',
+info={'source_repository':'https://github.com/rS7Y/tapzap-for-linux',
       'source_revision':os.environ['SOURCE_REVISION'],
       'source_manifest_sha256':hashlib.sha256(manifest.read_bytes()).hexdigest(),
       'architecture':'x86_64','status':'experimental; not a general Linux release',
