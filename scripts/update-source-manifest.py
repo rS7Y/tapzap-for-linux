@@ -33,7 +33,9 @@ def main():
     source_files = sorted(path for path in (ROOT / "src").rglob("*")
                           if path.is_file() and "build" not in path.relative_to(ROOT).parts
                           and "dist" not in path.relative_to(ROOT).parts
-                          and "evidence" not in path.relative_to(ROOT).parts)
+                          and "evidence" not in path.relative_to(ROOT).parts
+                          and "__pycache__" not in path.relative_to(ROOT).parts
+                          and path.suffix != ".pyc")
     discovered = {path.relative_to(ROOT).as_posix() for path in source_files}
     unmapped = discovered - records.keys() - ADDITIONAL_PROVENANCE.keys() - PUBLIC_AUTHORED.keys()
     if unmapped:

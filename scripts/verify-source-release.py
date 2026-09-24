@@ -28,7 +28,9 @@ def main():
     actual = {path.relative_to(ROOT).as_posix() for path in (ROOT / "src").rglob("*")
               if path.is_file() and "build" not in path.relative_to(ROOT).parts
               and "dist" not in path.relative_to(ROOT).parts
-              and "evidence" not in path.relative_to(ROOT).parts}
+              and "evidence" not in path.relative_to(ROOT).parts
+              and "__pycache__" not in path.relative_to(ROOT).parts
+              and path.suffix != ".pyc"}
     if actual != listed:
         fail(f"source manifest mismatch: missing={sorted(actual-listed)} extra={sorted(listed-actual)}")
     for row in rows:
