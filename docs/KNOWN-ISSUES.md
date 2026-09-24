@@ -30,4 +30,4 @@ until a later change documents a reproduced fix and a relevant test.
 The source audit and evidence boundaries are detailed in
 [validation](VALIDATION.md). If you encounter one, stop testing and follow the
 [safe troubleshooting steps](TROUBLESHOOTING.md). Share a short, redacted
-report using the [GitHub forms](https://github.com/rS7Y/tapzap-linux/issues/new/choose).
+report using the [GitHub forms](https://github.com/rS7Y/tapzap-for-linux/issues/new/choose).

@@ -169,9 +169,9 @@
     {
       "path": "src/omarchy-hyprland/README.md",
       "source_snapshot": "public-authored-2026-09-24",
-      "source_sha256": "81a179be8141a7d9b0dc5cde3209a8bcb8dab1a29bb381a652385ea513b5697f",
-      "bytes": 1261,
-      "sha256": "082f0e4bd53b0b13a72e1ceab59dd193a2635479d43a23e9beb1c5dac1713c63"
+      "source_sha256": "fdf56bf62133606530d73f28537203f67e6361ece1442169af4342f3e139d5f9",
+      "bytes": 1281,
+      "sha256": "fdf56bf62133606530d73f28537203f67e6361ece1442169af4342f3e139d5f9"
     },
     {
       "path": "src/omarchy-hyprland/build.sh",
@@ -224,8 +224,8 @@
     },
     {
       "path": "src/omarchy-hyprland/package.sh",
-      "sha256": "194c71179188f4eec0c15615c5bd300329026c4f38b5381300cd7c4a101abb14",
-      "bytes": 2654,
+      "sha256": "2e354930227dc4077ea1b61cae4b3c2bbec7070ce43849c7d93fe1a01455a260",
+      "bytes": 2658,
       "source_snapshot": "omarchy-addon-0.1.6",
       "source_sha256": "932b3f02ddacefd9f2b734308e55abfd345af3595d47794b6035bfd5c110d045"
     },

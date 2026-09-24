@@ -40,12 +40,12 @@ settings.
 
 ## Report a problem
 
-Search [existing reports](https://github.com/rS7Y/tapzap-linux/issues), then
-[choose a GitHub report form](https://github.com/rS7Y/tapzap-linux/issues/new/choose):
+Search [existing reports](https://github.com/rS7Y/tapzap-for-linux/issues), then
+[choose a GitHub report form](https://github.com/rS7Y/tapzap-for-linux/issues/new/choose):
 
-- [Bug report](https://github.com/rS7Y/tapzap-linux/issues/new?template=bug_report.yml)
-- [Compatibility report](https://github.com/rS7Y/tapzap-linux/issues/new?template=compatibility.yml)
-- [Feature request](https://github.com/rS7Y/tapzap-linux/issues/new?template=feature_request.yml)
+- [Bug report](https://github.com/rS7Y/tapzap-for-linux/issues/new?template=bug_report.yml)
+- [Compatibility report](https://github.com/rS7Y/tapzap-for-linux/issues/new?template=compatibility.yml)
+- [Feature request](https://github.com/rS7Y/tapzap-for-linux/issues/new?template=feature_request.yml)
 
 Include the app/build version, distro and version, desktop and session,
 GPU/driver, display/HDR context, exact steps, and expected versus actual
@@ -56,11 +56,11 @@ home-directory paths, and unreviewed logs or screenshots. See
 ## Project links
 
 - [Linux beta guide and current downloads](https://tapzap.app/linux-beta/)
-- [Linux source repository on GitHub](https://github.com/rS7Y/tapzap-linux)
+- [Linux source repository on GitHub](https://github.com/rS7Y/tapzap-for-linux)
 - [Changes](CHANGELOG.md)
 - [Contributing](CONTRIBUTING.md)
 - [Third-party notices](THIRD-PARTY-NOTICES/README.md)
-- [GitHub releases](https://github.com/rS7Y/tapzap-linux/releases) — no source-matched binary release yet
+- [GitHub releases](https://github.com/rS7Y/tapzap-for-linux/releases) — no source-matched binary release yet
 
 After the Linux setup and support information: need Tap Zap for
 [macOS or Windows](https://tapzap.app/download)? Those editions are paid;

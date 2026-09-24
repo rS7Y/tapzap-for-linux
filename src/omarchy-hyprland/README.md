@@ -4,9 +4,9 @@ This directory contains an experimental x86_64 integration for Omarchy using
 Hyprland's CTM v2 protocol. It is not a generic Wayland build and is not an
 official Omarchy package.
 
-Read the repository's [known issues](https://github.com/rS7Y/tapzap-linux/blob/main/docs/KNOWN-ISSUES.md),
-[validation limits](https://github.com/rS7Y/tapzap-linux/blob/main/docs/VALIDATION.md), and
-[safe recovery steps](https://github.com/rS7Y/tapzap-linux/blob/main/docs/TROUBLESHOOTING.md)
+Read the repository's [known issues](https://github.com/rS7Y/tapzap-for-linux/blob/main/docs/KNOWN-ISSUES.md),
+[validation limits](https://github.com/rS7Y/tapzap-for-linux/blob/main/docs/VALIDATION.md), and
+[safe recovery steps](https://github.com/rS7Y/tapzap-for-linux/blob/main/docs/TROUBLESHOOTING.md)
 before building. The physical filter-enable path and broad hardware
 compatibility are not verified.
 
@@ -27,4 +27,4 @@ reviewed. The installer is scoped to the current user's data directories and
 does not use `sudo`.
 
 The package includes its GPL text and third-party notices. The full source
-tree is available at [rS7Y/tapzap-linux](https://github.com/rS7Y/tapzap-linux).
+tree is available at [rS7Y/tapzap-for-linux](https://github.com/rS7Y/tapzap-for-linux).

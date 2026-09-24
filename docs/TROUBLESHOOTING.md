@@ -30,5 +30,5 @@ color shift would put you at risk.
 - Do not paste raw system logs into public issues. Remove personal paths,
   usernames, hostnames, license keys, and unrelated application data.
 
-For help, file a concise report with the [GitHub issue forms](https://github.com/rS7Y/tapzap-linux/issues/new/choose).
+For help, file a concise report with the [GitHub issue forms](https://github.com/rS7Y/tapzap-for-linux/issues/new/choose).
 For security-sensitive details, use the private route in [SECURITY.md](../SECURITY.md).
