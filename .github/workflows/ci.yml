@@ -1,0 +1,53 @@
+name: Linux source CI
+
+on:
+  push:
+    branches: [main, "codex/**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: linux-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Syntax-check Python and shell files
+        run: |
+          python -m compileall -q src tests scripts
+          find src scripts -type f -name '*.sh' -print0 | xargs -0 -r -n1 bash -n
+      - name: Verify imported source, notices, and private-path boundaries
+        run: python scripts/verify-source-release.py
+      - name: Run source, license, documentation, and issue-form tests
+        run: python -m unittest discover -s tests -v
+
+  native-builds:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [x11, gnome-wayland, plasma-wayland, sway, omarchy-hyprland]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Install required development packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            g++ pkg-config python3 python3-gi python3-yaml python3-xlib \
+            libx11-dev libxrandr-dev libxext-dev libxfixes-dev \
+            libcairo2-dev libfreetype6-dev libgtk-3-dev libayatana-appindicator3-dev \
+            dbus-daemon libdbus-1-dev libglib2.0-dev liblcms2-dev \
+            libwayland-dev libwayland-bin libwayland-server0 wayland-protocols \
+            xvfb
+      - name: Build the requested native variant and run its source self-test
+        run: bash scripts/ci-build-variant.sh "${{ matrix.variant }}"

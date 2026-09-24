@@ -46,7 +46,7 @@ body:
     id: check
     attributes:
       label: Did the setup check pass?
-      description: Omarchy uses python3 install.py; other builds use ./run.sh --check.
+      description: For a source build, run the documented self-test. For an older website ZIP, use its included setup check.
       options:
         - "Yes"
         - "No"

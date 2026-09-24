@@ -1,2 +1,6 @@
 __pycache__/
 *.pyc
+/src/*/build/
+/src/*/dist/
+/src/*/AppDir/
+/src/*/evidence/

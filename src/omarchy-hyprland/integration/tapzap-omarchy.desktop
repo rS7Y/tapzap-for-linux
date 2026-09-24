@@ -1,0 +1,20 @@
+# Copyright (C) 2026 Tap Zap.
+# SPDX-License-Identifier: GPL-3.0-or-later
+[Desktop Entry]
+Type=Application
+Name=TAP ZAP Omarchy
+Comment=Screen warmth and software dimming
+Exec=tapzap-omarchy show
+Icon=tapzap-omarchy
+Terminal=false
+Categories=Utility;Settings;
+StartupWMClass=TapZapOmarchy
+Actions=Toggle;Quit;
+
+[Desktop Action Toggle]
+Name=Toggle filter
+Exec=tapzap-omarchy toggle
+
+[Desktop Action Quit]
+Name=Quit TAP ZAP
+Exec=tapzap-omarchy quit

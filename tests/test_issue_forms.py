@@ -1,3 +1,5 @@
+# Copyright (C) 2026 Tap Zap.
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Keep the public Linux beta issue intake small and structurally valid."""
 
 from pathlib import Path

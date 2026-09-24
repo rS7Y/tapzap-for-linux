@@ -1,0 +1,857 @@
+{
+  "schema_version": 1,
+  "created_on": "2026-09-24",
+  "scope": "Linux application source and required assets only; no original absolute paths are retained.",
+  "files": [
+    {
+      "path": "src/gnome-wayland/assets/Anybody-Bold.ttf",
+      "sha256": "4f441d3231192e489940a047819de53d79382e043021a76bd54e0efd25129faa",
+      "bytes": 2356,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "4f441d3231192e489940a047819de53d79382e043021a76bd54e0efd25129faa"
+    },
+    {
+      "path": "src/gnome-wayland/assets/Anybody-ExtraBold.ttf",
+      "sha256": "58dbf7f99d0d79b63032ee907e26d4e1bd329a6d5026aac8bb71f27b2cebf697",
+      "bytes": 2804,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "58dbf7f99d0d79b63032ee907e26d4e1bd329a6d5026aac8bb71f27b2cebf697"
+    },
+    {
+      "path": "src/gnome-wayland/assets/OFL.txt",
+      "sha256": "7f0313b042b462fcae1934436cc747f9fd4433e3b08fd6459a4a5104b0bbd5db",
+      "bytes": 4486,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "7f0313b042b462fcae1934436cc747f9fd4433e3b08fd6459a4a5104b0bbd5db"
+    },
+    {
+      "path": "src/gnome-wayland/build.sh",
+      "sha256": "1cfc84fe4a84a49a305aad4431c826134e209e70241d87b58e35f0e424ac771a",
+      "bytes": 3223,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "afc50f80701d8e54c149bc8e5776a0b5b2b6bf2a6f84946efeca0243f01db3af"
+    },
+    {
+      "path": "src/gnome-wayland/gamma_backend.hpp",
+      "sha256": "2c257f36cdc14dcd0015a0ac2ac08bc119302efff8b8d581ca1b8405ec5998f9",
+      "bytes": 1755,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "ebf9baea0f2f9cbee57217c42865af5b03d91002306721b745ca0cfb7754f907"
+    },
+    {
+      "path": "src/gnome-wayland/gamma_gnome.cpp",
+      "sha256": "c68b4abadc963454fa48aef26e4b5a811f4dcd388ce3769c66617273499d9381",
+      "bytes": 4432,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "a052b104a61f0eb2a396e67383f9bd3c72e476fced6c68aee3050609eb7bf3a4"
+    },
+    {
+      "path": "src/gnome-wayland/gamma_headless.cpp",
+      "sha256": "98b1b99a25e24a3b27f69234a8665da63cb1b4a78d1c9516e10a47a3f25b27f5",
+      "bytes": 1896,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "c71a3be2c9bda8f835f68d162f51f08c2b001703d49be231066f63aa0e841b0d"
+    },
+    {
+      "path": "src/gnome-wayland/gamma_plasma.cpp",
+      "sha256": "0022c3e61bb37ea57dcec3d35873689b05842a3b194cb01c515d1990ef1920ac",
+      "bytes": 4447,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "488b5a8a6dabe50155f8ff73ba49a1c6ec6e6abe4d8b20c0823cf21b034e6702"
+    },
+    {
+      "path": "src/gnome-wayland/gamma_wayland.cpp",
+      "sha256": "b462081b8ad06a773e72733afe1040644792c3a54ba0c8a342833776c082cb33",
+      "bytes": 9782,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "daade3698f6dc63a1dcfb4c9c67de853be42932cb379c3011d4b8261ff631f63"
+    },
+    {
+      "path": "src/gnome-wayland/gamma_xrandr.cpp",
+      "sha256": "64e57208c39d00f62c79dfb64194545fc228483c26aacdb403fd4bb813972a83",
+      "bytes": 8573,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "37a8ab7763c82c3703bcf13468819adee9dc98c7a4f88104959fdaa47ff3a2e0"
+    },
+    {
+      "path": "src/gnome-wayland/gnome_helper.py",
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "5ee3a6a44d484d4dd5e928a4073ce321326515291e3ebbf0b09eb0ec7b2edf63",
+      "bytes": 9212,
+      "sha256": "de70119b77c5306b94e7138f337c0b2564deb4ef4fa5419bd4d14dd5247c6189"
+    },
+    {
+      "path": "src/gnome-wayland/ipc.hpp",
+      "sha256": "bc2689f51fffee85659d2eb2437c39333712bc0b64e6419bacbc4e3c77363839",
+      "bytes": 2511,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "74650db812e46bafe3370b932cf8339b74def539c89fcac4977072fc2e4ede77"
+    },
+    {
+      "path": "src/gnome-wayland/logind_brightness.hpp",
+      "sha256": "0ee17fd8f15a41efa3eb4d065686a22f4709e10718648b19d8b136b3df326c87",
+      "bytes": 4557,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "61264d78759096bab88e1829f43ca05ec8e9b6eb4f99ed48cb178e6ebdd88f1a"
+    },
+    {
+      "path": "src/gnome-wayland/main.cpp",
+      "sha256": "9daaf73fe251f18554481a1f9e7e6a1c9e2cbb214cb75bf1cde323b82381c41e",
+      "bytes": 10087,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "1ebd7329961e212d580fe2b663991d2f74fc46f7495a8e8b206ac8397a177d98"
+    },
+    {
+      "path": "src/gnome-wayland/platform.hpp",
+      "sha256": "3900d30f1678edd3ccee448328f5e205d834277b01fc160c0723f834a1438de7",
+      "bytes": 9488,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "95e795fba5c881f83b56b250d4255529b8a899b36545a0a86c5628939f7d13a8"
+    },
+    {
+      "path": "src/gnome-wayland/ppm.hpp",
+      "sha256": "1573cd14800d6ad73ff6871b5b7726cef7a4c1e47bb5953a0c3abf2789e28964",
+      "bytes": 1996,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "e02ebd4282f361105c3f3feed7b13efafec45a4a29646e2f4d611a6467add40a"
+    },
+    {
+      "path": "src/gnome-wayland/protocols/wlr-gamma-control-unstable-v1.xml",
+      "sha256": "4065cbc291a80348b7ef311168fbfb5cf245efe977a6dc32211291ef1a9529a1",
+      "bytes": 5507,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "4065cbc291a80348b7ef311168fbfb5cf245efe977a6dc32211291ef1a9529a1"
+    },
+    {
+      "path": "src/gnome-wayland/pwm.hpp",
+      "sha256": "e19de6d9666106f0c1005f337044cf093899e02b7507396984d617f08a6250e0",
+      "bytes": 4023,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "32d4ef094edd788c055aabd1167e09adac7cfb2d153e9f999df8fb035ce9bb6c"
+    },
+    {
+      "path": "src/gnome-wayland/tapzap_core.hpp",
+      "sha256": "71cd21cc9e375ee8a5b288e407cc3a4eae40fdd3fcddb1e6d437706fbd9df52f",
+      "bytes": 6204,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "76f162ef1a166fe4e9e5f034e9d7f69d249386282e16960f703b1fc42ce7bb0a",
+      "reviewed_change": "Removed private monorepo source filenames from explanatory comments."
+    },
+    {
+      "path": "src/gnome-wayland/test/xrandr_roundtrip.cpp",
+      "sha256": "7af3dbc5ac370db10cd9b9d0e19b3f76fe4a0df8058206fecdb0d8bd3021c1a2",
+      "bytes": 3788,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "c1fe289d4e1e372256f32f5a21ce316e54607e68308c842350951ae914300cd4"
+    },
+    {
+      "path": "src/gnome-wayland/tray.cpp",
+      "sha256": "f930cb5011ec6c5c4dbbde33e5725367df6bdd15e928486644cc9a1c54d07596",
+      "bytes": 1885,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "c5b0e770e07f2c1b1bc3494bca3dfef421801b5eceaf1d8477c3ab2a6ec09933"
+    },
+    {
+      "path": "src/gnome-wayland/ui.hpp",
+      "sha256": "fe6471d783d5bafb64f2263a3bb788e7aed9de724caacdf23f0c236e36d7d978",
+      "bytes": 371,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "6df354cf05c431603eec4c94330a9c60a4845d692d6bcd46fc0f12c71f9a6a71"
+    },
+    {
+      "path": "src/gnome-wayland/ui_cairo.cpp",
+      "sha256": "fdc36f42338b12deea8759096b61b9217246340a6e219171c46f44addf5cdbc0",
+      "bytes": 57053,
+      "source_snapshot": "desktop-tests-20260906/gnome",
+      "source_sha256": "b1e96f67ad5cbf2ba82309d96810c39fc4bae06460cad5ce4fdcd9c58089a924",
+      "reviewed_change": "Removed private monorepo source filenames from explanatory comments."
+    },
+    {
+      "path": "src/omarchy-hyprland/README.md",
+      "source_snapshot": "public-authored-2026-09-24",
+      "source_sha256": "81a179be8141a7d9b0dc5cde3209a8bcb8dab1a29bb381a652385ea513b5697f",
+      "bytes": 1261,
+      "sha256": "082f0e4bd53b0b13a72e1ceab59dd193a2635479d43a23e9beb1c5dac1713c63"
+    },
+    {
+      "path": "src/omarchy-hyprland/build.sh",
+      "sha256": "34327ffcd4cb7cf0d9a1259af0bcea47c4d9990cdec9eff9421a76732865b31f",
+      "bytes": 1230,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "977b87f1e8e80aac0b5eee5330f148c1bb41115ebd2872502691dd0d32ab2a90"
+    },
+    {
+      "path": "src/omarchy-hyprland/install.py",
+      "sha256": "bf80f3a3395802b3a74cc5a33ecf47f44a7a766236426553aba92ebcba7e6e26",
+      "bytes": 5323,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "c7068063e460d0a08bb48123546a003ede3cef0602f6e2ba4aeaa2e693902595"
+    },
+    {
+      "path": "src/omarchy-hyprland/integration/outside-click.lua",
+      "sha256": "4efb36e66f6de2fc34e29b0222140c99c69c536b6b00920b5fe5f49c6f6caebd",
+      "bytes": 1356,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "a30a240c9b034387b142932e734ff0ed8c910016b5be5f42e7608ecd7f58815f"
+    },
+    {
+      "path": "src/omarchy-hyprland/integration/setup-desktop.py",
+      "sha256": "5fbf248aa1085f9238b8cac009dc60a7ae5f8bebf45f4fb202919482410a54ad",
+      "bytes": 2197,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "051bfd88a19f06992c93cfefcd5d7ca90106df610920cded2b70ad64e61923e7"
+    },
+    {
+      "path": "src/omarchy-hyprland/integration/tapzap-omarchy",
+      "sha256": "10d753fac59c0572917e8d6e734a5f892da7470a269b81bb408c1a350d9f606c",
+      "bytes": 1443,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "10d753fac59c0572917e8d6e734a5f892da7470a269b81bb408c1a350d9f606c"
+    },
+    {
+      "path": "src/omarchy-hyprland/integration/tapzap-omarchy.desktop",
+      "sha256": "86bf5e7044168618e77f0e0619357e2eca2e242d45e6dce82dcae17fac91ae1d",
+      "bytes": 447,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "1a6bc434b0bc741b5c54aff52c5134f1847d8999d3f7e6ede2d8ea9f0fe2af76"
+    },
+    {
+      "path": "src/omarchy-hyprland/integration/tapzap-omarchy.svg",
+      "sha256": "66e5e4fb4a9f6f47ff8c4579cc3eb15678ed7dbe902bbd7b9bd66064d9d27cec",
+      "bytes": 210,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "8bbc7d0a3564b2c996541b75bae8ea6a886050340a78edcee68276bb0b7a7ae9"
+    },
+    {
+      "path": "src/omarchy-hyprland/package.sh",
+      "sha256": "194c71179188f4eec0c15615c5bd300329026c4f38b5381300cd7c4a101abb14",
+      "bytes": 2654,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "932b3f02ddacefd9f2b734308e55abfd345af3595d47794b6035bfd5c110d045"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/assets/Anybody-Bold.ttf",
+      "sha256": "4f441d3231192e489940a047819de53d79382e043021a76bd54e0efd25129faa",
+      "bytes": 2356,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "4f441d3231192e489940a047819de53d79382e043021a76bd54e0efd25129faa"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/assets/Anybody-ExtraBold.ttf",
+      "sha256": "58dbf7f99d0d79b63032ee907e26d4e1bd329a6d5026aac8bb71f27b2cebf697",
+      "bytes": 2804,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "58dbf7f99d0d79b63032ee907e26d4e1bd329a6d5026aac8bb71f27b2cebf697"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/assets/HYPRLAND-PROTOCOL-LICENSE.txt",
+      "sha256": "26effa52487115cb610a4461e277c3d63e612feffa2773be2aa03baccbfbbdc5",
+      "bytes": 1573,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "26effa52487115cb610a4461e277c3d63e612feffa2773be2aa03baccbfbbdc5"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/assets/OFL.txt",
+      "sha256": "7f0313b042b462fcae1934436cc747f9fd4433e3b08fd6459a4a5104b0bbd5db",
+      "bytes": 4486,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "7f0313b042b462fcae1934436cc747f9fd4433e3b08fd6459a4a5104b0bbd5db"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/ctm/color.h",
+      "sha256": "efd313d77dc8e162cf4178ee37536a652128212f5d1403bf762700c605b94d4f",
+      "bytes": 1571,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "345648e03a24952aa119f78788c7a66932be04768d975730010014fbd1d02574",
+      "reviewed_change": "Removed private monorepo source filenames from explanatory comments."
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/ctm/engine.c",
+      "sha256": "678355ecaee29c57544181e85a9ffd97fefb76dfa3ae891af1de4e1c3b98af86",
+      "bytes": 10133,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "9faf40c82b45d23ad5dd8016e7893207aac3bc16d9a9631c5ca59c5f0279a9c9"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/ctm/protocols/hyprland-ctm-control-v1.xml",
+      "sha256": "61005d257b54863465b88a5c57c22562f4d0315a36f4eda211b11d959f438601",
+      "bytes": 4474,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "61005d257b54863465b88a5c57c22562f4d0315a36f4eda211b11d959f438601"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/gamma_backend.hpp",
+      "sha256": "4f2c1d0906fad5030f0d40db4c1cf51ec39b9008d7e26c4b022290f67b9a1aec",
+      "bytes": 1811,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "7be7a36a3483b288fe2918c51df7daffecaf51765bb320173458d7ba5223e023"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/gamma_hyprland.cpp",
+      "sha256": "4f30d4dbec8840ff3492f1b5951d8e5974705bd5509e5c2935c1f3da3d214246",
+      "bytes": 3970,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "2ed3517835a6c3c2df9c7387d1962c0da6645eed51b8808476309cc2f139e935"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/ipc.hpp",
+      "sha256": "9fb8d92e721026f7677a3cd80680106748a00312bdd883ab472019095c63bb11",
+      "bytes": 4925,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "bd741c3ddf04b5460d7bb2b6ca5661f8a9f1cdd06684d43eb1d991ab3cbfcce8"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/logind_brightness.hpp",
+      "sha256": "0ee17fd8f15a41efa3eb4d065686a22f4709e10718648b19d8b136b3df326c87",
+      "bytes": 4557,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "61264d78759096bab88e1829f43ca05ec8e9b6eb4f99ed48cb178e6ebdd88f1a"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/main.cpp",
+      "sha256": "f1d2962f373db50a92c728a739c605ba87f43974de6a450dd6a7b32a7a04f184",
+      "bytes": 10284,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "cfeb446f61dc51fe9df46bad2595920e8711977cf63a2b979282790865b590e7"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/platform.hpp",
+      "sha256": "3d3adb72e3cdb461a929ff433c3ddfe267ed10939480a43f494a75cd75fd40a6",
+      "bytes": 9535,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "04631ff66ee5e05c72f9159eaa6bda46c5f092bc9d1f5126c8a7a7903b5bf06b"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/ppm.hpp",
+      "sha256": "1573cd14800d6ad73ff6871b5b7726cef7a4c1e47bb5953a0c3abf2789e28964",
+      "bytes": 1996,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "e02ebd4282f361105c3f3feed7b13efafec45a4a29646e2f4d611a6467add40a"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/pwm.hpp",
+      "sha256": "e19de6d9666106f0c1005f337044cf093899e02b7507396984d617f08a6250e0",
+      "bytes": 4023,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "32d4ef094edd788c055aabd1167e09adac7cfb2d153e9f999df8fb035ce9bb6c"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/tapzap_core.hpp",
+      "sha256": "71cd21cc9e375ee8a5b288e407cc3a4eae40fdd3fcddb1e6d437706fbd9df52f",
+      "bytes": 6204,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "76f162ef1a166fe4e9e5f034e9d7f69d249386282e16960f703b1fc42ce7bb0a",
+      "reviewed_change": "Removed private monorepo source filenames from explanatory comments."
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/tray.cpp",
+      "sha256": "97724a9f3cf01de6e1ab3a9e37fb95b15217580a6fbfe3c7b1be50395ee189cc",
+      "bytes": 10621,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "d385439d7348a9674cb00513868124c0079320f34c408714fc69254026c918f8"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/ui.hpp",
+      "sha256": "fe6471d783d5bafb64f2263a3bb788e7aed9de724caacdf23f0c236e36d7d978",
+      "bytes": 371,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "6df354cf05c431603eec4c94330a9c60a4845d692d6bcd46fc0f12c71f9a6a71"
+    },
+    {
+      "path": "src/omarchy-hyprland/src/linux/ui_cairo.cpp",
+      "sha256": "c7a527b39b2c1a1b1093af1ed918918c9e83b5428e170007313794d9a657fa2c",
+      "bytes": 62194,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "f1edf0e878595796278419e129348e5467714d75c68b06e9ad7dd7e7317cf903",
+      "reviewed_change": "Removed private monorepo source filenames from explanatory comments."
+    },
+    {
+      "path": "src/omarchy-hyprland/test.sh",
+      "sha256": "6787715ed7ebbfcd1e8d2e8b21a49faa4fbcac350051a736223ea61060d80bf2",
+      "bytes": 491,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "8bf2f88a728959d8e80dfcf28b3692941075b87a483ea4d8e82b133d8a69eed3"
+    },
+    {
+      "path": "src/omarchy-hyprland/tests/capture.cpp",
+      "sha256": "08c06a221dfbd73868fc91c086ca3ed514a29afbf58ee835aca96f52bab9be22",
+      "bytes": 1652,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "b0915af3cbd93b483faf4119b20f90e9114fb11e7ed2f0dacd708f6f5767fcca"
+    },
+    {
+      "path": "src/omarchy-hyprland/tests/ctm_server.c",
+      "sha256": "df24ec9862747d919e221eefa63b82f62f6eeed4dd7a1018d3cd690c8ece7c88",
+      "bytes": 3184,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "8ba6bd7da3b14663acbb458a20d377e82c9cb1bb6f0b3998d977b3a59b83ab2c"
+    },
+    {
+      "path": "src/omarchy-hyprland/tests/device-dismiss.py",
+      "sha256": "03dfad75b847b112e9246e985a7aaf7bdc757931fec5c737215171a7db9138fb",
+      "bytes": 3670,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "1e0343dcdd8fd95283c34a012cbb4db87aa05ebb034f3937605a7e94a2ba8452"
+    },
+    {
+      "path": "src/omarchy-hyprland/tests/integration.py",
+      "sha256": "63695699c7755e3817736f90f6075961e51a630ff9b95a233fa4b0501c5caea7",
+      "bytes": 10544,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "d2e64e52d4c471d25cb0b6c806059d955a32d008384fdca8e1e51ac3381cfb22"
+    },
+    {
+      "path": "src/omarchy-hyprland/tests/package.py",
+      "sha256": "a7bd0de49c9b1b1781fdbf4d1053adc387aa7499127a11791a3a334950aeca27",
+      "bytes": 2904,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "8d0e9b6ffc1d6b961f0f42ab3a34888f687016f08c8e6393ddda8a469b1384a9"
+    },
+    {
+      "path": "src/omarchy-hyprland/tests/pointer.c",
+      "sha256": "62aefcae68ed4a12a6b04ebc1810291f13b1afde1016cf24e9087e7adde657dd",
+      "bytes": 2557,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "1258a1c1ae32e35e4cdb3b6058863ebb152b5c670f82422ecb90b83a5b30aa07"
+    },
+    {
+      "path": "src/omarchy-hyprland/tests/wlr-virtual-pointer-unstable-v1.xml",
+      "sha256": "3ff6d540be0bc5228195bf072bde42117ea17945a5c2061add5d3cf97d6bb524",
+      "bytes": 6895,
+      "source_snapshot": "omarchy-addon-0.1.6",
+      "source_sha256": "3ff6d540be0bc5228195bf072bde42117ea17945a5c2061add5d3cf97d6bb524"
+    },
+    {
+      "path": "src/plasma-wayland/assets/Anybody-Bold.ttf",
+      "sha256": "4f441d3231192e489940a047819de53d79382e043021a76bd54e0efd25129faa",
+      "bytes": 2356,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "4f441d3231192e489940a047819de53d79382e043021a76bd54e0efd25129faa"
+    },
+    {
+      "path": "src/plasma-wayland/assets/Anybody-ExtraBold.ttf",
+      "sha256": "58dbf7f99d0d79b63032ee907e26d4e1bd329a6d5026aac8bb71f27b2cebf697",
+      "bytes": 2804,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "58dbf7f99d0d79b63032ee907e26d4e1bd329a6d5026aac8bb71f27b2cebf697"
+    },
+    {
+      "path": "src/plasma-wayland/assets/OFL.txt",
+      "sha256": "7f0313b042b462fcae1934436cc747f9fd4433e3b08fd6459a4a5104b0bbd5db",
+      "bytes": 4486,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "7f0313b042b462fcae1934436cc747f9fd4433e3b08fd6459a4a5104b0bbd5db"
+    },
+    {
+      "path": "src/plasma-wayland/build.sh",
+      "sha256": "ebb8f0c045476563b0b95d0ee9b3cde0027e8126b5b5b0482edb23648f973d15",
+      "bytes": 2513,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "2f40ef641fbcfebfa5a1e1ec956f7d669b6bd7616fd8c59bebda57519cdac6e0"
+    },
+    {
+      "path": "src/plasma-wayland/gamma_backend.hpp",
+      "sha256": "2c257f36cdc14dcd0015a0ac2ac08bc119302efff8b8d581ca1b8405ec5998f9",
+      "bytes": 1755,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "ebf9baea0f2f9cbee57217c42865af5b03d91002306721b745ca0cfb7754f907"
+    },
+    {
+      "path": "src/plasma-wayland/gamma_headless.cpp",
+      "sha256": "183343132453495042191163d67646e7c65c942b2c205b7f349617f6ca0d75b5",
+      "bytes": 1582,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "44661bf811e26f7fd0d4f40c684517d9ed1cbdf14866a8ea3f55cc2bd80b71e5"
+    },
+    {
+      "path": "src/plasma-wayland/gamma_plasma.cpp",
+      "sha256": "0022c3e61bb37ea57dcec3d35873689b05842a3b194cb01c515d1990ef1920ac",
+      "bytes": 4447,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "488b5a8a6dabe50155f8ff73ba49a1c6ec6e6abe4d8b20c0823cf21b034e6702"
+    },
+    {
+      "path": "src/plasma-wayland/gamma_xrandr.cpp",
+      "sha256": "64e57208c39d00f62c79dfb64194545fc228483c26aacdb403fd4bb813972a83",
+      "bytes": 8573,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "37a8ab7763c82c3703bcf13468819adee9dc98c7a4f88104959fdaa47ff3a2e0"
+    },
+    {
+      "path": "src/plasma-wayland/ipc.hpp",
+      "sha256": "bc2689f51fffee85659d2eb2437c39333712bc0b64e6419bacbc4e3c77363839",
+      "bytes": 2511,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "74650db812e46bafe3370b932cf8339b74def539c89fcac4977072fc2e4ede77"
+    },
+    {
+      "path": "src/plasma-wayland/logind_brightness.hpp",
+      "sha256": "0ee17fd8f15a41efa3eb4d065686a22f4709e10718648b19d8b136b3df326c87",
+      "bytes": 4557,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "61264d78759096bab88e1829f43ca05ec8e9b6eb4f99ed48cb178e6ebdd88f1a"
+    },
+    {
+      "path": "src/plasma-wayland/main.cpp",
+      "sha256": "9daaf73fe251f18554481a1f9e7e6a1c9e2cbb214cb75bf1cde323b82381c41e",
+      "bytes": 10087,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "1ebd7329961e212d580fe2b663991d2f74fc46f7495a8e8b206ac8397a177d98"
+    },
+    {
+      "path": "src/plasma-wayland/make_profile.py",
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "5847fcc6152f6b6bba84f6b6e07514cd7f9c13367787f0b40428e652442c4df0",
+      "bytes": 4546,
+      "sha256": "7f8e00327c0a42b455f74547b65d860adfde0af8bab06bf98f583273464c1148"
+    },
+    {
+      "path": "src/plasma-wayland/plasma_helper.py",
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "fab17eeaa44d940dcb614439ba0c008ae18fa11d021790e4e22b17ec6d9c35ac",
+      "bytes": 10791,
+      "sha256": "67f427632215dfb8d7974225a538fbac9cf878e22476c496a9da9262504df3b5"
+    },
+    {
+      "path": "src/plasma-wayland/platform.hpp",
+      "sha256": "3900d30f1678edd3ccee448328f5e205d834277b01fc160c0723f834a1438de7",
+      "bytes": 9488,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "95e795fba5c881f83b56b250d4255529b8a899b36545a0a86c5628939f7d13a8"
+    },
+    {
+      "path": "src/plasma-wayland/ppm.hpp",
+      "sha256": "1573cd14800d6ad73ff6871b5b7726cef7a4c1e47bb5953a0c3abf2789e28964",
+      "bytes": 1996,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "e02ebd4282f361105c3f3feed7b13efafec45a4a29646e2f4d611a6467add40a"
+    },
+    {
+      "path": "src/plasma-wayland/pwm.hpp",
+      "sha256": "e19de6d9666106f0c1005f337044cf093899e02b7507396984d617f08a6250e0",
+      "bytes": 4023,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "32d4ef094edd788c055aabd1167e09adac7cfb2d153e9f999df8fb035ce9bb6c"
+    },
+    {
+      "path": "src/plasma-wayland/tapzap_core.hpp",
+      "sha256": "71cd21cc9e375ee8a5b288e407cc3a4eae40fdd3fcddb1e6d437706fbd9df52f",
+      "bytes": 6204,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "76f162ef1a166fe4e9e5f034e9d7f69d249386282e16960f703b1fc42ce7bb0a",
+      "reviewed_change": "Removed private monorepo source filenames from explanatory comments."
+    },
+    {
+      "path": "src/plasma-wayland/test/xrandr_roundtrip.cpp",
+      "sha256": "7af3dbc5ac370db10cd9b9d0e19b3f76fe4a0df8058206fecdb0d8bd3021c1a2",
+      "bytes": 3788,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "c1fe289d4e1e372256f32f5a21ce316e54607e68308c842350951ae914300cd4"
+    },
+    {
+      "path": "src/plasma-wayland/tray.cpp",
+      "sha256": "f930cb5011ec6c5c4dbbde33e5725367df6bdd15e928486644cc9a1c54d07596",
+      "bytes": 1885,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "c5b0e770e07f2c1b1bc3494bca3dfef421801b5eceaf1d8477c3ab2a6ec09933"
+    },
+    {
+      "path": "src/plasma-wayland/ui.hpp",
+      "sha256": "fe6471d783d5bafb64f2263a3bb788e7aed9de724caacdf23f0c236e36d7d978",
+      "bytes": 371,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "6df354cf05c431603eec4c94330a9c60a4845d692d6bcd46fc0f12c71f9a6a71"
+    },
+    {
+      "path": "src/plasma-wayland/ui_cairo.cpp",
+      "sha256": "67460d910386451b8553161887fb536e0e5949928d625dfaf451b57d3e536661",
+      "bytes": 56977,
+      "source_snapshot": "desktop-tests-20260906/plasma",
+      "source_sha256": "2b6a7b66a8e63b26ed3e209ec5db66357347946851b952724dc228f3e0670f16",
+      "reviewed_change": "Removed private monorepo source filenames from explanatory comments."
+    },
+    {
+      "path": "src/sway/assets/Anybody-Bold.ttf",
+      "sha256": "4f441d3231192e489940a047819de53d79382e043021a76bd54e0efd25129faa",
+      "bytes": 2356,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "4f441d3231192e489940a047819de53d79382e043021a76bd54e0efd25129faa"
+    },
+    {
+      "path": "src/sway/assets/Anybody-ExtraBold.ttf",
+      "sha256": "58dbf7f99d0d79b63032ee907e26d4e1bd329a6d5026aac8bb71f27b2cebf697",
+      "bytes": 2804,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "58dbf7f99d0d79b63032ee907e26d4e1bd329a6d5026aac8bb71f27b2cebf697"
+    },
+    {
+      "path": "src/sway/assets/OFL.txt",
+      "sha256": "7f0313b042b462fcae1934436cc747f9fd4433e3b08fd6459a4a5104b0bbd5db",
+      "bytes": 4486,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "7f0313b042b462fcae1934436cc747f9fd4433e3b08fd6459a4a5104b0bbd5db"
+    },
+    {
+      "path": "src/sway/build.sh",
+      "sha256": "596c588d3d4296e8ae313a13c205074b10a9e6f30edd37346fa21745c1caf053",
+      "bytes": 3207,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "f02e87a1bfc5509a71d9be5683fbdea61960d6af7efe18ab9e883a4b2f8d2e2d"
+    },
+    {
+      "path": "src/sway/gamma_backend.hpp",
+      "sha256": "2c257f36cdc14dcd0015a0ac2ac08bc119302efff8b8d581ca1b8405ec5998f9",
+      "bytes": 1755,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "ebf9baea0f2f9cbee57217c42865af5b03d91002306721b745ca0cfb7754f907"
+    },
+    {
+      "path": "src/sway/gamma_headless.cpp",
+      "sha256": "a959ce43005fae0f29452b68254eaf4b4a6195cd49c19c00147dd06b589301d1",
+      "bytes": 1774,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "2765a34ee285a5cb1015f11de93781a339666275a3f8c9bc93daea8dc6bd3eb2"
+    },
+    {
+      "path": "src/sway/gamma_plasma.cpp",
+      "sha256": "0022c3e61bb37ea57dcec3d35873689b05842a3b194cb01c515d1990ef1920ac",
+      "bytes": 4447,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "488b5a8a6dabe50155f8ff73ba49a1c6ec6e6abe4d8b20c0823cf21b034e6702"
+    },
+    {
+      "path": "src/sway/gamma_wayland.cpp",
+      "sha256": "b462081b8ad06a773e72733afe1040644792c3a54ba0c8a342833776c082cb33",
+      "bytes": 9782,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "daade3698f6dc63a1dcfb4c9c67de853be42932cb379c3011d4b8261ff631f63"
+    },
+    {
+      "path": "src/sway/gamma_xrandr.cpp",
+      "sha256": "64e57208c39d00f62c79dfb64194545fc228483c26aacdb403fd4bb813972a83",
+      "bytes": 8573,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "37a8ab7763c82c3703bcf13468819adee9dc98c7a4f88104959fdaa47ff3a2e0"
+    },
+    {
+      "path": "src/sway/ipc.hpp",
+      "sha256": "bc2689f51fffee85659d2eb2437c39333712bc0b64e6419bacbc4e3c77363839",
+      "bytes": 2511,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "74650db812e46bafe3370b932cf8339b74def539c89fcac4977072fc2e4ede77"
+    },
+    {
+      "path": "src/sway/logind_brightness.hpp",
+      "sha256": "0ee17fd8f15a41efa3eb4d065686a22f4709e10718648b19d8b136b3df326c87",
+      "bytes": 4557,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "61264d78759096bab88e1829f43ca05ec8e9b6eb4f99ed48cb178e6ebdd88f1a"
+    },
+    {
+      "path": "src/sway/main.cpp",
+      "sha256": "9daaf73fe251f18554481a1f9e7e6a1c9e2cbb214cb75bf1cde323b82381c41e",
+      "bytes": 10087,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "1ebd7329961e212d580fe2b663991d2f74fc46f7495a8e8b206ac8397a177d98"
+    },
+    {
+      "path": "src/sway/platform.hpp",
+      "sha256": "3900d30f1678edd3ccee448328f5e205d834277b01fc160c0723f834a1438de7",
+      "bytes": 9488,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "95e795fba5c881f83b56b250d4255529b8a899b36545a0a86c5628939f7d13a8"
+    },
+    {
+      "path": "src/sway/ppm.hpp",
+      "sha256": "1573cd14800d6ad73ff6871b5b7726cef7a4c1e47bb5953a0c3abf2789e28964",
+      "bytes": 1996,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "e02ebd4282f361105c3f3feed7b13efafec45a4a29646e2f4d611a6467add40a"
+    },
+    {
+      "path": "src/sway/protocols/wlr-gamma-control-unstable-v1.xml",
+      "sha256": "4065cbc291a80348b7ef311168fbfb5cf245efe977a6dc32211291ef1a9529a1",
+      "bytes": 5507,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "4065cbc291a80348b7ef311168fbfb5cf245efe977a6dc32211291ef1a9529a1"
+    },
+    {
+      "path": "src/sway/pwm.hpp",
+      "sha256": "e19de6d9666106f0c1005f337044cf093899e02b7507396984d617f08a6250e0",
+      "bytes": 4023,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "32d4ef094edd788c055aabd1167e09adac7cfb2d153e9f999df8fb035ce9bb6c"
+    },
+    {
+      "path": "src/sway/tapzap_core.hpp",
+      "sha256": "71cd21cc9e375ee8a5b288e407cc3a4eae40fdd3fcddb1e6d437706fbd9df52f",
+      "bytes": 6204,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "76f162ef1a166fe4e9e5f034e9d7f69d249386282e16960f703b1fc42ce7bb0a",
+      "reviewed_change": "Removed private monorepo source filenames from explanatory comments."
+    },
+    {
+      "path": "src/sway/test/xrandr_roundtrip.cpp",
+      "sha256": "7af3dbc5ac370db10cd9b9d0e19b3f76fe4a0df8058206fecdb0d8bd3021c1a2",
+      "bytes": 3788,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "c1fe289d4e1e372256f32f5a21ce316e54607e68308c842350951ae914300cd4"
+    },
+    {
+      "path": "src/sway/tray.cpp",
+      "sha256": "f930cb5011ec6c5c4dbbde33e5725367df6bdd15e928486644cc9a1c54d07596",
+      "bytes": 1885,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "c5b0e770e07f2c1b1bc3494bca3dfef421801b5eceaf1d8477c3ab2a6ec09933"
+    },
+    {
+      "path": "src/sway/ui.hpp",
+      "sha256": "fe6471d783d5bafb64f2263a3bb788e7aed9de724caacdf23f0c236e36d7d978",
+      "bytes": 371,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "6df354cf05c431603eec4c94330a9c60a4845d692d6bcd46fc0f12c71f9a6a71"
+    },
+    {
+      "path": "src/sway/ui_cairo.cpp",
+      "sha256": "1969eef6d0dd37e6364bc993481b9861ad76779f51f6d2d2f3d3047d1d533160",
+      "bytes": 57015,
+      "source_snapshot": "desktop-tests-20260906/sway",
+      "source_sha256": "11da03277a03358cfc5924eb7e7ff8e34b9bf97bf6fa86549fde292b790bfb27",
+      "reviewed_change": "Removed private monorepo source filenames from explanatory comments."
+    },
+    {
+      "path": "src/x11/assets/Anybody-Bold.ttf",
+      "sha256": "4f441d3231192e489940a047819de53d79382e043021a76bd54e0efd25129faa",
+      "bytes": 2356,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "4f441d3231192e489940a047819de53d79382e043021a76bd54e0efd25129faa"
+    },
+    {
+      "path": "src/x11/assets/Anybody-ExtraBold.ttf",
+      "sha256": "58dbf7f99d0d79b63032ee907e26d4e1bd329a6d5026aac8bb71f27b2cebf697",
+      "bytes": 2804,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "58dbf7f99d0d79b63032ee907e26d4e1bd329a6d5026aac8bb71f27b2cebf697"
+    },
+    {
+      "path": "src/x11/assets/OFL.txt",
+      "sha256": "7f0313b042b462fcae1934436cc747f9fd4433e3b08fd6459a4a5104b0bbd5db",
+      "bytes": 4486,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "7f0313b042b462fcae1934436cc747f9fd4433e3b08fd6459a4a5104b0bbd5db"
+    },
+    {
+      "path": "src/x11/build.sh",
+      "sha256": "c1d3c09fbc3b03b5e1400b916af972044f82344dbd860863c859423a88b3a480",
+      "bytes": 2496,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "0d23288f94d7d907e45bae57b264b66f9a46ba481232d8941f9db3ae1a766ae0"
+    },
+    {
+      "path": "src/x11/gamma_backend.hpp",
+      "sha256": "2c257f36cdc14dcd0015a0ac2ac08bc119302efff8b8d581ca1b8405ec5998f9",
+      "bytes": 1755,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "ebf9baea0f2f9cbee57217c42865af5b03d91002306721b745ca0cfb7754f907"
+    },
+    {
+      "path": "src/x11/gamma_headless.cpp",
+      "sha256": "66d2fc20bd86a35d11d4c3e91d00c8e5c3cb1b1b88f6fe124bf962a0296d7376",
+      "bytes": 1438,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "89e488ac0a1c87caab9ca0b5f8df122740c997ab53a1b809a2ff9d2de9315148"
+    },
+    {
+      "path": "src/x11/gamma_xrandr.cpp",
+      "sha256": "64e57208c39d00f62c79dfb64194545fc228483c26aacdb403fd4bb813972a83",
+      "bytes": 8573,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "37a8ab7763c82c3703bcf13468819adee9dc98c7a4f88104959fdaa47ff3a2e0"
+    },
+    {
+      "path": "src/x11/ipc.hpp",
+      "sha256": "bc2689f51fffee85659d2eb2437c39333712bc0b64e6419bacbc4e3c77363839",
+      "bytes": 2511,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "74650db812e46bafe3370b932cf8339b74def539c89fcac4977072fc2e4ede77"
+    },
+    {
+      "path": "src/x11/logind_brightness.hpp",
+      "sha256": "0ee17fd8f15a41efa3eb4d065686a22f4709e10718648b19d8b136b3df326c87",
+      "bytes": 4557,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "61264d78759096bab88e1829f43ca05ec8e9b6eb4f99ed48cb178e6ebdd88f1a"
+    },
+    {
+      "path": "src/x11/main.cpp",
+      "sha256": "9daaf73fe251f18554481a1f9e7e6a1c9e2cbb214cb75bf1cde323b82381c41e",
+      "bytes": 10087,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "1ebd7329961e212d580fe2b663991d2f74fc46f7495a8e8b206ac8397a177d98"
+    },
+    {
+      "path": "src/x11/platform.hpp",
+      "sha256": "3900d30f1678edd3ccee448328f5e205d834277b01fc160c0723f834a1438de7",
+      "bytes": 9488,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "95e795fba5c881f83b56b250d4255529b8a899b36545a0a86c5628939f7d13a8"
+    },
+    {
+      "path": "src/x11/ppm.hpp",
+      "sha256": "1573cd14800d6ad73ff6871b5b7726cef7a4c1e47bb5953a0c3abf2789e28964",
+      "bytes": 1996,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "e02ebd4282f361105c3f3feed7b13efafec45a4a29646e2f4d611a6467add40a"
+    },
+    {
+      "path": "src/x11/pwm.hpp",
+      "sha256": "e19de6d9666106f0c1005f337044cf093899e02b7507396984d617f08a6250e0",
+      "bytes": 4023,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "32d4ef094edd788c055aabd1167e09adac7cfb2d153e9f999df8fb035ce9bb6c"
+    },
+    {
+      "path": "src/x11/tapzap_core.hpp",
+      "sha256": "71cd21cc9e375ee8a5b288e407cc3a4eae40fdd3fcddb1e6d437706fbd9df52f",
+      "bytes": 6204,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "76f162ef1a166fe4e9e5f034e9d7f69d249386282e16960f703b1fc42ce7bb0a",
+      "reviewed_change": "Removed private monorepo source filenames from explanatory comments."
+    },
+    {
+      "path": "src/x11/test/xrandr_roundtrip.cpp",
+      "sha256": "7af3dbc5ac370db10cd9b9d0e19b3f76fe4a0df8058206fecdb0d8bd3021c1a2",
+      "bytes": 3788,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "c1fe289d4e1e372256f32f5a21ce316e54607e68308c842350951ae914300cd4"
+    },
+    {
+      "path": "src/x11/tray.cpp",
+      "sha256": "f930cb5011ec6c5c4dbbde33e5725367df6bdd15e928486644cc9a1c54d07596",
+      "bytes": 1885,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "c5b0e770e07f2c1b1bc3494bca3dfef421801b5eceaf1d8477c3ab2a6ec09933"
+    },
+    {
+      "path": "src/x11/ui.hpp",
+      "sha256": "fe6471d783d5bafb64f2263a3bb788e7aed9de724caacdf23f0c236e36d7d978",
+      "bytes": 371,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "6df354cf05c431603eec4c94330a9c60a4845d692d6bcd46fc0f12c71f9a6a71"
+    },
+    {
+      "path": "src/x11/ui_cairo.cpp",
+      "sha256": "755ac326b60da59d7e5b3c56f37a2f9dc3666eaee42e512d1422a254dfcb075e",
+      "bytes": 52650,
+      "source_snapshot": "desktop-tests-20260906/x11",
+      "source_sha256": "f3f0c4f16e1c97f93b6521ff760099fa0167af903d904aa49bd48d8f149c4a9b",
+      "reviewed_change": "Removed private monorepo source filenames from explanatory comments."
+    }
+  ],
+  "derivation": [
+    "source_sha256 identifies the reviewed preservation snapshot; sha256 and bytes identify the public file",
+    "project-owned files received GPL-3.0-or-later SPDX headers after owner approval",
+    "machine-specific proprietary-platform comments were removed without changing runtime behavior",
+    "third-party protocol definitions and font files retain their original bytes and licenses"
+  ]
+}
