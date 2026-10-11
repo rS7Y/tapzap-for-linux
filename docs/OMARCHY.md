@@ -31,7 +31,8 @@ python3 src/omarchy-hyprland/install.py --archive /path/to/tapzap-omarchy-0.3.0-
 
 Install, update and remove TAP ZAP from an unlocked desktop. The installer refuses
 a locked or undetermined session because Omarchy 4 plugin rescans also reload its
-lock service. Do not lock the screen until installation finishes.
+lock service. Do not lock the screen until installation finishes. Native updates
+refresh the shell to clear cached QML components; desktop applications stay open.
 
 No administrator access is needed. The installer checks the download and its
 contents, adds the application launcher and `tapzap` command, and installs

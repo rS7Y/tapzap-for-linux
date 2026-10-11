@@ -156,6 +156,14 @@ def install_plugin(config, app_root, prefix):
             "Plugin installed. Enable it when the shell is ready: omarchy plugin enable app.tapzap"
         )
 
+    if not prefix and shutil.which("omarchy-restart-shell"):
+        # The stable plugin symlink keeps the same QML URLs across releases.
+        # Omarchy's rescan can retain compiled components from the old target.
+        # Its guarded shell restart clears those caches without closing apps.
+        require_unlocked_session(prefix)
+        env = dict(os.environ, OMARCHY_PATH=os.environ.get("OMARCHY_PATH", "/usr/share/omarchy"))
+        subprocess.run(["omarchy-restart-shell"], env=env, timeout=40, check=True)
+
 
 def remove_plugin(config, app_root, prefix):
     target = plugin_path(config)

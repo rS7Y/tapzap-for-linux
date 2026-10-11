@@ -8,6 +8,8 @@ predate the public source snapshot are not treated as releases of this source.
 - Keep the classic compact TAP ZAP layout in the native Omarchy bar plugin, with
   square outer edges, a vector ZAP bolt, vertical faders and original typography.
   Schedule and Settings controls remain available under the gear button.
+- Refresh the unlocked Omarchy shell after native plugin updates so cached QML
+  cannot leave the old layout on screen. Desktop applications remain running.
 - Refuse native plugin installation, updates and removal while the compositor is
   locked or its lock state cannot be determined; Omarchy rescans reload its locker.
 - Make native popup commands wait for plugin discovery after installation.
