@@ -5,6 +5,10 @@ predate the public source snapshot are not treated as releases of this source.
 
 ## Unreleased
 
+- Reduce Auto Schedule button text and match Mac/Windows preset behavior:
+  manual warmth suppresses preset highlights until an explicit preset click,
+  including after release, status polling and keyboard warmth edits.
+
 - Use a simple monochrome Settings gear, a readable system font for Settings
   and Auto Schedule headings, a plain Quit label, and centered ZAP icon/text.
 

@@ -40,6 +40,15 @@ import Quickshell
 import "Plugin" as TapZap
 ShellRoot {
     TapZap.Panel { id: panel }
+    function descendants(object, seen) {
+        if (!object || seen.indexOf(object)>=0) return []
+        seen.push(object)
+        var result=[object]
+        var children=Array.from(object.children || []).concat(Array.from(object.resources || []))
+        if (object.contentItem) children.push(object.contentItem)
+        for (var child of children) result=result.concat(descendants(child,seen))
+        return result
+    }
     Timer {
         interval: 100; running: true
         onTriggered: {
@@ -52,6 +61,44 @@ ShellRoot {
             if(panel.notice!=="INVALID TIMES") {console.error("Status erased validation"); Qt.exit(1); return}
             panel.applyState(JSON.stringify(state),true)
             if(panel.notice!=="") {console.error("Action failed to clear notice"); Qt.exit(1); return}
+            // Manual warmth is not a preset selection, even when a drag stops
+            // exactly on one. Polling and brightness edits must preserve that.
+            var items=descendants(panel,[])
+            var warmth=items.find(item=>item.label==="WARMTH" && typeof item.editValue==="function")
+            var brightness=items.find(item=>item.label==="BRIGHTNESS" && typeof item.editValue==="function")
+            var presets=["DAY","EVENING","NIGHT"].map(label=>items.find(item=>item.text===label && typeof item.clicked==="function"))
+            if(!warmth || !brightness || presets.some(item=>!item)) {console.error("Cannot locate native faders and presets"); Qt.exit(1); return}
+            state.intensity=0.3846153846
+            panel.applyState(JSON.stringify(state),false)
+            if(!presets[0].selected) {console.error("DAY fixture did not select the preset"); Qt.exit(1); return}
+            warmth.dragging=true
+            if(presets.some(item=>item.selected)) {console.error("Warmth mouse-down left a preset highlighted"); Qt.exit(1); return}
+            var samples=[0.1,0.3846153846,0.5846153846,1,0.5846153846,0.3846153846,0.1]
+            for(var sample of samples) {
+                warmth.editValue(sample)
+                state.intensity=sample
+                panel.applyState(JSON.stringify(state),false)
+                if(presets.some(item=>item.selected)) {console.error("Warmth drag highlighted a crossed preset: "+sample); Qt.exit(1); return}
+            }
+            warmth.editValue(0.3846153846)
+            warmth.dragging=false
+            state.intensity=0.3846153846
+            panel.applyState(JSON.stringify(state),false)
+            brightness.editValue(0.6)
+            if(presets.some(item=>item.selected)) {console.error("Release, polling or brightness restored a manual preset highlight"); Qt.exit(1); return}
+            presets[0].clicked()
+            panel.applyState(JSON.stringify(state),true)
+            if(!presets[0].selected || presets[1].selected || presets[2].selected) {console.error("Explicit DAY selection did not restore its highlight"); Qt.exit(1); return}
+            brightness.dragging=true
+            brightness.editValue(0.7)
+            brightness.dragging=false
+            if(!presets[0].selected) {console.error("Brightness drag cleared the chosen preset"); Qt.exit(1); return}
+            warmth.editValue(1)
+            state.intensity=1
+            panel.applyState(JSON.stringify(state),false)
+            if(presets.some(item=>item.selected)) {console.error("Keyboard warmth edit highlighted a preset"); Qt.exit(1); return}
+            panel.queue=[]
+            console.log("PASS: manual warmth suppresses preset flicker in both directions")
             var clockComponent=Qt.createComponent("Plugin/TimeEditor.qml")
             if(clockComponent.status!==Component.Ready) {console.error("Clock picker is missing: "+clockComponent.errorString()); Qt.exit(1); return}
             var clock=clockComponent.createObject(null,{minutes:1439})
@@ -103,6 +150,8 @@ ShellRoot {
         stdout, stderr = process.communicate()
         raise AssertionError("Native QML check timed out:\n" + stdout + stderr)
     output = stdout + stderr
-    assert process.returncode == 0 and "PASS:" in output, output
+    assert process.returncode == 0, output
+    assert "PASS: manual warmth suppresses preset flicker" in output, output
+    assert "PASS: native QML components, assets and persistent validation notices" in output, output
     assert "Cannot load font" not in output and "ERROR" not in output, output
-    print("PASS: native QML components, assets and persistent validation notices")
+    print("PASS: native QML, schedule validation and manual warmth preset suppression")

@@ -37,6 +37,9 @@ OmarchyUi.Panel {
     property string currentKey: ""
     property string notice: ""
     property bool connected: false
+    // Manual warmth values are not preset choices, even at an exact match.
+    // Keep this suppressed after release and status polls until a preset click.
+    property bool suppressPresetHighlight: false
     property int view: 0
     property int editingPhase: -1
     property var draftMinutes: [420, 1080, 1320]
@@ -417,7 +420,10 @@ OmarchyUi.Panel {
                         value: 1
                         signalColor: "#ff0000"
                         filterEnabled: root.snapshot.enabled
+                        onDraggingChanged: if (dragging)
+                            root.suppressPresetHighlight = true
                         onEdited: function (v) {
+                            root.suppressPresetHighlight = true;
                             root.send(["set", "warmth", String(v)], "warmth");
                         }
                     }
@@ -523,8 +529,11 @@ OmarchyUi.Panel {
                             height: 36
                             text: modelData
                             fontFamily: anybodyBold.name
-                            selected: Math.abs(root.snapshot.intensity - [1 - 4000 / 6500, 1 - 2700 / 6500, 1][index]) < .02
-                            onClicked: root.send(["preset", ["day", "evening", "night"][index]])
+                            selected: !root.suppressPresetHighlight && Math.abs(root.snapshot.intensity - [1 - 4000 / 6500, 1 - 2700 / 6500, 1][index]) < .02
+                            onClicked: {
+                                root.suppressPresetHighlight = false;
+                                root.send(["preset", ["day", "evening", "night"][index]]);
+                            }
                         }
                     }
                 }
@@ -555,7 +564,7 @@ OmarchyUi.Panel {
                         height: 44
                         text: "AUTO SCHEDULE   " + root.scheduleSummary()
                         fontFamily: root.mono
-                        textSize: 12
+                        textSize: 10
                         onClicked: root.view = 2
                     }
                     TapButton {
@@ -642,7 +651,7 @@ OmarchyUi.Panel {
                     height: 40
                     text: "AUTO SCHEDULE   " + (root.snapshot.schedule.enabled ? "ON" : "OFF")
                     fontFamily: root.mono
-                    textSize: 12
+                    textSize: 10
                     selected: root.snapshot.schedule.enabled
                     onClicked: root.send(["schedule", "enabled", root.snapshot.schedule.enabled ? "0" : "1"])
                 }
