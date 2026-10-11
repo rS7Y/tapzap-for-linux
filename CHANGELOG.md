@@ -5,6 +5,9 @@ predate the public source snapshot are not treated as releases of this source.
 
 ## Unreleased
 
+- Keep isolated Omarchy tests off the live desktop's X11 display, and check
+  licenses after builds without treating generated protocol files as project code.
+- Record native Omarchy checks of public source `90d2720` and their limits.
 - Format project C/C++ and Python consistently without changing application
   behavior; preserve backend boundaries and upstream assets.
 - Add a code map, CLI reference, and `make` commands for development checks.

@@ -1,6 +1,6 @@
 # Linux validation and limits
 
-Updated 2026-09-24. Tap Zap for Linux is free and experimental. The checks
+Updated 2026-10-11. Tap Zap for Linux is free and experimental. The checks
 below describe the evidence available for these separate backend snapshots;
 they do not certify a general Linux release or guarantee that a filter can be
 restored after every compositor, driver, display, or process failure.
@@ -10,7 +10,7 @@ restored after every compositor, driver, display, or process failure.
 | Area | Environment / evidence | What it does not establish |
 |---|---|---|
 | X11, GNOME, Plasma, Sway snapshots | Saved September 5–6, 2026 work used Ubuntu 24.04 x86_64 on a Dell XPS 15 9570 with Intel UHD 630/i915, alongside Xvfb and isolated protocol/helper tests. | It is not new validation of the public source commit, every backend/session, other GPUs, HDR, hotplug, suspend/resume, or physical optical output. GNOME and Sway visual confirmation was still pending in the saved notes. |
-| Omarchy / Hyprland snapshot | Saved Omarchy 4.0.2 / Hyprland 0.56.2 Intel-display work opened the integrated app OFF and exercised its tray/show path. | Enabling the filter on that physical display was still pending. This is not evidence for other GPUs, panels, Hyprland versions, HDR, hotplug, or suspend/resume. |
+| Omarchy / Hyprland public source | On October 11, source `90d2720` built on a Dell XPS 15 9570 running Omarchy 4.0.2 / Hyprland 0.56.2, with one eDP-1 display at 3840×2160 and scale 3. Native checks passed for OFF startup, tray registration, DAY/EVENING/NIGHT presets, brightness slider, Settings navigation, hide/show, toggle, OFF, and quit. After quit, a new CTM owner acquired and released the real compositor successfully. The operator confirmed visible warm/red changes and their reversal. Original app settings and filter state were restored. | This establishes native GUI, visible tint changes, and compositor protocol behavior on that machine, not optical color measurements, PWM reduction, other GPUs/panels/Hyprland versions, HDR, hotplug, suspend/resume, or arbitrary crash recovery. Helper-failure and timeout recovery were tested only against the isolated protocol server. |
 | Source color-core contract | The repository test compiles and runs independently authored C++17 endpoint, range, monotonicity, and gamma-ramp checks against all five source variants. | A color-curve test is not a live backend, compositor, display, recovery, PWM, or visual test. |
 | September 7 beta archives | The five archived download hashes matched their old publication manifest. | None of the existing app archives is bound to this repository revision or a reproducible public build. They are not source-matched releases. |
 
