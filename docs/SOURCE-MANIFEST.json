@@ -244,11 +244,18 @@
       "sha256": "6dd6d0590f6eb5cb8d513d9878bcc830882e3daab679c3f06d5721bb4ba89fce"
     },
     {
+      "path": "src/omarchy-hyprland/plugin/Gear.qml",
+      "source_snapshot": "public-authored-2026-10-11",
+      "source_sha256": "a867376307af03635117bd9cb910007aaed810c3c54abf7de58d63d175bdda8f",
+      "bytes": 1176,
+      "sha256": "a867376307af03635117bd9cb910007aaed810c3c54abf7de58d63d175bdda8f"
+    },
+    {
       "path": "src/omarchy-hyprland/plugin/Panel.qml",
       "source_snapshot": "public-authored-2026-10-11",
       "source_sha256": "49117813fa9c7014f3da1dcd0a3000e0b2d3f8a6113ccc731a657b2b19ac8ca3",
-      "bytes": 29005,
-      "sha256": "3ae8c5375e549aa671fe5dea102d4332d54649147d34feb2128c628f9982ba6c"
+      "bytes": 29340,
+      "sha256": "ff1759c93e1cb3b72bf83722ae141fd1c3ff734779fb4ebb0bd0a781d03cf76d"
     },
     {
       "path": "src/omarchy-hyprland/plugin/Service.qml",
@@ -261,8 +268,8 @@
       "path": "src/omarchy-hyprland/plugin/TapButton.qml",
       "source_snapshot": "public-authored-2026-10-11",
       "source_sha256": "43a40391510887d21c8bae0638d019ce9cb2a7a5351b66b6b8cff00199c84006",
-      "bytes": 2322,
-      "sha256": "e71284a82bb40a77934692da34a7553e4f1fed140d56a209927493e0fedfcc4e"
+      "bytes": 2380,
+      "sha256": "ad851062b4e954d81916d57e41ed8982508510b552e89418270d8cef13cc18fa"
     },
     {
       "path": "src/omarchy-hyprland/plugin/TimeEditor.qml",

@@ -367,9 +367,10 @@ OmarchyUi.Panel {
                 x: 24
                 y: 21
                 text: root.view === 0 ? "TAP ZAP" : root.view === 1 ? "SETTINGS" : "AUTO SCHEDULE"
-                font.family: anybody.name
-                font.pixelSize: 11
-                font.letterSpacing: 1
+                font.family: root.view === 0 ? anybody.name : root.mono
+                font.pixelSize: root.view === 0 ? 11 : 14
+                font.bold: root.view !== 0
+                font.letterSpacing: root.view === 0 ? 1 : .5
                 color: "#686868"
             }
             TapButton {
@@ -378,8 +379,14 @@ OmarchyUi.Panel {
                 width: 52
                 height: 44
                 quiet: true
-                text: root.view === 0 ? "⚙︎" : "BACK"
-                textSize: root.view === 0 ? 26 : 12
+                text: root.view === 0 ? "" : "BACK"
+                textSize: 12
+                Gear {
+                    visible: root.view === 0
+                    anchors.centerIn: parent
+                    width: 24
+                    height: 24
+                }
                 Accessible.name: root.view === 0 ? "Settings" : "Back"
                 fontFamily: root.mono
                 onClicked: {
@@ -548,6 +555,7 @@ OmarchyUi.Panel {
                         height: 44
                         text: "AUTO SCHEDULE   " + root.scheduleSummary()
                         fontFamily: root.mono
+                        textSize: 12
                         onClicked: root.view = 2
                     }
                     TapButton {
@@ -577,7 +585,7 @@ OmarchyUi.Panel {
                     TapButton {
                         width: 288
                         height: 44
-                        text: "EMERGENCY STOP (QUIT)"
+                        text: "QUIT"
                         danger: true
                         fontFamily: root.mono
                         onClicked: {
@@ -634,6 +642,7 @@ OmarchyUi.Panel {
                     height: 40
                     text: "AUTO SCHEDULE   " + (root.snapshot.schedule.enabled ? "ON" : "OFF")
                     fontFamily: root.mono
+                    textSize: 12
                     selected: root.snapshot.schedule.enabled
                     onClicked: root.send(["schedule", "enabled", root.snapshot.schedule.enabled ? "0" : "1"])
                 }

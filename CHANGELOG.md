@@ -5,6 +5,9 @@ predate the public source snapshot are not treated as releases of this source.
 
 ## Unreleased
 
+- Use a simple monochrome Settings gear, a readable system font for Settings
+  and Auto Schedule headings, a plain Quit label, and centered ZAP icon/text.
+
 - Enlarge the Settings gear and remove the redundant close button. Match the
   PWM-Safe row to the Mac UI and keep the bar and ZAP bolts in the same proportions.
 - Open schedule clocks in an hour/minute picker with mouse and keyboard controls;

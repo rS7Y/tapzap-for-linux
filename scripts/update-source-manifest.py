@@ -39,6 +39,7 @@ PUBLIC_AUTHORED = {
             "plugin/Service.qml",
             "plugin/Fader.qml",
             "plugin/Bolt.qml",
+            "plugin/Gear.qml",
             "plugin/TapButton.qml",
             "plugin/TimeEditor.qml",
         )

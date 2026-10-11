@@ -61,6 +61,7 @@ Rectangle {
             color: root.textColor
         }
         Text {
+            anchors.verticalCenter: parent.verticalCenter
             text: root.text
             font.family: root.fontFamily
             font.pixelSize: root.textSize
