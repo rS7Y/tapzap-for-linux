@@ -7,6 +7,9 @@ channel, Anybody headings and metallic fader caps. Clicking outside closes
 the panel while the filter keeps running. The gear opens Settings;
 there is no separate close button. Quit restores the display.
 
+See the [screenshot gallery](SCREENSHOTS.md) for the main panel, Settings,
+Auto Schedule and clock picker.
+
 One managed engine serves all monitors. It exits when the plugin is unloaded
 or the shell exits; a lifetime guardian lets it flush preferences and restore
 brightness before exiting. A session marker resumes a previously started
@@ -122,12 +125,16 @@ compatible. Preferences live in the user's config directory
 
 ## Daily schedules
 
+![Auto Schedule with DAY, EVENING and NIGHT start times](screenshots/omarchy/auto-schedule.png)
+
 Settings → Auto Schedule lets you select DAY, EVENING and NIGHT start times in
 24-hour local time. Defaults are 07:00, 18:00 and 22:00. Selected times must be
 unique, and at least one preset must be selected before enabling scheduling.
 Click a clock to open its hour/minute picker. Use the +/− buttons, type the
 digits, or use the Up/Down keys in a field. Done returns to the schedule;
 Save Times commits the draft. Unchanged saves preserve a manual hold.
+
+![Hour and minute picker for the DAY start](screenshots/omarchy/time-picker.png)
 
 Each start fades warmth to its preset over one minute. Manual warmth or a
 preset holds until the next selected start. Brightness remains under manual

@@ -27,9 +27,17 @@ and follow the [native plugin setup guide](docs/OMARCHY.md) for verified install
 schedules, settings, updates and removal. The root `manifest.json` is the Omarchy
 plugin entry point; its native engine requires the manual setup in that guide.
 
-![TAP ZAP native Omarchy panel](preview.png)
 ARM64, HDR, other GPU/driver combinations, and many hotplug or suspend/resume
 paths are unverified.
+
+## Omarchy screenshots
+
+| Main panel | Settings | Auto Schedule |
+|---|---|---|
+| ![TAP ZAP warmth and brightness faders](docs/screenshots/omarchy/main.png) | ![TAP ZAP settings](docs/screenshots/omarchy/settings.png) | ![Daily schedule controls](docs/screenshots/omarchy/auto-schedule.png) |
+
+See the [screenshot gallery](docs/SCREENSHOTS.md) for the time picker, OFF state
+and menu bar icon. These captures show the native Omarchy 0.3.0 interface.
 
 ## Start here
 
@@ -57,6 +65,7 @@ then run `make build VARIANT=x11` (or the matching variant from the table).
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Code map, backend boundaries, and where to start reading |
 | [`docs/COMMANDS.md`](docs/COMMANDS.md) | Development commands and application CLI reference |
 | [`docs/OMARCHY.md`](docs/OMARCHY.md) | Omarchy native plugin, schedules, install, update and uninstall |
+| [`docs/SCREENSHOTS.md`](docs/SCREENSHOTS.md) | Native Omarchy panel, Settings and schedule screenshots |
 | [`tests/`](tests/) | Color-core, licensing, documentation, and source-integrity tests |
 | [`scripts/`](scripts/) | Native CI builds and source-manifest maintenance |
 | [`THIRD-PARTY-NOTICES/`](THIRD-PARTY-NOTICES/README.md) | Font and protocol licenses |
