@@ -50,6 +50,10 @@ legacy.write_text("OTHER BUILD\n", encoding="utf-8")
 installer.install(prefix)
 launcher = prefix / "bin/tapzap-omarchy"
 assert launcher.is_symlink() and launcher.resolve().is_file()
+short = prefix / "bin/tapzap"
+assert short.is_symlink() and short.resolve() == launcher.resolve()
+assert (launcher.resolve().parent / "setup/install.py").is_file()
+assert (launcher.resolve().parent / "LICENSE").is_file()
 before = launcher.resolve()
 desktop = prefix / "data/applications/tapzap-omarchy.desktop"
 assert 'Exec="' in desktop.read_text(encoding="utf-8")
@@ -59,7 +63,7 @@ prefs = prefix / "config/TapZapOmarchy/settings.ini"
 prefs.parent.mkdir(parents=True)
 prefs.write_text("enabled=0\n", encoding="utf-8")
 installer.uninstall(prefix)
-assert not launcher.exists() and not desktop.exists()
+assert not launcher.exists() and not short.exists() and not desktop.exists()
 assert before.exists() and prefs.exists() and legacy.read_text(encoding="utf-8") == "OTHER BUILD\n"
 print(
     "PASS: archive checksum, source revision, notices, payload hashes, isolated install/uninstall"

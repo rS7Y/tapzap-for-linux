@@ -170,8 +170,8 @@
       "path": "src/omarchy-hyprland/README.md",
       "source_snapshot": "public-authored-2026-09-24",
       "source_sha256": "fdf56bf62133606530d73f28537203f67e6361ece1442169af4342f3e139d5f9",
-      "bytes": 1368,
-      "sha256": "c40a69b3f218c13c7af5140df384acbb81754f077c0fd74388339b33064df08c"
+      "bytes": 1698,
+      "sha256": "bd810dd5a532d7fcb5e43a848968a71ba840c772c7506c66507cbad4418b201f"
     },
     {
       "path": "src/omarchy-hyprland/build.sh",
@@ -182,15 +182,15 @@
     },
     {
       "path": "src/omarchy-hyprland/install.py",
-      "sha256": "1e73468e3f1a444cac807332c222b8a7fd5ecda4b52b9eb7d447518d65f1e064",
-      "bytes": 5823,
+      "sha256": "c5ff9bbf01d0ad91a710bc3ed89d94efa677298e340c36de6ceb7a753cb53a33",
+      "bytes": 13259,
       "source_snapshot": "omarchy-addon-0.1.6",
       "source_sha256": "c7068063e460d0a08bb48123546a003ede3cef0602f6e2ba4aeaa2e693902595"
     },
     {
       "path": "src/omarchy-hyprland/integration/outside-click.lua",
-      "sha256": "4efb36e66f6de2fc34e29b0222140c99c69c536b6b00920b5fe5f49c6f6caebd",
-      "bytes": 1356,
+      "sha256": "87266a33838d599e28f28f2ed1a5de8f557ede97012e429f01c23d5e92823162",
+      "bytes": 1401,
       "source_snapshot": "omarchy-addon-0.1.6",
       "source_sha256": "a30a240c9b034387b142932e734ff0ed8c910016b5be5f42e7608ecd7f58815f"
     },
@@ -203,15 +203,15 @@
     },
     {
       "path": "src/omarchy-hyprland/integration/tapzap-omarchy",
-      "sha256": "10d753fac59c0572917e8d6e734a5f892da7470a269b81bb408c1a350d9f606c",
-      "bytes": 1443,
+      "sha256": "f7c883a1fc969bea6d197ae4f7f13f0567ae4cd5797ac49b5f7dc012afea07cb",
+      "bytes": 1933,
       "source_snapshot": "omarchy-addon-0.1.6",
       "source_sha256": "10d753fac59c0572917e8d6e734a5f892da7470a269b81bb408c1a350d9f606c"
     },
     {
       "path": "src/omarchy-hyprland/integration/tapzap-omarchy.desktop",
-      "sha256": "86bf5e7044168618e77f0e0619357e2eca2e242d45e6dce82dcae17fac91ae1d",
-      "bytes": 447,
+      "sha256": "e636e3b7c91bf1401d478575ce6446a739b8ea582a2ef6385c66452e64d021a6",
+      "bytes": 439,
       "source_snapshot": "omarchy-addon-0.1.6",
       "source_sha256": "1a6bc434b0bc741b5c54aff52c5134f1847d8999d3f7e6ede2d8ea9f0fe2af76"
     },
@@ -224,8 +224,8 @@
     },
     {
       "path": "src/omarchy-hyprland/package.sh",
-      "sha256": "2e354930227dc4077ea1b61cae4b3c2bbec7070ce43849c7d93fe1a01455a260",
-      "bytes": 2658,
+      "sha256": "16bb36dfc7125cf21989202af81d835abb561cc72a48b0e830c5ed7c90e49c1a",
+      "bytes": 2691,
       "source_snapshot": "omarchy-addon-0.1.6",
       "source_sha256": "932b3f02ddacefd9f2b734308e55abfd345af3595d47794b6035bfd5c110d045"
     },
@@ -402,8 +402,8 @@
     },
     {
       "path": "src/omarchy-hyprland/tests/package.py",
-      "sha256": "3988e2037fcf779b41766513c7be00d6d2e45bfe2b6841bf492ce9e5192080de",
-      "bytes": 2910,
+      "sha256": "0f22f2b36d203cf3c09ea6cec9b587eb52a1641f7f4400b2e5a67552069ea9e3",
+      "bytes": 3154,
       "source_snapshot": "omarchy-addon-0.1.6",
       "source_sha256": "8d0e9b6ffc1d6b961f0f42ab3a34888f687016f08c8e6393ddda8a469b1384a9"
     },

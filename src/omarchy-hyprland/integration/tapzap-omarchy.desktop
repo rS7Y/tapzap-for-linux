@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 [Desktop Entry]
 Type=Application
-Name=TAP ZAP Omarchy
+Name=TAP ZAP
 Comment=Screen warmth and software dimming
 Exec=tapzap-omarchy show
 Icon=tapzap-omarchy

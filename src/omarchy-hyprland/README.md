@@ -1,8 +1,13 @@
-# Tap Zap Omarchy / Hyprland trial package
+# Tap Zap Omarchy / Hyprland add-on
 
 This directory contains an experimental x86_64 integration for Omarchy using
 Hyprland's CTM v2 protocol. It is not a generic Wayland build and is not an
 official Omarchy package.
+
+For installation, tray controls, updates, optional login startup and removal,
+read the [Omarchy add-on guide](https://github.com/rS7Y/tapzap-for-linux/blob/main/docs/OMARCHY.md).
+The public binary release is pending; local archives can be installed with
+`python3 install.py --archive /path/to/package.tar.gz` and its adjacent checksum.
 
 Read the repository's [known issues](https://github.com/rS7Y/tapzap-for-linux/blob/main/docs/KNOWN-ISSUES.md),
 [validation limits](https://github.com/rS7Y/tapzap-for-linux/blob/main/docs/VALIDATION.md), and

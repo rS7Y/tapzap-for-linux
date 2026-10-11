@@ -2,7 +2,9 @@
 
 There is no binary release in this repository that is verified against the
 public source revision. The older website beta ZIPs are not source-matched.
-No general-purpose Linux install or autostart package is offered here yet.
+Omarchy has a [per-user tray add-on installer](OMARCHY.md), with optional login
+startup, verified local-archive updates and uninstall. Other variants currently
+require manual source builds.
 
 The source variants remain experimental while the recovery findings in
 [known issues](KNOWN-ISSUES.md) are open. If you choose to evaluate a local
@@ -21,8 +23,9 @@ Run that command from the selected backend's source directory after building.
 It checks the color-curve math; it does not enable a filter or validate a
 compositor, display, GPU, tray, or recovery behavior. There are no generic
 `sudo make install` commands. The Omarchy installer is intended for a completed
-and checksum-verified trial archive, not for the source directory itself.
+and checksum-verified archive, not for the source directory itself; use its
+`--archive` option as described in the [Omarchy guide](OMARCHY.md).
 
-Do not enable launch-at-login or install a build system-wide while evaluating
-this experimental source. If the display does not return to its prior state,
+For the other experimental builds, leave launch-at-login disabled during
+evaluation. Keep all installations per-user. If the display does not return to its prior state,
 stop and use [safe recovery steps](TROUBLESHOOTING.md).

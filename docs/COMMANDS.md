@@ -13,7 +13,7 @@ Run development commands from the repository root after following the
 | `make build VARIANT=gnome-wayland` | Build the GNOME variant |
 | `make build VARIANT=plasma-wayland` | Build the Plasma variant |
 | `make build VARIANT=sway` | Build the Sway variant |
-| `make build VARIANT=omarchy-hyprland` | Build, test, and package the Hyprland trial from a clean commit |
+| `make build VARIANT=omarchy-hyprland` | Build, test, and package the Omarchy add-on from a clean commit |
 | `make format` | Format project C/C++ and Python, then update public source hashes |
 | `make check-format` | Check the pinned formatting rules without changing files |
 | `make scan-secrets` | Scan working files and all available local Git refs with Gitleaks |
@@ -24,6 +24,11 @@ at `src/<variant>/build/tapzap`; Omarchy uses
 `src/omarchy-hyprland/build/tapzap`.
 
 ## Offline application commands
+
+Installed Omarchy add-ons use a small wrapper: `tapzap` opens the panel, while
+`tapzap version`, `tapzap update` and `tapzap uninstall` manage the installation.
+See [the Omarchy guide](OMARCHY.md) for those commands. The following reference
+describes the native build executable.
 
 After building, run these from the selected variant directory. They operate
 on color data or local image files and do not enable a display filter.
@@ -50,6 +55,6 @@ immediately afterward. These commands access display state: they are not
 build checks, and unresolved [recovery issues](KNOWN-ISSUES.md) apply.
 
 Use the [backend setup](BUILDING.md), [first-run guidance](INSTALLING.md), and
-[recovery steps](TROUBLESHOOTING.md) before evaluating them. Running `tapzap`
+[recovery steps](TROUBLESHOOTING.md) before evaluating them. Running `./build/tapzap`
 with no arguments prints usage and exits with status 2. The preserved CLI
 does not implement a `--help` option.

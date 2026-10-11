@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright (C) 2026 Tap Zap.
+# SPDX-License-Identifier: GPL-3.0-or-later
 set -euo pipefail
 root=$(dirname "$(readlink -f -- "$0")")
 app="$root/bin/tapzap"
@@ -13,11 +15,21 @@ export TAPZAP_FRAMELESS=1
 export TAPZAP_SCALE="${TAPZAP_SCALE:-0.8}"
 unset TAPZAP_OVERLAY TAPZAP_WINDOWED TAPZAP_GNOME_HELPER TAPZAP_PLASMA_HELPER TAPZAP_WLR_ENABLE TAPZAP_START_HIDDEN
 command=${1:-show}
+if [[ $command == update ]]; then
+  if [[ $# -gt 1 ]]; then
+    python3 "$root/setup/install.py" --archive "$2"
+  else
+    python3 "$root/setup/install.py" --download
+  fi
+  exec "$TAPZAP_LAUNCHER" start-hidden
+fi
+if [[ $command == uninstall ]]; then exec python3 "$root/setup/install.py" --uninstall; fi
+if [[ $command == version ]]; then exec python3 "$root/setup/install.py" --version; fi
 if [[ $command == selftest ]]; then exec "$app" selftest; fi
 if [[ $command == status || $command == hide || $command == quit ]]; then exec "$app" "$command"; fi
 if [[ $command == on || $command == off || $command == toggle ]]; then exec "$app" "$command"; fi
 if [[ $command != show && $command != start-hidden ]]; then
-  echo 'Usage: tapzap-omarchy [show|on|off|toggle|hide|status|quit|start-hidden|selftest]' >&2
+  echo 'Usage: tapzap [show|on|off|toggle|hide|status|quit|start-hidden|selftest|version|update [ARCHIVE]|uninstall]' >&2
   exit 2
 fi
 if "$app" status >/dev/null 2>&1; then
@@ -25,7 +37,7 @@ if "$app" status >/dev/null 2>&1; then
   exec "$app" show
 fi
 if [[ -z ${WAYLAND_DISPLAY:-} || -z ${DISPLAY:-} || -z ${XDG_RUNTIME_DIR:-} ]]; then
-  echo 'Open this trial from your Omarchy desktop with XWayland enabled.' >&2
+  echo 'Open TAP ZAP from your Omarchy desktop with XWayland enabled.' >&2
   exit 2
 fi
 [[ $command == start-hidden ]] && export TAPZAP_START_HIDDEN=1

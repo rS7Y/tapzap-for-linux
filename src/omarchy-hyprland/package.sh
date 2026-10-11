@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 set -euo pipefail
 cd "$(dirname "$0")"
-trial=0.1.6
+trial=0.2.0
 out="dist/tapzap-omarchy-$trial-linux-x86_64"
 [[ $(uname -m) == x86_64 ]] || { echo 'This trial archive targets x86_64.' >&2; exit 1; }
 repo_root="$(git rev-parse --show-toplevel)"
@@ -27,7 +27,7 @@ install -m644 "$repo_root/LICENSE" "$out/"
 install -m644 "$repo_root/SECURITY.md" "$out/"
 cp -R "$repo_root/THIRD-PARTY-NOTICES" "$out/"
 mkdir -p "$out/docs"
-for doc in BUILDING INSTALLING KNOWN-ISSUES SUPPORT-MATRIX TROUBLESHOOTING VALIDATION; do
+for doc in BUILDING INSTALLING OMARCHY KNOWN-ISSUES SUPPORT-MATRIX TROUBLESHOOTING VALIDATION; do
   install -m644 "$repo_root/docs/$doc.md" "$out/docs/"
 done
 SOURCE_REVISION="$source_revision" python3 - "$repo_root" "$out/BUILD-INFO.json" <<'PY'
@@ -36,6 +36,7 @@ from pathlib import Path
 root=Path(sys.argv[1]); output=Path(sys.argv[2])
 manifest=root/'docs/SOURCE-MANIFEST.json'
 info={'source_repository':'https://github.com/rS7Y/tapzap-for-linux',
+      'version':'0.2.0',
       'source_revision':os.environ['SOURCE_REVISION'],
       'source_manifest_sha256':hashlib.sha256(manifest.read_bytes()).hexdigest(),
       'architecture':'x86_64','status':'experimental; not a general Linux release',

@@ -1,8 +1,9 @@
 -- Copyright (C) 2026 Tap Zap.
 -- SPDX-License-Identifier: GPL-3.0-or-later
--- Omarchy/Hyprland Lua integration for the separate TAP ZAP trial only.
+-- Omarchy/Hyprland Lua integration for TAP ZAP.
 -- A desktop or layer-shell click need not change an XWayland window's focus.
 -- Observe ordinary clicks without consuming them or changing other bindings.
+if o and o.window then o.window("^TapZapOmarchy$", { border_size = 0 }) end
 local previous = rawget(_G, "tapzap_omarchy_outside_click")
 if previous then
   for _, binding in ipairs(previous) do binding:remove() end
@@ -18,7 +19,7 @@ local function dismissOutside()
       local pos, size = window.at, window.size
       if cursor.x < pos.x or cursor.y < pos.y or
          cursor.x >= pos.x + size.x or cursor.y >= pos.y + size.y then
-        -- Only spawn a command when this trial is visible and clicked outside.
+        -- Only spawn a command when the panel is visible and clicked outside.
         hl.exec_cmd('"$HOME/.local/bin/tapzap-omarchy" hide')
         return
       end
@@ -30,6 +31,6 @@ for _, button in ipairs({ 272, 273, 274 }) do
   bindings[#bindings + 1] = hl.bind("mouse:" .. button, dismissOutside, {
     non_consuming = true,
     transparent = true,
-    description = "TAP ZAP trial: dismiss on outside click"
+    description = "TAP ZAP: dismiss on outside click"
   })
 end

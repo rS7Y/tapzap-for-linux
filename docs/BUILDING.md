@@ -119,11 +119,11 @@ backend. It requires Linux x86_64, `wayland-client`, `wayland-scanner`, Cairo,
 FreeType, X11/Xext/XRandR, GIO, D-Bus, and the matching Hyprland protocol.
 `test.sh` additionally needs `wayland-server`, `dbus-run-session`, and Python
 packages listed in that script. The build runs the native color self-test.
-After the source commit is clean, `bash package.sh` creates a local trial
+After the source commit is clean, `bash package.sh` creates a local add-on
 archive, records the source revision, includes the GPL and component notices,
 and reruns the build, integration, and isolated install/uninstall checks. This
-is a packaging check, not a recommendation to distribute or install while the
-known reliability findings remain open.
+is a packaging check; see the [Omarchy guide](OMARCHY.md) for local installation
+and the remaining compatibility limits.
 
 ## Important build limitation
 

@@ -22,6 +22,9 @@ distro name alone.
 | Omarchy / Hyprland | [`src/omarchy-hyprland/`](src/omarchy-hyprland/) | Experimental; Hyprland CTM v2, x86_64 |
 
 See [the full matrix](docs/SUPPORT-MATRIX.md) for prerequisites and evidence.
+For Omarchy, use the [tray add-on guide](docs/OMARCHY.md) for installation,
+everyday commands, optional startup and removal. A public binary release is
+pending; the verified local-archive installer is available now.
 ARM64, HDR, other GPU/driver combinations, and many hotplug or suspend/resume
 paths are unverified.
 
@@ -50,6 +53,7 @@ then run `make build VARIANT=x11` (or the matching variant from the table).
 | [`src/`](src/) | Five desktop-session implementations and their required assets |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Code map, backend boundaries, and where to start reading |
 | [`docs/COMMANDS.md`](docs/COMMANDS.md) | Development commands and application CLI reference |
+| [`docs/OMARCHY.md`](docs/OMARCHY.md) | Omarchy tray add-on, install, update and uninstall |
 | [`tests/`](tests/) | Color-core, licensing, documentation, and source-integrity tests |
 | [`scripts/`](scripts/) | Native CI builds and source-manifest maintenance |
 | [`THIRD-PARTY-NOTICES/`](THIRD-PARTY-NOTICES/README.md) | Font and protocol licenses |

@@ -5,6 +5,10 @@ predate the public source snapshot are not treated as releases of this source.
 
 ## Unreleased
 
+- Add the Omarchy tray add-on installer, short `tapzap` command, verified
+  archive/download updates, version reporting and uninstall. Preserve
+  preferences, older versions and integration backups; keep login startup optional.
+
 - Keep isolated Omarchy tests off the live desktop's X11 display, and check
   licenses after builds without treating generated protocol files as project code.
 - Record native Omarchy checks of public source `90d2720` and their limits.
