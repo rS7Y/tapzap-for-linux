@@ -10,19 +10,33 @@
 namespace tapzap {
 
 class HeadlessBackend : public IGammaBackend {
-public:
-    std::string name() const override { return "headless"; }
-    int outputCount() const override { return 1; }
-    bool init(std::string&) override { return true; }
-    bool setFilter(double intensity, double brightness, std::string&) override {
+  public:
+    std::string name() const override {
+        return "headless";
+    }
+    int outputCount() const override {
+        return 1;
+    }
+    bool init(std::string &) override {
+        return true;
+    }
+    bool setFilter(double intensity, double brightness, std::string &) override {
         last_ = buildRamp(intensity, brightness, kSize);
         active_ = true;
         return true;
     }
-    bool restore(std::string&) override { active_ = false; return true; }
-    const GammaRamp& lastRamp() const { return last_; }
-    bool active() const { return active_; }
-private:
+    bool restore(std::string &) override {
+        active_ = false;
+        return true;
+    }
+    const GammaRamp &lastRamp() const {
+        return last_;
+    }
+    bool active() const {
+        return active_;
+    }
+
+  private:
     static constexpr int kSize = 256;
     GammaRamp last_{kSize};
     bool active_ = false;
@@ -38,10 +52,12 @@ std::unique_ptr<IGammaBackend> makeWaylandGammaBackend();
 
 std::unique_ptr<IGammaBackend> makeDefaultBackend() {
 #ifdef HAVE_WLR_GAMMA
-    if (std::getenv("TAPZAP_WLR_ENABLE")) return makeWaylandGammaBackend();
+    if (std::getenv("TAPZAP_WLR_ENABLE"))
+        return makeWaylandGammaBackend();
 #endif
 #if defined(__linux__) && defined(HAVE_XRANDR)
-    if (std::getenv("TAPZAP_PLASMA_HELPER")) return makePlasmaBackend();
+    if (std::getenv("TAPZAP_PLASMA_HELPER"))
+        return makePlasmaBackend();
     return makeXRandRBackend();
 #else
     return std::make_unique<HeadlessBackend>();

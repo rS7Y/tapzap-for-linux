@@ -14,19 +14,23 @@
 
 namespace tapzap {
 class PwmSafe {
-public:
+  public:
     explicit PwmSafe(std::string root = "/sys/class/backlight", bool directWrites = true)
         : root_(std::move(root)), directWrites_(directWrites) {}
-    ~PwmSafe() { disable(); }
+    ~PwmSafe() {
+        disable();
+    }
     bool detect() {
-        if (enabled_) return available();
+        if (enabled_)
+            return available();
         targets_.clear();
         const bool logind = logind_.available();
-        DIR* d = ::opendir(root_.c_str());
+        DIR *d = ::opendir(root_.c_str());
         if (d) {
-            struct dirent* e;
+            struct dirent *e;
             while ((e = ::readdir(d)) != nullptr) {
-                if (e->d_name[0] == '.') continue;
+                if (e->d_name[0] == '.')
+                    continue;
                 const std::string base = root_ + "/" + e->d_name;
                 const long mx = static_cast<long>(readNumFile(base + "/max_brightness", -1));
                 const std::string bp = base + "/brightness";
@@ -38,59 +42,94 @@ public:
         }
         return available();
     }
-    bool available() const { return !targets_.empty(); }
+    bool available() const {
+        return !targets_.empty();
+    }
     bool enable() {
-        if (!available()) return false;
-        if (restorePending_ && !disable()) return false;
-        if (enabled_) { reassertIfDrifted(); return verified(); }
-        for (auto& t : targets_) {
+        if (!available())
+            return false;
+        if (restorePending_ && !disable())
+            return false;
+        if (enabled_) {
+            reassertIfDrifted();
+            return verified();
+        }
+        for (auto &t : targets_) {
             t.priorRaw = static_cast<long>(readNumFile(t.path, -1));
             if (t.priorRaw < 0 || t.priorRaw > t.maxRaw) {
-                for (auto& target : targets_) target.priorRaw = -1;
+                for (auto &target : targets_)
+                    target.priorRaw = -1;
                 return false;
             }
         }
         enabled_ = true;
-        for (auto& t : targets_) {
-            if (!write(t, t.maxRaw)) { disable(); return false; }
+        for (auto &t : targets_) {
+            if (!write(t, t.maxRaw)) {
+                disable();
+                return false;
+            }
         }
-        if (!verified()) { disable(); return false; }
+        if (!verified()) {
+            disable();
+            return false;
+        }
         return true;
     }
     bool disable() {
         bool restored = true;
-        for (auto& t : targets_) {
-            if (t.priorRaw < 0) continue;
-            if (readNumFile(t.path, -1) == t.priorRaw || write(t, t.priorRaw)) t.priorRaw = -1;
-            else restored = false;
+        for (auto &t : targets_) {
+            if (t.priorRaw < 0)
+                continue;
+            if (readNumFile(t.path, -1) == t.priorRaw || write(t, t.priorRaw))
+                t.priorRaw = -1;
+            else
+                restored = false;
         }
         restorePending_ = !restored;
-        enabled_ = !restored; // Preserve snapshots when restoration fails so a later attempt can retry.
+        enabled_ =
+            !restored; // Preserve snapshots when restoration fails so a later attempt can retry.
         return restored;
     }
     bool verified() const {
-        if (!enabled_ || targets_.empty()) return false;
-        for (const auto& t : targets_)
-            if (readNumFile(t.path, -1) != t.maxRaw) return false;
+        if (!enabled_ || targets_.empty())
+            return false;
+        for (const auto &t : targets_)
+            if (readNumFile(t.path, -1) != t.maxRaw)
+                return false;
         return true;
     }
     void reassertIfDrifted() {
-        if (!enabled_ || restorePending_) return;
-        for (auto& t : targets_)
-            if (readNumFile(t.path, -1) != t.maxRaw) write(t, t.maxRaw);
+        if (!enabled_ || restorePending_)
+            return;
+        for (auto &t : targets_)
+            if (readNumFile(t.path, -1) != t.maxRaw)
+                write(t, t.maxRaw);
     }
-    bool enabled() const { return enabled_; }
-private:
-    struct Target { std::string path, device; long maxRaw, priorRaw; };
-    bool write(const Target& t, long value) {
+    bool enabled() const {
+        return enabled_;
+    }
+
+  private:
+    struct Target {
+        std::string path, device;
+        long maxRaw, priorRaw;
+    };
+    bool write(const Target &t, long value) {
         bool ok = false;
         if (directWrites_ && ::access(t.path.c_str(), W_OK) == 0) {
-            FILE* f = std::fopen(t.path.c_str(), "w");
-            if (f) { ok = std::fprintf(f, "%ld", value) > 0; if (std::fclose(f) != 0) ok = false; }
+            FILE *f = std::fopen(t.path.c_str(), "w");
+            if (f) {
+                ok = std::fprintf(f, "%ld", value) > 0;
+                if (std::fclose(f) != 0)
+                    ok = false;
+            }
         }
-        if (!ok) ok = logind_.set(t.device, static_cast<unsigned int>(value));
+        if (!ok)
+            ok = logind_.set(t.device, static_cast<unsigned int>(value));
         ok = ok && readNumFile(t.path, -1) == value;
-        if (!ok) std::fprintf(stderr, "[PWM] Could not verify %s brightness %ld\n", t.device.c_str(), value);
+        if (!ok)
+            std::fprintf(stderr, "[PWM] Could not verify %s brightness %ld\n", t.device.c_str(),
+                         value);
         return ok;
     }
     std::string root_;

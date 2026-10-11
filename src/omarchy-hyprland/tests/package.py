@@ -61,4 +61,6 @@ prefs.write_text("enabled=0\n", encoding="utf-8")
 installer.uninstall(prefix)
 assert not launcher.exists() and not desktop.exists()
 assert before.exists() and prefs.exists() and legacy.read_text(encoding="utf-8") == "OTHER BUILD\n"
-print("PASS: archive checksum, source revision, notices, payload hashes, isolated install/uninstall")
+print(
+    "PASS: archive checksum, source revision, notices, payload hashes, isolated install/uninstall"
+)

@@ -16,16 +16,22 @@ namespace tapzap {
 struct IGammaBackend {
     virtual ~IGammaBackend() = default;
     // Open the display server connection and capture each output's baseline ramp.
-    virtual bool init(std::string& err) = 0;
+    virtual bool init(std::string &err) = 0;
     // Apply intensity (0..1 warmth) + brightness (0..1) across every active output.
-    virtual bool setFilter(double intensity, double brightness, std::string& err) = 0;
+    virtual bool setFilter(double intensity, double brightness, std::string &err) = 0;
     // Restore every output to its captured baseline.
-    virtual bool restore(std::string& err) = 0;
+    virtual bool restore(std::string &err) = 0;
     // Re-enumerate outputs and recapture baselines (call after a display reconfigure / wake).
-    virtual bool refresh(std::string& err) { (void)err; return true; }
+    virtual bool refresh(std::string &err) {
+        (void)err;
+        return true;
+    }
     // While enabled, repair display-server resets without replacing the original baseline.
-    virtual bool maintainFilter(double intensity, double brightness, std::string& err) {
-        (void)intensity; (void)brightness; (void)err; return true;
+    virtual bool maintainFilter(double intensity, double brightness, std::string &err) {
+        (void)intensity;
+        (void)brightness;
+        (void)err;
+        return true;
     }
     virtual std::string name() const = 0;
     virtual int outputCount() const = 0;

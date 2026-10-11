@@ -89,8 +89,18 @@ class LinuxColorCoreTests(unittest.TestCase):
                     executable = temp / "core_contract"
                     fixture.write_text(CORE_CONTRACT, encoding="utf-8")
                     subprocess.run(
-                        [compiler, "-std=c++17", "-Wall", "-Wextra", "-Werror",
-                         "-I", str(core_header.parent), str(fixture), "-o", str(executable)],
+                        [
+                            compiler,
+                            "-std=c++17",
+                            "-Wall",
+                            "-Wextra",
+                            "-Werror",
+                            "-I",
+                            str(core_header.parent),
+                            str(fixture),
+                            "-o",
+                            str(executable),
+                        ],
                         check=True,
                         capture_output=True,
                         text=True,

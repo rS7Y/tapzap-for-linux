@@ -36,22 +36,36 @@ class PublicRepoIntegrityTests(unittest.TestCase):
         manifest = json.loads((ROOT / "docs/SOURCE-MANIFEST.json").read_text(encoding="utf-8"))
         rows = manifest["files"]
         listed = {row["path"] for row in rows}
-        actual = {path.relative_to(ROOT).as_posix() for path in (ROOT / "src").rglob("*")
-                  if path.is_file() and "build" not in path.relative_to(ROOT).parts
-                  and "dist" not in path.relative_to(ROOT).parts
-                  and "evidence" not in path.relative_to(ROOT).parts
-                  and "__pycache__" not in path.relative_to(ROOT).parts
-                  and path.suffix != ".pyc"}
-        self.assertEqual(actual, listed, "source manifest must cover the complete imported source tree")
+        actual = {
+            path.relative_to(ROOT).as_posix()
+            for path in (ROOT / "src").rglob("*")
+            if path.is_file()
+            and "build" not in path.relative_to(ROOT).parts
+            and "dist" not in path.relative_to(ROOT).parts
+            and "evidence" not in path.relative_to(ROOT).parts
+            and "__pycache__" not in path.relative_to(ROOT).parts
+            and path.suffix != ".pyc"
+        }
+        self.assertEqual(
+            actual, listed, "source manifest must cover the complete imported source tree"
+        )
         for row in rows:
             with self.subTest(path=row["path"]):
                 self.assertRegex(row["sha256"], r"^[0-9a-f]{64}$")
                 self.assertRegex(row["source_sha256"], r"^[0-9a-f]{64}$")
-                self.assertEqual(row["sha256"], hashlib.sha256((ROOT / row["path"]).read_bytes()).hexdigest())
+                self.assertEqual(
+                    row["sha256"], hashlib.sha256((ROOT / row["path"]).read_bytes()).hexdigest()
+                )
 
     def test_public_manifest_does_not_disclose_private_source_paths(self):
         text = (ROOT / "docs/SOURCE-MANIFEST.json").read_text(encoding="utf-8")
-        for forbidden in ("/Users/", "/Volumes/", "Documents/Codex", "TapZap2.swift", "TapZap2.cpp"):
+        for forbidden in (
+            "/Users/",
+            "/Volumes/",
+            "Documents/Codex",
+            "TapZap2.swift",
+            "TapZap2.cpp",
+        ):
             with self.subTest(forbidden=forbidden):
                 self.assertNotIn(forbidden, text)
 
