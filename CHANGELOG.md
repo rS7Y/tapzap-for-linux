@@ -5,6 +5,10 @@ predate the public source snapshot are not treated as releases of this source.
 
 ## Unreleased
 
+- Match the bar and ZAP button mark to the Mac artwork and icon sizes; use a
+  single 45% OFF opacity on the bar. Shrink the gear by 10% and center it on
+  the visible TAP ZAP title lettering.
+
 - Reduce Auto Schedule button text and match Mac/Windows preset behavior:
   manual warmth suppresses preset highlights until an explicit preset click,
   including after release, status polling and keyboard warmth edits.

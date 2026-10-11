@@ -55,8 +55,8 @@ Rectangle {
         spacing: root.bolt ? 8 : 0
         Bolt {
             visible: root.bolt
-            width: root.bolt ? 18 : 0
-            height: 24
+            width: root.bolt ? 22 : 0
+            height: 22
             anchors.verticalCenter: parent.verticalCenter
             color: root.textColor
         }

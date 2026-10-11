@@ -248,10 +248,9 @@ OmarchyUi.Panel {
             Item {
                 Bolt {
                     anchors.centerIn: parent
-                    width: 12
-                    height: 16
+                    width: 18
+                    height: 18
                     color: root.barForeground
-                    opacity: root.snapshot.enabled ? 1 : .45
                 }
             }
         }
@@ -367,6 +366,8 @@ OmarchyUi.Panel {
                 color: "#000000"
             }
             Text {
+                id: headerTitle
+                readonly property real inkCenterY: y + baselineOffset + headerMetrics.tightBoundingRect.y + headerMetrics.tightBoundingRect.height / 2
                 x: 24
                 y: 21
                 text: root.view === 0 ? "TAP ZAP" : root.view === 1 ? "SETTINGS" : "AUTO SCHEDULE"
@@ -376,9 +377,14 @@ OmarchyUi.Panel {
                 font.letterSpacing: root.view === 0 ? 1 : .5
                 color: "#686868"
             }
+            TextMetrics {
+                id: headerMetrics
+                text: headerTitle.text
+                font: headerTitle.font
+            }
             TapButton {
                 x: 252
-                y: 6
+                y: root.view === 0 ? headerTitle.inkCenterY - height / 2 : 6
                 width: 52
                 height: 44
                 quiet: true
@@ -387,8 +393,8 @@ OmarchyUi.Panel {
                 Gear {
                     visible: root.view === 0
                     anchors.centerIn: parent
-                    width: 24
-                    height: 24
+                    width: 21.6
+                    height: 21.6
                 }
                 Accessible.name: root.view === 0 ? "Settings" : "Back"
                 fontFamily: root.mono
