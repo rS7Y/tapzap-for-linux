@@ -126,6 +126,28 @@ class OmarchyInstallTests(unittest.TestCase):
         self.assertNotEqual(0, result.returncode)
         self.assertIn("release differs", result.stderr)
 
+    def test_upgrade_backs_up_an_older_owned_icon(self):
+        self.assertEqual(0, self.run_installer("--archive", self.archive).returncode)
+        icon = self.prefix / "data/icons/hicolor/scalable/apps/tapzap-omarchy.svg"
+        icon.write_text("older TAP ZAP icon")
+        result = self.run_installer("--archive", self.archive)
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertEqual(
+            (VARIANT / "integration/tapzap-omarchy.svg").read_bytes(), icon.read_bytes()
+        )
+        backups = self.prefix / "data/tapzap-omarchy-trial/backups"
+        self.assertTrue(any(p.read_text() == "older TAP ZAP icon" for p in backups.iterdir()))
+
+    def test_retries_do_not_take_ownership_of_an_unrelated_icon(self):
+        icon = self.prefix / "data/icons/hicolor/scalable/apps/tapzap-omarchy.svg"
+        icon.parent.mkdir(parents=True)
+        icon.write_text("OTHER APP")
+        for _ in range(2):
+            result = self.run_installer("--archive", self.archive)
+            self.assertNotEqual(0, result.returncode)
+            self.assertEqual("OTHER APP", icon.read_text())
+            self.assertFalse((self.prefix / "data/applications/tapzap-omarchy.desktop").exists())
+
     def test_upgrade_keeps_previous_release_and_preferences(self):
         self.assertEqual(0, self.run_installer("--archive", self.archive).returncode)
         before = (self.prefix / "bin/tapzap").resolve()

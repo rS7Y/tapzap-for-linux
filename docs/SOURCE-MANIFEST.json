@@ -182,8 +182,8 @@
     },
     {
       "path": "src/omarchy-hyprland/install.py",
-      "sha256": "c5ff9bbf01d0ad91a710bc3ed89d94efa677298e340c36de6ceb7a753cb53a33",
-      "bytes": 13259,
+      "sha256": "ce3bdd9f319924f4126f9ace9ccae43396fc30f2bbe7295cf907d75bf5ece221",
+      "bytes": 13456,
       "source_snapshot": "omarchy-addon-0.1.6",
       "source_sha256": "c7068063e460d0a08bb48123546a003ede3cef0602f6e2ba4aeaa2e693902595"
     },

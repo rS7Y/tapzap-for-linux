@@ -49,12 +49,12 @@ def paths(prefix=None):
     )
 
 
-def checked_write(path, data, app_root=None):
+def checked_write(path, data, app_root=None, owned=False):
     path.parent.mkdir(parents=True, exist_ok=True)
     if path.exists():
         if path.read_text() == data:
             return
-        if not app_root or str(app_root) not in path.read_text():
+        if not app_root or (not owned and str(app_root) not in path.read_text()):
             raise RuntimeError(f"Refusing to overwrite a different file: {path}")
         backup(path, app_root)
     path.write_text(data)
@@ -162,11 +162,15 @@ def install(prefix=None, package=ROOT):
     desktop = desktop.replace(
         "Icon=tapzap-omarchy", f"Icon={data}/icons/hicolor/scalable/apps/tapzap-omarchy.svg"
     )
-    checked_write(data / "applications/tapzap-omarchy.desktop", desktop, app_root)
+    desktop_path = data / "applications/tapzap-omarchy.desktop"
+    owned_desktop = desktop_path.is_file() and str(app_root) in desktop_path.read_text()
     checked_write(
         data / "icons/hicolor/scalable/apps/tapzap-omarchy.svg",
         (package / "integration/tapzap-omarchy.svg").read_text(),
+        app_root,
+        owned=owned_desktop,
     )
+    checked_write(desktop_path, desktop, app_root)
     hyprland_integration(config, app_root)
     if not prefix and current.exists():
         subprocess.run([str(current / "bin/tapzap"), "quit"], timeout=8, capture_output=True)
