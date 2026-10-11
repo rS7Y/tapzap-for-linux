@@ -42,6 +42,8 @@ for relative, expected in manifest.items():
 
 spec = importlib.util.spec_from_file_location("trial_installer", pkg / "install.py")
 installer = importlib.util.module_from_spec(spec)
+# Importing the installer must not add unsigned bytecode files to the package.
+sys.dont_write_bytecode = True
 spec.loader.exec_module(installer)
 prefix = temp / "user with spaces"
 legacy = prefix / "config/autostart/tapzap.desktop"
