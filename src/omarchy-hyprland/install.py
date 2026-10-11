@@ -103,6 +103,47 @@ def verify_package(package):
             raise RuntimeError(f"Archive verification failed: {relative}")
 
 
+def plugin_path(config):
+    return config / "omarchy/plugins/app.tapzap"
+
+
+def check_plugin_owner(config, app_root):
+    target = plugin_path(config)
+    if target.exists() or target.is_symlink():
+        if not target.is_symlink() or os.readlink(target) != str(app_root / "current/plugin"):
+            raise RuntimeError(f"Another installation owns {target}")
+
+
+def plugin_ipc(prefix, *args):
+    if prefix or not shutil.which("omarchy-shell"):
+        return False
+    env = dict(os.environ, OMARCHY_PATH=os.environ.get("OMARCHY_PATH", "/usr/share/omarchy"))
+    result = subprocess.run(
+        ["omarchy-shell", "shell", *args], env=env, timeout=8, capture_output=True, text=True
+    )
+    return result.returncode == 0 and result.stdout.strip() in ("", "ok")
+
+
+def install_plugin(config, app_root, prefix):
+    target = plugin_path(config)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    if not target.is_symlink():
+        target.symlink_to(app_root / "current/plugin")
+    plugin_ipc(prefix, "rescanPlugins")
+    if not plugin_ipc(prefix, "enablePlugin", "app.tapzap", "{}") and not prefix:
+        print(
+            "Plugin installed. Enable it when the shell is ready: omarchy plugin enable app.tapzap"
+        )
+
+
+def remove_plugin(config, app_root, prefix):
+    target = plugin_path(config)
+    if target.is_symlink() and os.readlink(target) == str(app_root / "current/plugin"):
+        plugin_ipc(prefix, "setPluginEnabled", "app.tapzap", "false")
+        target.unlink()
+        plugin_ipc(prefix, "rescanPlugins")
+
+
 def install(prefix=None, package=ROOT):
     if platform.system() != "Linux" and not prefix:
         raise RuntimeError(
@@ -116,6 +157,9 @@ def install(prefix=None, package=ROOT):
     version = hashlib.sha256((package / "SHA256SUMS.json").read_bytes()).hexdigest()[:16]
     app_root = data / "tapzap-omarchy-trial"
     release = app_root / "releases" / version
+    native = (package / "payload/plugin/manifest.json").is_file()
+    if native:
+        check_plugin_owner(config, app_root)
     files = {
         p.relative_to(package / "payload"): p
         for p in (package / "payload").rglob("*")
@@ -171,7 +215,7 @@ def install(prefix=None, package=ROOT):
         owned=owned_desktop,
     )
     checked_write(desktop_path, desktop, app_root)
-    hyprland_integration(config, app_root)
+    hyprland_integration(config, app_root, remove=native)
     if not prefix and current.exists():
         subprocess.run([str(current / "bin/tapzap"), "quit"], timeout=8, capture_output=True)
     pending = app_root / f".current-{os.getpid()}"
@@ -185,6 +229,8 @@ def install(prefix=None, package=ROOT):
         short.symlink_to(current / "tapzap-omarchy")
     elif not short.is_symlink() or os.readlink(short) != str(current / "tapzap-omarchy"):
         print("An existing 'tapzap' command was preserved. Use tapzap-omarchy instead.")
+    if native:
+        install_plugin(config, app_root, prefix)
     print("Installed TAP ZAP. Open it from the application launcher or run tapzap.")
     print("First use starts OFF. Start at login is optional in Settings.")
     print("Update: tapzap update    Remove: tapzap uninstall")
@@ -193,7 +239,9 @@ def install(prefix=None, package=ROOT):
 
 def reload_hyprland(prefix):
     if not prefix and os.environ.get("HYPRLAND_INSTANCE_SIGNATURE") and shutil.which("hyprctl"):
-        subprocess.run(["hyprctl", "reload"], timeout=8, capture_output=True, check=True)
+        subprocess.run(
+            ["hyprctl", "reload", "config-only"], timeout=8, capture_output=True, check=True
+        )
 
 
 def uninstall(prefix=None):
@@ -202,6 +250,7 @@ def uninstall(prefix=None):
     exe = app_root / "current/tapzap-omarchy"
     if not prefix and exe.exists():
         subprocess.run([str(exe), "quit"], timeout=8, check=False, capture_output=True)
+    remove_plugin(config, app_root, prefix)
     for name in ("tapzap", "tapzap-omarchy"):
         launcher = bin_dir / name
         if launcher.is_symlink() and os.readlink(launcher) == str(exe):

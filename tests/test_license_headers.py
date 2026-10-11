@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PROJECT_EXTENSIONS = {".c", ".cpp", ".h", ".hpp", ".lua", ".py", ".sh", ".desktop", ".svg"}
+PROJECT_EXTENSIONS = {".c", ".cpp", ".h", ".hpp", ".lua", ".qml", ".py", ".sh", ".desktop", ".svg"}
 VARIANTS = (
     "src/x11",
     "src/gnome-wayland",

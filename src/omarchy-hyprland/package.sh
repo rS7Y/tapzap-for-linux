@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 set -euo pipefail
 cd "$(dirname "$0")"
-trial=0.2.0
+trial=0.3.0
 out="dist/tapzap-omarchy-$trial-linux-x86_64"
 [[ $(uname -m) == x86_64 ]] || { echo 'This trial archive targets x86_64.' >&2; exit 1; }
 repo_root="$(git rev-parse --show-toplevel)"
@@ -20,6 +20,9 @@ install -m755 build/tapzap build/tapzap-ctm build/tapzap-tray "$out/payload/bin/
 install -m755 integration/tapzap-omarchy "$out/payload/"
 install -m644 integration/outside-click.lua "$out/payload/"
 cp -R src/linux/assets "$out/payload/"
+cp -R plugin "$out/payload/"
+mkdir -p "$out/payload/plugin/assets"
+install -m644 src/linux/assets/Anybody-*.ttf src/linux/assets/OFL.txt "$out/payload/plugin/assets/"
 install -m644 integration/tapzap-omarchy.desktop integration/tapzap-omarchy.svg "$out/integration/"
 install -m755 install.py "$out/"
 install -m644 README.md "$out/"
@@ -36,7 +39,7 @@ from pathlib import Path
 root=Path(sys.argv[1]); output=Path(sys.argv[2])
 manifest=root/'docs/SOURCE-MANIFEST.json'
 info={'source_repository':'https://github.com/rS7Y/tapzap-for-linux',
-      'version':'0.2.0',
+      'version':'0.3.0',
       'source_revision':os.environ['SOURCE_REVISION'],
       'source_manifest_sha256':hashlib.sha256(manifest.read_bytes()).hexdigest(),
       'architecture':'x86_64','status':'experimental; not a general Linux release',

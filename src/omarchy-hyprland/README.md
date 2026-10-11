@@ -4,7 +4,7 @@ This directory contains an experimental x86_64 integration for Omarchy using
 Hyprland's CTM v2 protocol. It is not a generic Wayland build and is not an
 official Omarchy package.
 
-For installation, tray controls, updates, optional login startup and removal,
+For installation, native bar controls, schedules, updates, login startup and removal,
 read the [Omarchy add-on guide](https://github.com/rS7Y/tapzap-for-linux/blob/main/docs/OMARCHY.md).
 The public binary release is pending; local archives can be installed with
 `python3 install.py --archive /path/to/package.tar.gz` and its adjacent checksum.
@@ -26,7 +26,12 @@ bash build.sh
 bash test.sh
 ```
 
-`test.sh` exercises protocol and setup integration checks. It is not a physical
+`plugin/` contains the native Omarchy QML interface. `src/linux/service.cpp`
+owns the filter and settings; `schedule.hpp` contains the local-time scheduler.
+The original `ui_cairo.cpp` is the optional fallback.
+
+`test.sh` exercises the fallback GUI/tray and native engine against isolated
+X11/Wayland servers. It is not a physical
 display or recovery test. Do not install an archive unless it has been rebuilt
 from a reviewed source commit, its checksums verified, and its open issues
 reviewed. The installer is scoped to the current user's data directories and

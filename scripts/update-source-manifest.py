@@ -24,7 +24,24 @@ ADDITIONAL_PROVENANCE = {
         "fab17eeaa44d940dcb614439ba0c008ae18fa11d021790e4e22b17ec6d9c35ac",
     ),
 }
-PUBLIC_AUTHORED = {"src/omarchy-hyprland/README.md": "public-authored-2026-09-24"}
+PUBLIC_AUTHORED = {
+    "src/omarchy-hyprland/README.md": "public-authored-2026-09-24",
+    **{
+        f"src/omarchy-hyprland/{name}": "public-authored-2026-10-11"
+        for name in (
+            "tests/service.py",
+            "tests/qml.py",
+            "src/linux/schedule.hpp",
+            "src/linux/service.hpp",
+            "src/linux/service.cpp",
+            "plugin/manifest.json",
+            "plugin/Panel.qml",
+            "plugin/Service.qml",
+            "plugin/Fader.qml",
+            "plugin/TapButton.qml",
+        )
+    },
+}
 
 
 def main():

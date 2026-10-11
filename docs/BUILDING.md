@@ -114,6 +114,10 @@ bash build.sh
 bash test.sh
 ```
 
+The native panel uses Omarchy 4.0.2 shell plugins and Quickshell. It loads
+`qs.Ui`, `qs.Commons` and `Quickshell.Hyprland` from the installed shell. No
+Omarchy or Qt libraries are bundled.
+
 This is an experimental Hyprland CTM-v2 integration, not a generic Wayland
 backend. It requires Linux x86_64, `wayland-client`, `wayland-scanner`, Cairo,
 FreeType, X11/Xext/XRandR, GIO, D-Bus, and the matching Hyprland protocol.

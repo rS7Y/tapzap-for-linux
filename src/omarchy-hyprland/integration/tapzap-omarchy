@@ -25,11 +25,31 @@ if [[ $command == update ]]; then
 fi
 if [[ $command == uninstall ]]; then exec python3 "$root/setup/install.py" --uninstall; fi
 if [[ $command == version ]]; then exec python3 "$root/setup/install.py" --version; fi
+if [[ $command == engine ]]; then exec "$app" managed-daemon; fi
+if [[ $command == engine-resume ]]; then exec "$app" resume-daemon; fi
+if [[ $command == set || $command == preset || $command == schedule ]]; then exec "$app" "$@"; fi
+# Native Omarchy 4 plugin owns the popup and the engine lifetime. Older shells
+# can use the retained Cairo front end explicitly with TAPZAP_CAIRO=1.
+plugin="${XDG_CONFIG_HOME:-$HOME/.config}/omarchy/plugins/app.tapzap/manifest.json"
+if [[ -f $plugin && ${TAPZAP_CAIRO:-0} != 1 ]]; then
+  export OMARCHY_PATH="${OMARCHY_PATH:-/usr/share/omarchy}"
+  if [[ $command == show || $command == hide ]]; then
+    exec omarchy-shell app.tapzap "$command"
+  fi
+  if [[ $command == start-hidden ]]; then
+    for attempt in {1..20}; do
+      if omarchy-shell app.tapzap.engine start; then exit 0; fi
+      sleep 0.5
+    done
+    echo 'Omarchy shell is not ready. Open TAP ZAP from the bar.' >&2
+    exit 1
+  fi
+fi
 if [[ $command == selftest ]]; then exec "$app" selftest; fi
 if [[ $command == status || $command == hide || $command == quit ]]; then exec "$app" "$command"; fi
 if [[ $command == on || $command == off || $command == toggle ]]; then exec "$app" "$command"; fi
 if [[ $command != show && $command != start-hidden ]]; then
-  echo 'Usage: tapzap [show|on|off|toggle|hide|status|quit|start-hidden|selftest|version|update [ARCHIVE]|uninstall]' >&2
+  echo 'Usage: tapzap [show|on|off|toggle|hide|status|quit|set|preset|schedule|start-hidden|selftest|version|update [ARCHIVE]|uninstall]' >&2
   exit 2
 fi
 if "$app" status >/dev/null 2>&1; then

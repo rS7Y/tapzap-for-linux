@@ -7,3 +7,6 @@ wayland-scanner server-header src/linux/ctm/protocols/hyprland-ctm-control-v1.xm
 cc -std=c11 -O2 -Wall -Wextra -Ibuild $(pkg-config --cflags wayland-server) \
   tests/ctm_server.c build/ctm-protocol.c -o build/test-ctm-server $(pkg-config --libs wayland-server)
 dbus-run-session -- "${TEST_PYTHON:-/usr/bin/python3}" tests/integration.py
+
+"${TEST_PYTHON:-/usr/bin/python3}" tests/service.py
+"${TEST_PYTHON:-/usr/bin/python3}" tests/qml.py

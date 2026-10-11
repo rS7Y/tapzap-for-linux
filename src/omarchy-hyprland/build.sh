@@ -13,7 +13,7 @@ cc -std=c11 -O2 -Wall -Wextra -Wno-unused-parameter -Ibuild $(pkg-config --cflag
   src/linux/ctm/engine.c build/ctm-protocol.c -o build/tapzap-ctm $(pkg-config --libs wayland-client) -lm
 ${CXX:-g++} -std=c++17 -O2 -Wall -Wextra -DHAVE_CAIRO -DHAVE_XRANDR -DHAVE_LOGIND \
   $(pkg-config --cflags cairo freetype2 x11 xext xrandr dbus-1) \
-  src/linux/main.cpp src/linux/ui_cairo.cpp src/linux/gamma_hyprland.cpp \
+  src/linux/main.cpp src/linux/ui_cairo.cpp src/linux/gamma_hyprland.cpp src/linux/service.cpp \
   -o build/tapzap $(pkg-config --libs cairo freetype2 x11 xext xrandr dbus-1)
 ${CXX:-g++} -std=c++17 -O2 -Wall -Wextra $(pkg-config --cflags gio-2.0) \
   src/linux/tray.cpp -o build/tapzap-tray $(pkg-config --libs gio-2.0)

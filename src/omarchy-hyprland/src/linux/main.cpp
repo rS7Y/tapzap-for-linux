@@ -15,6 +15,7 @@
 #include "tapzap_core.hpp"
 #include "ipc.hpp"
 #include "ui.hpp"
+#include "service.hpp"
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
@@ -245,6 +246,20 @@ int main(int argc, char **argv) {
         return 2;
     }
     const std::string c = argv[1];
+    if (c == "managed-daemon" || c == "resume-daemon")
+        return runManagedService(c == "resume-daemon");
+    if (c == "daemon")
+        return runService();
+    if (c == "set" || c == "preset" || c == "schedule") {
+        std::string command = c;
+        for (int i = 2; i < argc; ++i)
+            command += " " + std::string(argv[i]);
+        std::string reply;
+        if (!ipcQuery(command, reply))
+            return 1;
+        std::puts(reply.c_str());
+        return reply.find("\"ok\":true") != std::string::npos ? 0 : 1;
+    }
     if (c == "gui")
         return runGui(argc, argv);
     if (c == "on" || c == "off" || c == "toggle" || c == "show" || c == "hide" || c == "status" ||

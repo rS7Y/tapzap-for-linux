@@ -5,6 +5,13 @@ predate the public source snapshot are not treated as releases of this source.
 
 ## Unreleased
 
+- Add the native Omarchy bar plugin with rounded console C, original TAP ZAP
+  typography and colors, two vertical faders, presets and keyboard controls.
+- Separate its managed filter engine from the window. Add daily local-time
+  schedules, one-minute fades, manual holds, OFF/startup rules and DST tests.
+- Migrate the earlier outside-click hook to native popup dismissal; retain
+  the optional Cairo interface and preserve user input/theme configuration.
+
 - Add the Omarchy tray add-on installer, short `tapzap` command, verified
   archive/download updates, version reporting and uninstall. Preserve
   preferences, older versions and integration backups; keep login startup optional.

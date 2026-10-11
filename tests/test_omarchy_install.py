@@ -69,6 +69,48 @@ class OmarchyInstallTests(unittest.TestCase):
             timeout=15,
         )
 
+    def native_package(self):
+        sums = self.package / "SHA256SUMS.json"
+        hashes = json.loads(sums.read_text())
+        for source in (VARIANT / "plugin").iterdir():
+            target = self.package / "payload/plugin" / source.name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(source.read_bytes())
+            hashes[str(target.relative_to(self.package))] = hashlib.sha256(
+                target.read_bytes()
+            ).hexdigest()
+        sums.write_text(json.dumps(hashes))
+        self.write_archive()
+
+    def test_native_upgrade_removes_legacy_hook_and_keeps_user_input(self):
+        config = self.prefix / "config/hypr/hyprland.lua"
+        config.parent.mkdir(parents=True)
+        original = '-- User configuration\nrequire("hypr.input")\n'
+        config.write_text(original)
+        self.assertEqual(0, self.run_installer("--archive", self.archive).returncode)
+        self.native_package()
+        result = self.run_installer("--archive", self.archive)
+        self.assertEqual(0, result.returncode, result.stderr)
+        plugin = self.prefix / "config/omarchy/plugins/app.tapzap"
+        self.assertTrue(plugin.is_symlink())
+        self.assertTrue((plugin / "Panel.qml").is_file())
+        self.assertEqual(original, config.read_text())
+        self.assertEqual(0, self.run_installer("--uninstall").returncode)
+        self.assertFalse(plugin.is_symlink())
+        self.assertEqual(original, config.read_text())
+
+    def test_native_install_refuses_other_plugin_before_changes(self):
+        self.native_package()
+        plugin = self.prefix / "config/omarchy/plugins/app.tapzap"
+        plugin.mkdir(parents=True)
+        marker = plugin / "manifest.json"
+        marker.write_text("OTHER PLUGIN")
+        result = self.run_installer("--archive", self.archive)
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("Another installation owns", result.stderr)
+        self.assertEqual("OTHER PLUGIN", marker.read_text())
+        self.assertFalse((self.prefix / "data").exists())
+
     def test_one_command_installs_archive_and_short_launcher(self):
         result = self.run_installer("--archive", self.archive)
         self.assertEqual(0, result.returncode, result.stderr)

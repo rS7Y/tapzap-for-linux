@@ -56,6 +56,9 @@ short = prefix / "bin/tapzap"
 assert short.is_symlink() and short.resolve() == launcher.resolve()
 assert (launcher.resolve().parent / "setup/install.py").is_file()
 assert (launcher.resolve().parent / "LICENSE").is_file()
+plugin = prefix / "config/omarchy/plugins/app.tapzap"
+assert plugin.is_symlink() and (plugin / "manifest.json").is_file()
+assert (plugin / "assets/Anybody-ExtraBold.ttf").is_file()
 before = launcher.resolve()
 desktop = prefix / "data/applications/tapzap-omarchy.desktop"
 assert 'Exec="' in desktop.read_text(encoding="utf-8")
@@ -66,6 +69,7 @@ prefs.parent.mkdir(parents=True)
 prefs.write_text("enabled=0\n", encoding="utf-8")
 installer.uninstall(prefix)
 assert not launcher.exists() and not short.exists() and not desktop.exists()
+assert not plugin.is_symlink()
 assert before.exists() and prefs.exists() and legacy.read_text(encoding="utf-8") == "OTHER BUILD\n"
 print(
     "PASS: archive checksum, source revision, notices, payload hashes, isolated install/uninstall"

@@ -17,6 +17,8 @@ TEXT_SUFFIXES = {
     ".h",
     ".hpp",
     ".lua",
+    ".qml",
+    ".json",
     ".md",
     ".py",
     ".sh",
