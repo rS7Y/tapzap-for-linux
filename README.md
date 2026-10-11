@@ -22,9 +22,12 @@ distro name alone.
 | Omarchy / Hyprland | [`src/omarchy-hyprland/`](src/omarchy-hyprland/) | Experimental; Hyprland CTM v2, x86_64 |
 
 See [the full matrix](docs/SUPPORT-MATRIX.md) for prerequisites and evidence.
-For Omarchy, use the [tray add-on guide](docs/OMARCHY.md) for installation,
-everyday commands, optional startup and removal. A public binary release is
-pending; the verified local-archive installer is available now.
+For Omarchy, download [TAP ZAP 0.3.0](https://github.com/rS7Y/tapzap-for-linux/releases/tag/omarchy-v0.3.0)
+and follow the [native plugin setup guide](docs/OMARCHY.md) for verified installation,
+schedules, settings, updates and removal. The root `manifest.json` is the Omarchy
+plugin entry point; its native engine requires the manual setup in that guide.
+
+![TAP ZAP native Omarchy panel](preview.png)
 ARM64, HDR, other GPU/driver combinations, and many hotplug or suspend/resume
 paths are unverified.
 
@@ -53,17 +56,19 @@ then run `make build VARIANT=x11` (or the matching variant from the table).
 | [`src/`](src/) | Five desktop-session implementations and their required assets |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Code map, backend boundaries, and where to start reading |
 | [`docs/COMMANDS.md`](docs/COMMANDS.md) | Development commands and application CLI reference |
-| [`docs/OMARCHY.md`](docs/OMARCHY.md) | Omarchy tray add-on, install, update and uninstall |
+| [`docs/OMARCHY.md`](docs/OMARCHY.md) | Omarchy native plugin, schedules, install, update and uninstall |
 | [`tests/`](tests/) | Color-core, licensing, documentation, and source-integrity tests |
 | [`scripts/`](scripts/) | Native CI builds and source-manifest maintenance |
 | [`THIRD-PARTY-NOTICES/`](THIRD-PARTY-NOTICES/README.md) | Font and protocol licenses |
 
 ## Build and install
 
-There is not yet a binary release built and verified from this public source
-revision. The Linux ZIPs currently linked from the website are earlier beta
-artifacts and are **not source-matched** to this repository. Do not infer source
-correspondence from their checksums.
+The [Omarchy 0.3.0 release](https://github.com/rS7Y/tapzap-for-linux/releases/tag/omarchy-v0.3.0)
+contains an x86_64 package built from its tagged public source. Its archive records
+the full source commit and payload hashes, and includes its checksum, license,
+notices and setup guide. See [release validation](docs/VALIDATION.md#release-correspondence).
+The older X11/GNOME/Plasma/Sway ZIPs on the website are **not source-matched** to
+this repository. This Omarchy release does not replace those other builds.
 
 To build locally, use the commands in [Building](docs/BUILDING.md), then follow
 the [installation and safe first-run steps](docs/INSTALLING.md). Do not install
@@ -93,7 +98,7 @@ home-directory paths, and unreviewed logs or screenshots. See
 - [Changes](CHANGELOG.md)
 - [Contributing](CONTRIBUTING.md)
 - [Third-party notices](THIRD-PARTY-NOTICES/README.md)
-- [GitHub releases](https://github.com/rS7Y/tapzap-for-linux/releases) — no source-matched binary release yet
+- [GitHub releases](https://github.com/rS7Y/tapzap-for-linux/releases) — Omarchy packages and checksums
 
 After the Linux setup and support information: need Tap Zap for
 [macOS or Windows](https://tapzap.app/download)? Those editions are paid;

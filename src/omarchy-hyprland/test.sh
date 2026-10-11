@@ -10,3 +10,4 @@ dbus-run-session -- "${TEST_PYTHON:-/usr/bin/python3}" tests/integration.py
 
 "${TEST_PYTHON:-/usr/bin/python3}" tests/service.py
 "${TEST_PYTHON:-/usr/bin/python3}" tests/qml.py
+TAPZAP_QML_REPOSITORY=1 "${TEST_PYTHON:-/usr/bin/python3}" tests/qml.py

@@ -4,7 +4,7 @@ TAP ZAP is a native Omarchy bar plugin. Open its lightning icon to use two
 vertical faders, DAY / EVENING / NIGHT presets and the ZAP switch. The square-edged
 panel keeps TAP ZAP's dark surfaces, red warmth channel, white brightness
 channel, Anybody headings and metallic fader caps. Clicking outside closes
-the panel while the filter keeps running. The large gear opens Settings;
+the panel while the filter keeps running. The gear opens Settings;
 there is no separate close button. Quit restores the display.
 
 One managed engine serves all monitors. It exits when the plugin is unloaded
@@ -23,31 +23,74 @@ suspend/resume remain unverified. Read [Known issues](KNOWN-ISSUES.md).
 
 ## Install
 
-A public binary release is still pending. For a verified local package, keep
-the archive and its `.sha256` file together, then run from the repository root:
+The current release is [Omarchy 0.3.0](https://github.com/rS7Y/tapzap-for-linux/releases/tag/omarchy-v0.3.0).
+Use Linux x86_64 with glibc 2.38+, Omarchy's native Quickshell shell and Hyprland
+CTM v2. Tested versions are Omarchy 4.0.2, Hyprland 0.56.2 and Quickshell 0.3.1.
+The engine uses Cairo, FreeType, X11/Xext/XRandR, D-Bus, the C++ runtime and
+Wayland client libraries already present on the tested Omarchy installation.
+Other versions and hardware require their own checks. No Qt or Omarchy libraries
+are bundled. The optional Cairo fallback also needs XWayland and GTK/AppIndicator.
+
+From a terminal on your **unlocked Omarchy desktop**, download the archive and
+checksum together, verify them, then install:
 
 ```sh
-python3 src/omarchy-hyprland/install.py --archive /path/to/tapzap-omarchy-0.3.0-linux-x86_64.tar.gz
+mkdir -p ~/Downloads/tapzap-omarchy-0.3.0
+cd ~/Downloads/tapzap-omarchy-0.3.0
+curl --fail --location --remote-name https://github.com/rS7Y/tapzap-for-linux/releases/download/omarchy-v0.3.0/tapzap-omarchy-0.3.0-linux-x86_64.tar.gz
+curl --fail --location --remote-name https://github.com/rS7Y/tapzap-for-linux/releases/download/omarchy-v0.3.0/tapzap-omarchy-0.3.0-linux-x86_64.tar.gz.sha256
+sha256sum --check tapzap-omarchy-0.3.0-linux-x86_64.tar.gz.sha256
+tar -xzf tapzap-omarchy-0.3.0-linux-x86_64.tar.gz
+python3 tapzap-omarchy-0.3.0-linux-x86_64/install.py --archive tapzap-omarchy-0.3.0-linux-x86_64.tar.gz
 ```
 
-Install, update and remove TAP ZAP from an unlocked desktop. The installer refuses
-a locked or undetermined session because Omarchy 4 plugin rescans also reload its
+Continue only when the checksum reports **OK**. The checksum detects incomplete
+or changed downloads; it is not a signature or independent security review.
+You can also download both files from the release page without using curl.
+No sudo or pkexec is required. The installer checks payload hashes and adds
+**TAP ZAP** to the launcher, the `tapzap` command and the `app.tapzap` bar widget.
+If another application owns `tapzap`, use `tapzap-omarchy` for these commands.
+
+Install, update and remove from an unlocked desktop. The installer refuses a
+locked or undetermined session because Omarchy 4 plugin rescans can reload its
 lock service. Do not lock the screen until installation finishes. Native updates
-refresh the shell to clear cached QML components; desktop applications stay open.
+restart the Omarchy shell to clear cached QML components; desktop applications
+stay open. Input settings, theme and unrelated plugins are preserved. Integration
+files that need replacement are backed up.
 
-No administrator access is needed. The installer checks the download and its
-contents, adds the application launcher and `tapzap` command, and installs
-`app.tapzap` in the user's Omarchy plugin directory. It enables the bar widget
-through Omarchy shell IPC. An upgrade removes the earlier TAP ZAP outside-click
-Lua block and backs up changed integration files. It reloads only compositor
-configuration, without changing the user's rounding, theme or input settings. It preserves unrelated commands
-and settings. If another app owns `tapzap`, use `tapzap-omarchy` instead.
+### Marketplace / Git-managed plugin
 
-After the installer reaches `main` and an Omarchy release is published, the
-download installer will be available with:
+The repository also has a root plugin manifest, so Omarchy's plugin manager can
+clone it directly:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/rS7Y/tapzap-for-linux/main/install-omarchy.sh | bash
+omarchy plugin add https://github.com/rS7Y/tapzap-for-linux.git --enable
+```
+
+**Manual setup is required:** this command installs the QML interface only.
+Run the verified archive installation above to install the matching native
+engine and launcher. The installer recognizes this repository's Git checkout
+and preserves its files, branch and local edits. Do not use Add over an existing
+package-managed `app.tapzap` link; the package installation already includes and
+enables the same widget.
+
+For an existing package installation, use `tapzap update`. For a Git-managed
+plugin, update both parts from an unlocked desktop:
+
+```sh
+omarchy plugin update app.tapzap
+# Review and accept the plugin diff, then update the engine:
+tapzap update
+```
+
+Quit restores the display and stops the engine. `tapzap uninstall` removes the
+engine, commands, launcher and login entry, retaining preferences and backups.
+A Git-managed plugin is disabled and retained so local edits are not deleted;
+remove that checkout separately when ready:
+
+```sh
+tapzap uninstall
+omarchy plugin remove app.tapzap
 ```
 
 Open **TAP ZAP** from the application launcher or run `tapzap`. New preferences
@@ -112,6 +155,28 @@ physical flicker measurement. The PWM row follows the Mac UI with a status
 dot and separate OFF, pending and ON states. **Report a bug / Get support** in
 Settings opens the repository's GitHub issue-report chooser. It does not
 submit a report or upload diagnostics automatically.
+
+## Setup checks and recovery
+
+After installation, run `tapzap version` to see the installed version and source
+commit. `tapzap status` reports the running engine, filter, hardware-readback
+state and next schedule start. If the engine has been quit, open TAP ZAP first;
+"not running" then is expected.
+
+- **Command not found:** open a new terminal, or run `~/.local/bin/tapzap-omarchy`.
+- **Panel says connecting:** confirm `~/.local/bin/tapzap-omarchy` exists. A plugin
+  added with Omarchy's Git manager still needs the verified engine installation.
+- **Icon missing:** run `omarchy plugin enable app.tapzap`. Check that you are
+  using Omarchy's native shell rather than a different bar implementation.
+- **Install refuses the session:** unlock the desktop and retry from its terminal.
+  Do not kill the lock screen or compositor to bypass the guard.
+- **Schedule does not start immediately:** it waits for a strictly future selected
+  time. Enable Launch at login if the engine should watch schedules after login.
+- **Unexpected display output:** use `tapzap off`, then `tapzap quit`. Quit other
+  color-filter applications and read [Troubleshooting](TROUBLESHOOTING.md).
+
+For bugs, use Settings → Report a bug / Get support. Reports are public; review
+any logs or screenshots before attaching them.
 
 ## Build a package
 

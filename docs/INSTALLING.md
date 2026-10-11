@@ -1,10 +1,11 @@
 # Installing and first run
 
-There is no binary release in this repository that is verified against the
-public source revision. The older website beta ZIPs are not source-matched.
-Omarchy has a [per-user tray add-on installer](OMARCHY.md), with optional login
-startup, verified local-archive updates and uninstall. Other variants currently
-require manual source builds.
+Omarchy has a [source-matched 0.3.0 release and native plugin installer](OMARCHY.md),
+with verified downloads, optional login startup, daily schedules, updates and
+uninstall. Follow that guide from an unlocked Omarchy desktop. Marketplace/Git
+installs require the native engine as a manual dependency.
+Other variants currently require source builds; older website beta ZIPs are not
+source-matched to this repository.
 
 The source variants remain experimental while the recovery findings in
 [known issues](KNOWN-ISSUES.md) are open. If you choose to evaluate a local

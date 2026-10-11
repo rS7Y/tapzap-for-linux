@@ -55,6 +55,9 @@ p=Path(sys.argv[1]); files={str(f.relative_to(p)):hashlib.sha256(f.read_bytes())
 (p/'SHA256SUMS.json').write_text(json.dumps(files,indent=2)+'\n')
 PY
 tar -C dist -czf "$out.tar.gz" "$(basename "$out")"
-sha256sum "$out.tar.gz" > "$out.tar.gz.sha256"
+(
+  cd dist
+  sha256sum "$(basename "$out").tar.gz"
+) > "$out.tar.gz.sha256"
 cat "$out.tar.gz.sha256"
 python3 tests/package.py "$out.tar.gz"

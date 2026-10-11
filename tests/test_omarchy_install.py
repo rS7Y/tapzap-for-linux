@@ -111,6 +111,49 @@ class OmarchyInstallTests(unittest.TestCase):
         self.assertEqual("OTHER PLUGIN", marker.read_text())
         self.assertFalse((self.prefix / "data").exists())
 
+    def plugin_checkout(self, remote="https://github.com/rS7Y/tapzap-for-linux.git"):
+        plugin = self.prefix / "config/omarchy/plugins/app.tapzap"
+        plugin.mkdir(parents=True)
+        subprocess.run(["git", "init", "-q", str(plugin)], check=True)
+        subprocess.run(["git", "-C", str(plugin), "remote", "add", "origin", remote], check=True)
+        (plugin / "manifest.json").write_text(
+            json.dumps({"id": "app.tapzap", "entryPoints": {"barWidget": "Omarchy.qml"}})
+        )
+        (plugin / "Omarchy.qml").write_text("// Locally edited plugin\n")
+        return plugin
+
+    def test_native_install_and_remove_preserve_official_git_checkout_and_edits(self):
+        self.native_package()
+        plugin = self.plugin_checkout()
+        before = {p.name: p.read_bytes() for p in plugin.iterdir() if p.is_file()}
+        result = self.run_installer("--archive", self.archive)
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertFalse(plugin.is_symlink())
+        self.assertTrue((self.prefix / "bin/tapzap").is_symlink())
+        self.assertEqual(0, self.run_installer("--archive", self.archive).returncode)
+        self.assertEqual(0, self.run_installer("--uninstall").returncode)
+        self.assertEqual(before, {p.name: p.read_bytes() for p in plugin.iterdir() if p.is_file()})
+        self.assertTrue((plugin / ".git").is_dir())
+
+    def test_native_install_refuses_lookalike_git_remote_before_changes(self):
+        self.native_package()
+        self.plugin_checkout("https://github.com/other/tapzap-for-linux.git")
+        result = self.run_installer("--archive", self.archive)
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("Another installation owns", result.stderr)
+        self.assertFalse((self.prefix / "data").exists())
+
+    def test_native_install_refuses_malformed_git_manifest_before_changes(self):
+        self.native_package()
+        plugin = self.plugin_checkout()
+        for value in ([], {"id": "app.tapzap", "entryPoints": []}):
+            with self.subTest(value=value):
+                (plugin / "manifest.json").write_text(json.dumps(value))
+                result = self.run_installer("--archive", self.archive)
+                self.assertNotEqual(0, result.returncode)
+                self.assertIn("Another installation owns", result.stderr)
+                self.assertFalse((self.prefix / "data").exists())
+
     def live_installer(self):
         spec = importlib.util.spec_from_file_location("live_installer", VARIANT / "install.py")
         installer = importlib.util.module_from_spec(spec)

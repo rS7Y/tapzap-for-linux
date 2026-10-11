@@ -10,7 +10,7 @@ does not certify the public source revision or your system.
 | GNOME Wayland | GNOME/Mutter helper; optional wlroots protocol path | Earlier Ubuntu 24.04 x86_64 helper/protocol work. | Visual confirmation and general hardware coverage are not established; helper needs a GNOME session and GObject introspection. | Experimental; not broadly supported |
 | KDE Plasma Wayland | KWin color-profile helper | Earlier Ubuntu 24.04 x86_64 helper work. | SDR/profile constraints, display removal, recovery journal, and multi-display behavior need more validation. | Experimental; not broadly supported |
 | Sway / wlroots | `wlr-gamma-control` protocol | Earlier Ubuntu 24.04 x86_64 protocol work. | Compositor protocol support varies; timeout/OFF behavior and visual confirmation remain open. | Experimental; not broadly supported |
-| Omarchy / Hyprland | Hyprland CTM v2 integration | Public source `90d2720` exercised GUI, tray and CTM presets on Omarchy 4.0.2 / Hyprland 0.56.2; the user confirmed visible filter changes and restoration. | Other GPUs, HDR, hotplug, suspend/resume and measured optical output are unverified. | Experimental; not broadly supported |
+| Omarchy / Hyprland | Hyprland CTM v2 integration | Omarchy 0.3.0 classic controls, settings and a real scheduled fade exercised on Omarchy 4.0.2 / Hyprland 0.56.2; earlier visible filter/restoration confirmation. See [validation](VALIDATION.md). | Other GPUs, HDR, hotplug, suspend/resume and measured optical output are unverified. | Experimental; not broadly supported |
 
 ## Common scope
 

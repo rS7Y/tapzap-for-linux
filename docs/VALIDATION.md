@@ -1,6 +1,6 @@
 # Linux validation and limits
 
-Updated 2026-10-11. Tap Zap for Linux is free and experimental. The checks
+Updated 2026-10-12. Tap Zap for Linux is free and experimental. The checks
 below describe the evidence available for these separate backend snapshots;
 they do not certify a general Linux release or guarantee that a filter can be
 restored after every compositor, driver, display, or process failure.
@@ -48,6 +48,31 @@ Original filter, brightness, PWM and schedule preferences were restored after
 testing. These checks establish the tested controls and software readback on
 this Dell; they do not establish physical PWM reduction or multi-monitor behavior.
 
+### Omarchy 0.3.0 release checks (October 12)
+
+The classic interface at `441eaac` was checked on the same Dell, with the
+following live mouse and keyboard checks:
+
+- PWM-Safe OFF/ON, including supported hardware brightness readback at 100%.
+- Launch at login OFF/ON and corresponding creation/removal of the autostart entry.
+- Extreme Dim ON/OFF; zero-brightness and floor enforcement use isolated engine tests.
+- DAY, EVENING and NIGHT clock pickers: hour/minute buttons, typed digits,
+  keyboard arrows, draft isolation and Save Times persistence.
+- Schedule ON/OFF, individual phase selection, duplicate-time rejection and
+  empty-selection rejection without changing persisted times.
+- A real future local-time DAY start from OFF, its intermediate transition and
+  completed 60-second fade to 4000K, with saved brightness retained.
+- Manual warmth holding until the next start, unchanged-save hold preservation,
+  Quit, reopening OFF, and retained future schedule/times.
+
+All original filter, brightness, login, PWM and schedule preferences were restored.
+The release adds the repository-root plugin entry point and recognition of a
+Git-managed plugin checkout. Isolated installer tests cover install, update and
+removal while preserving checkout files/local edits, plus refusal of lookalike
+remote URLs. Native QML checks load both packaged and repository entry points.
+These controls and software readbacks do not prove physical PWM reduction or
+expand the hardware coverage beyond this machine.
+
 ## Open reliability findings
 
 The September 6 audit found the following issues in the X11/GNOME/Plasma/Sway
@@ -86,8 +111,14 @@ stop if the display does not return to the user's expected state.
 
 ## Release correspondence
 
-There are currently no binaries in this repository that claim to match a
-source tag. A future release must identify its exact source commit, build
-command, runtime requirements, component notices, tested environment, open
-issues, and SHA-256 checksum. Recomputing a ZIP checksum alone proves only the
-identity of that ZIP, not which source produced it.
+`omarchy-v0.3.0` identifies the first source-matched native Omarchy package.
+The release archive records the full tagged commit and source-manifest digest
+in `BUILD-INFO.json`, includes the GPL and component notices, and hashes each
+payload file in `SHA256SUMS.json`. The adjacent SHA-256 file verifies the
+archive after download. Build with `bash src/omarchy-hyprland/package.sh` from
+a clean checkout; the script runs native color, engine, protocol, QML and
+isolated installer checks before completing the package.
+
+This is an experimental x86_64 Omarchy release. Other backend website ZIPs
+remain unmapped to this source. A checksum proves file identity; it does not
+prove reproducible builds, physical output, or broad compatibility.

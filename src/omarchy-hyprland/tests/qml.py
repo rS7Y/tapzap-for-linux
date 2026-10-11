@@ -11,6 +11,7 @@ import subprocess
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
+repository_mode = os.environ.get("TAPZAP_QML_REPOSITORY") == "1"
 shell = Path(os.environ.get("OMARCHY_PATH", "/usr/share/omarchy")) / "shell"
 if not (shell / "Ui/Panel.qml").is_file():
     print("SKIP: native QML check requires the installed Omarchy shell")
@@ -33,6 +34,9 @@ with tempfile.TemporaryDirectory(prefix="tapzap-qml-test-") as temporary:
         (root / name).symlink_to(shell / name)
     shutil.copytree(ROOT / "plugin", root / "Plugin")
     shutil.copytree(ROOT / "src/linux/assets", root / "Plugin/assets")
+    if repository_mode:
+        (root / "src").symlink_to(ROOT.parents[1] / "src")
+        shutil.copy2(ROOT.parents[1] / "Omarchy.qml", root / "RepositoryPanel.qml")
     runtime = root / "runtime"
     runtime.mkdir(mode=0o700)
     (root / "shell.qml").write_text("""import QtQuick
@@ -129,6 +133,15 @@ ShellRoot {
     }
 }
 """)
+    if repository_mode:
+        source = root / "shell.qml"
+        source.write_text(
+            source.read_text()
+            .replace('import "Plugin" as TapZap', 'import "." as Repository')
+            .replace("TapZap.Panel {", "Repository.RepositoryPanel {")
+            .replace('"Plugin/Service.qml"', '"src/omarchy-hyprland/plugin/Service.qml"')
+            .replace('"Plugin/TimeEditor.qml"', '"src/omarchy-hyprland/plugin/TimeEditor.qml"')
+        )
     env = dict(
         os.environ,
         QT_QPA_PLATFORM="wayland",

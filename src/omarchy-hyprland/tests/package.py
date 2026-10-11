@@ -15,6 +15,8 @@ SOURCE = Path(__file__).resolve().parents[3]
 archive = Path(sys.argv[1]).resolve()
 checksum = Path(str(archive) + ".sha256").read_text(encoding="utf-8").split()[0]
 assert hashlib.sha256(archive.read_bytes()).hexdigest() == checksum, "archive checksum mismatch"
+# A downloaded pair must verify directly from any directory, without build paths.
+subprocess.run(["sha256sum", "--check", archive.name + ".sha256"], cwd=archive.parent, check=True)
 
 temp = Path(tempfile.mkdtemp(prefix="tapzap-omarchy-package-")).resolve()
 with tarfile.open(archive) as tar:

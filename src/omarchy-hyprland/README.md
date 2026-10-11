@@ -6,8 +6,10 @@ official Omarchy package.
 
 For installation, native bar controls, schedules, updates, login startup and removal,
 read the [Omarchy add-on guide](https://github.com/rS7Y/tapzap-for-linux/blob/main/docs/OMARCHY.md).
-The public binary release is pending; local archives can be installed with
-`python3 install.py --archive /path/to/package.tar.gz` and its adjacent checksum.
+[Omarchy 0.3.0](https://github.com/rS7Y/tapzap-for-linux/releases/tag/omarchy-v0.3.0)
+is the source-matched experimental x86_64 release. Follow the guide to download,
+verify and install its archive and checksum. Git-managed plugins need the same
+native-engine setup; `omarchy plugin add` alone installs only the interface.
 
 Read the repository's [known issues](https://github.com/rS7Y/tapzap-for-linux/blob/main/docs/KNOWN-ISSUES.md),
 [validation limits](https://github.com/rS7Y/tapzap-for-linux/blob/main/docs/VALIDATION.md), and

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "app.tapzap",
+  "name": "TAP ZAP",
+  "version": "0.3.0",
+  "author": "Rusty",
+  "description": "Vertical screen-warmth and brightness faders with daily presets",
+  "kinds": ["bar-widget", "service"],
+  "entryPoints": {
+    "barWidget": "Omarchy.qml",
+    "service": "src/omarchy-hyprland/plugin/Service.qml"
+  },
+  "barWidget": {
+    "displayName": "TAP ZAP",
+    "category": "Display",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}

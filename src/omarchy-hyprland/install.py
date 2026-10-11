@@ -107,8 +107,45 @@ def plugin_path(config):
     return config / "omarchy/plugins/app.tapzap"
 
 
+def git_plugin_checkout(config):
+    """Recognize our marketplace checkout without changing its files or Git state."""
+    target = plugin_path(config)
+    if target.is_symlink() or not (target / ".git").exists():
+        return False
+    try:
+        manifest = json.loads((target / "manifest.json").read_text())
+        if not isinstance(manifest, dict) or not isinstance(manifest.get("entryPoints"), dict):
+            return False
+        if (
+            manifest.get("id") != "app.tapzap"
+            or manifest.get("entryPoints", {}).get("barWidget") != "Omarchy.qml"
+        ):
+            return False
+        top = subprocess.check_output(
+            ["git", "-C", str(target), "rev-parse", "--show-toplevel"],
+            text=True,
+            stderr=subprocess.DEVNULL,
+            timeout=5,
+        ).strip()
+        remote = subprocess.check_output(
+            ["git", "-C", str(target), "config", "--get", "remote.origin.url"],
+            text=True,
+            stderr=subprocess.DEVNULL,
+            timeout=5,
+        ).strip()
+        return Path(top).resolve() == target.resolve() and remote in (
+            "https://github.com/rS7Y/tapzap-for-linux",
+            "https://github.com/rS7Y/tapzap-for-linux.git",
+            "git@github.com:rS7Y/tapzap-for-linux.git",
+        )
+    except (OSError, ValueError, subprocess.SubprocessError):
+        return False
+
+
 def check_plugin_owner(config, app_root):
     target = plugin_path(config)
+    if git_plugin_checkout(config):
+        return
     if target.exists() or target.is_symlink():
         if not target.is_symlink() or os.readlink(target) != str(app_root / "current/plugin"):
             raise RuntimeError(f"Another installation owns {target}")
@@ -148,7 +185,7 @@ def require_unlocked_session(prefix):
 def install_plugin(config, app_root, prefix):
     target = plugin_path(config)
     target.parent.mkdir(parents=True, exist_ok=True)
-    if not target.is_symlink():
+    if not target.is_symlink() and not git_plugin_checkout(config):
         target.symlink_to(app_root / "current/plugin")
     plugin_ipc(prefix, "rescanPlugins")
     if not plugin_ipc(prefix, "enablePlugin", "app.tapzap", "{}") and not prefix:
@@ -167,6 +204,12 @@ def install_plugin(config, app_root, prefix):
 
 def remove_plugin(config, app_root, prefix):
     target = plugin_path(config)
+    if git_plugin_checkout(config):
+        plugin_ipc(prefix, "setPluginEnabled", "app.tapzap", "false")
+        print(
+            "Git-managed plugin disabled and preserved. Remove it with: omarchy plugin remove app.tapzap"
+        )
+        return
     if target.is_symlink() and os.readlink(target) == str(app_root / "current/plugin"):
         plugin_ipc(prefix, "setPluginEnabled", "app.tapzap", "false")
         target.unlink()
@@ -280,7 +323,7 @@ def uninstall(prefix=None):
     data, config, bin_dir = paths(prefix)
     app_root = data / "tapzap-omarchy-trial"
     exe = app_root / "current/tapzap-omarchy"
-    if plugin_path(config).is_symlink():
+    if plugin_path(config).is_symlink() or git_plugin_checkout(config):
         require_unlocked_session(prefix)
     if not prefix and exe.exists():
         subprocess.run([str(exe), "quit"], timeout=8, check=False, capture_output=True)

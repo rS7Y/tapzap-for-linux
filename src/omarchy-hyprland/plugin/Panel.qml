@@ -46,13 +46,14 @@ OmarchyUi.Panel {
     property var draftSelected: [true, true, true]
     implicitWidth: barButton.implicitWidth
     implicitHeight: barButton.implicitHeight
+    property url fontDirectory: Qt.resolvedUrl("assets/")
     FontLoader {
         id: anybody
-        source: Qt.resolvedUrl("assets/Anybody-ExtraBold.ttf")
+        source: root.fontDirectory + "Anybody-ExtraBold.ttf"
     }
     FontLoader {
         id: anybodyBold
-        source: Qt.resolvedUrl("assets/Anybody-Bold.ttf")
+        source: root.fontDirectory + "Anybody-Bold.ttf"
     }
     readonly property string mono: Style.font.family
 

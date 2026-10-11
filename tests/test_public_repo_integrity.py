@@ -14,6 +14,15 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class PublicRepoIntegrityTests(unittest.TestCase):
+    def test_root_plugin_contract_matches_packaged_plugin(self):
+        root = json.loads((ROOT / "manifest.json").read_text())
+        packaged = json.loads((ROOT / "src/omarchy-hyprland/plugin/manifest.json").read_text())
+        for key in ("id", "version", "kinds", "barWidget"):
+            self.assertEqual(packaged[key], root[key], key)
+        for entry in root["entryPoints"].values():
+            target = (ROOT / entry).resolve()
+            self.assertTrue(target.is_relative_to(ROOT) and target.is_file(), entry)
+
     def test_public_markdown_links_resolve_inside_the_repository(self):
         pages = [ROOT / "README.md", ROOT / "CONTRIBUTING.md", ROOT / "CHANGELOG.md"]
         pages += list((ROOT / "docs").rglob("*.md"))

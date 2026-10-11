@@ -5,6 +5,14 @@ predate the public source snapshot are not treated as releases of this source.
 
 ## Unreleased
 
+## Omarchy 0.3.0 — 2026-10-12
+
+Source-matched experimental x86_64 native Omarchy release. Includes verified
+archive setup, updates/removal, repository-root plugin-manager integration and
+preservation of Git-managed plugin edits. Live settings and real-time schedule
+checks are recorded in [Validation](docs/VALIDATION.md).
+
+
 - Match the bar and ZAP button mark to the Mac artwork and icon sizes; use a
   single 45% OFF opacity on the bar. Shrink the gear by 10% and center it on
   the visible TAP ZAP title lettering.
