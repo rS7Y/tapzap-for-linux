@@ -19,6 +19,17 @@ processes live elsewhere and are not part of this project.
 
 ## Tests and pull requests
 
+Set up the development environment using the [README](README.md#start-here),
+then run `make check`. See the [code map](docs/ARCHITECTURE.md) for entry
+points and the [command reference](docs/COMMANDS.md) for individual checks.
+The formatter versions are pinned in `requirements-dev.txt`; use the activated
+virtual environment so local formatting agrees with CI.
+
+Run `make format` before submitting source changes. It expands dense C/C++
+statements, applies consistent Python formatting, and refreshes the source
+manifest. Do not format third-party protocol XML or license files. Preserve
+the five backend boundaries; a shared-code refactor needs its own validation.
+
 Run the repository tests and the build/self-test for every backend your change
 touches. Include the exact commands and results in the pull request. For
 display-specific work, include only evidence you have reviewed and redacted;
@@ -33,6 +44,28 @@ build inputs, test evidence, notices, and checksum.
 After a change to the imported source tree, run
 `python3 scripts/update-source-manifest.py` and
 `python3 scripts/verify-source-release.py` before the unit tests.
+
+## Secret checks
+
+Install [Gitleaks 8.30.1](https://github.com/gitleaks/gitleaks/releases/tag/v8.30.1)
+and make it available on `PATH`. On macOS, `brew install gitleaks` provides the
+tool. CI downloads the pinned Linux release and verifies its SHA-256.
+
+```sh
+make scan-secrets
+```
+
+This scans working files and all local Git refs with the default rules and
+redacted output. Fetch complete history before auditing a clone made with
+`--depth`; CI uses a full checkout. Secret scans detect patterns, so also
+review every staged diff. Never commit credentials, `.env` files, private keys,
+deployment configuration, customer data, local logs, or unreviewed audit
+reports. Ignore rules are a convenience; do not bypass them with `git add -f`.
+Do not suppress a scanner finding without reviewing its cause.
+
+If a secret was committed, deleting the current file is insufficient: stop
+sharing it, revoke or rotate the affected credential, and report privately
+using [SECURITY.md](SECURITY.md). History repair requires a coordinated review.
 
 ## License and reports
 
