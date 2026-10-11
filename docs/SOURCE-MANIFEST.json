@@ -247,8 +247,8 @@
       "path": "src/omarchy-hyprland/plugin/Panel.qml",
       "source_snapshot": "public-authored-2026-10-11",
       "source_sha256": "49117813fa9c7014f3da1dcd0a3000e0b2d3f8a6113ccc731a657b2b19ac8ca3",
-      "bytes": 27755,
-      "sha256": "891b6f57d51c4c46ea62259953edc530709471e9e561eb729f2d0ff961d97eaf"
+      "bytes": 27971,
+      "sha256": "06294fe5d95864c408daa4c3faa8a6e21f85e704bf58cfe5b410a81bfebf2fff"
     },
     {
       "path": "src/omarchy-hyprland/plugin/Service.qml",

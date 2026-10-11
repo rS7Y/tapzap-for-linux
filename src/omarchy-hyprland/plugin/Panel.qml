@@ -259,6 +259,10 @@ OmarchyUi.Panel {
     PopupWindow {
         id: popup
         visible: root.opened
+        // The default tooltip surface cannot receive keyboard input. Request a
+        // real popup grab so clock fields and keyboard controls can take focus.
+        grabFocus: true
+        onClosed: root.close()
         color: "transparent"
         surfaceFormat.opaque: false
         readonly property real scale: Math.max(.45, Math.min(.8 * Style.font.baseSize / 12, screen ? (screen.height - 70) / 540 : 1, screen ? (screen.width - 24) / 320 : 1))
