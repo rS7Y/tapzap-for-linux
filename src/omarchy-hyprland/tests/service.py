@@ -5,6 +5,7 @@
 
 import json
 import os
+import signal
 from pathlib import Path
 import socket
 import subprocess
@@ -125,6 +126,36 @@ with tempfile.TemporaryDirectory(prefix="tapzap-service-test-") as temporary:
         assert state["schedule"]["next"] > time.time()
         assert query("quit")["ok"]
         engine.wait(timeout=7)
+        # Model Quickshell killing its direct child, with a delayed old owner.
+        engine = subprocess.Popen(
+            [ROOT / "build/tapzap", "managed-daemon"], env=env, stdout=log, stderr=log
+        )
+        wait(lambda: query()["engine"])
+        assert query("preset night")["ok"]
+        assert query("set brightness .4")["ok"]
+        worker = int(Path(f"/proc/{engine.pid}/task/{engine.pid}/children").read_text().split()[0])
+        os.kill(worker, signal.SIGSTOP)
+        engine.kill()
+        engine.wait(timeout=7)
+        resume = subprocess.Popen(
+            [ROOT / "build/tapzap", "resume-daemon"], env=env, stdout=log, stderr=log
+        )
+        time.sleep(0.2)
+        os.kill(worker, signal.SIGCONT)
+        wait(lambda: not matrix()["active"])
+        wait(lambda: "brightness=0.40000000000000002" in settings.read_text())
+        marker = runtime / "tapzap-omarchy/resume"
+        assert marker.is_file()
+        engine = resume
+        wait(lambda: query()["engine"])
+        assert query()["schedule"]["enabled"] and not query()["enabled"]
+        assert query("quit")["ok"]
+        engine.wait(timeout=7)
+        assert not marker.exists()
+        assert (
+            subprocess.run([ROOT / "build/tapzap", "resume-daemon"], env=env, timeout=7).returncode
+            == 0
+        )
         print("PASS: native engine validation, presets, hold, OFF, persistence and SIGTERM restore")
     finally:
         if engine and engine.poll() is None:

@@ -34,7 +34,13 @@ plugin="${XDG_CONFIG_HOME:-$HOME/.config}/omarchy/plugins/app.tapzap/manifest.js
 if [[ -f $plugin && ${TAPZAP_CAIRO:-0} != 1 ]]; then
   export OMARCHY_PATH="${OMARCHY_PATH:-/usr/share/omarchy}"
   if [[ $command == show || $command == hide ]]; then
-    exec omarchy-shell app.tapzap "$command"
+    # Plugin discovery is asynchronous immediately after installation/reload.
+    for attempt in {1..20}; do
+      if omarchy-shell app.tapzap "$command" 2>/dev/null; then exit 0; fi
+      sleep 0.1
+    done
+    echo 'TAP ZAP plugin is not ready. Enable it with: omarchy plugin enable app.tapzap' >&2
+    exit 1
   fi
   if [[ $command == start-hidden ]]; then
     for attempt in {1..20}; do

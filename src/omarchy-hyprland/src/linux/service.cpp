@@ -155,7 +155,7 @@ int runManagedService(bool resumeOnly) {
         if (getppid() != parent)
             _exit(0);
         signal(SIGPIPE, SIG_IGN);
-        const int result = runService();
+        const int result = runService(true);
         _exit(result);
     }
     int result = 0;
@@ -166,9 +166,17 @@ int runManagedService(bool resumeOnly) {
     return WIFEXITED(result) ? WEXITSTATUS(result) : 2;
 }
 
-int runService() {
-    InstanceLock lock;
-    if (!lock.acquire())
+int runService(bool waitForOwner) {
+    auto lock = std::make_unique<InstanceLock>();
+    bool acquired = lock->acquire();
+    // A replacement plugin can load before the old engine finishes flushing
+    // settings and restoring backlights. Wait for its ownership lock to close.
+    for (int attempt = 0; !acquired && waitForOwner && attempt < 80; ++attempt) {
+        usleep(100000);
+        lock = std::make_unique<InstanceLock>();
+        acquired = lock->acquire();
+    }
+    if (!acquired)
         return ipcSend("status") ? 0 : 2;
     const int listener = ipcListen();
     if (listener < 0)

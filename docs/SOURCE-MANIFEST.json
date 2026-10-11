@@ -203,8 +203,8 @@
     },
     {
       "path": "src/omarchy-hyprland/integration/tapzap-omarchy",
-      "sha256": "b7c35e6915199a718f5af7de80018f950ee7901e9d9934a8759c67956485d4c1",
-      "bytes": 2889,
+      "sha256": "6ea17f54662b0a2ac37449cf4d2d095a7ee7a929344efce925735b92f567a259",
+      "bytes": 3156,
       "source_snapshot": "omarchy-addon-0.1.6",
       "source_sha256": "10d753fac59c0572917e8d6e734a5f892da7470a269b81bb408c1a350d9f606c"
     },
@@ -240,8 +240,8 @@
       "path": "src/omarchy-hyprland/plugin/Panel.qml",
       "source_snapshot": "public-authored-2026-10-11",
       "source_sha256": "49117813fa9c7014f3da1dcd0a3000e0b2d3f8a6113ccc731a657b2b19ac8ca3",
-      "bytes": 28380,
-      "sha256": "f5704b23cd23f190585ef9e5908506dd5c1b96807cbb202898668cf20aacd0f5"
+      "bytes": 28383,
+      "sha256": "428b257720f3206f0a104f7a7695a3f111dd25dca725c51cca3f61e4d674a1ec"
     },
     {
       "path": "src/omarchy-hyprland/plugin/Service.qml",
@@ -381,15 +381,15 @@
       "path": "src/omarchy-hyprland/src/linux/service.cpp",
       "source_snapshot": "public-authored-2026-10-11",
       "source_sha256": "f4ef3e981d50b0393dcbcd07426ef2dc808a3fa0daa1a077e9bf4b71f9319ba3",
-      "bytes": 21362,
-      "sha256": "f4b3f67daa2540091663de5ae47c09450af713eaf467b794fb70016787c9f05b"
+      "bytes": 21795,
+      "sha256": "accd0a56359409bdb0176d87d395f0d9133ff04cb481dec7c2d492cff831781e"
     },
     {
       "path": "src/omarchy-hyprland/src/linux/service.hpp",
       "source_snapshot": "public-authored-2026-10-11",
       "source_sha256": "b82a9a3285de19ae6ff51bf48d1ee3864f63f922b70ff14c0ac6f2cc5e510594",
-      "bytes": 156,
-      "sha256": "f75314e70dbbce4bc998090513baad850848b6bbf03627cbb734d21e128dd274"
+      "bytes": 181,
+      "sha256": "518fcd4709b7bdeb05076e35f83fc808315ebec52d68e1aa846590b69cabaa2b"
     },
     {
       "path": "src/omarchy-hyprland/src/linux/tapzap_core.hpp",
@@ -481,8 +481,8 @@
       "path": "src/omarchy-hyprland/tests/service.py",
       "source_snapshot": "public-authored-2026-10-11",
       "source_sha256": "83fc0279c0cdb3f9ce42fe660508bda28035e28831073b97d07595e01ffb90e9",
-      "bytes": 4919,
-      "sha256": "9d8877aa96e1188e7053137a0dd4f6e83bdb1c4844d5b01697dcd63f9de6dc8f"
+      "bytes": 6252,
+      "sha256": "8b3c84617fdd0ce73529013288050d36a449c2f3fca8c402364b4fa8e36e1ed3"
     },
     {
       "path": "src/omarchy-hyprland/tests/wlr-virtual-pointer-unstable-v1.xml",

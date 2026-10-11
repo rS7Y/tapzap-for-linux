@@ -1,6 +1,6 @@
 // Copyright (C) 2026 Tap Zap.
 // SPDX-License-Identifier: GPL-3.0-or-later
 #pragma once
-int runService();
+int runService(bool waitForOwner = false);
 
 int runManagedService(bool resumeOnly = false);

@@ -397,7 +397,7 @@ OmarchyUi.Panel {
                 y: 13
                 width: 40
                 height: 30
-                text: root.view === 0 ? "⚙" : "BACK"
+                text: root.view === 0 ? "⚙︎" : "BACK"
                 fontFamily: root.mono
                 onClicked: {
                     if (root.view === 0)

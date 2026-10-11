@@ -14,6 +14,23 @@ restored after every compositor, driver, display, or process failure.
 | Source color-core contract | The repository test compiles and runs independently authored C++17 endpoint, range, monotonicity, and gamma-ramp checks against all five source variants. | A color-curve test is not a live backend, compositor, display, recovery, PWM, or visual test. |
 | September 7 beta archives | The five archived download hashes matched their old publication manifest. | None of the existing app archives is bound to this repository revision or a reproducible public build. They are not source-matched releases. |
 
+## Native Omarchy console (October 11)
+
+The native bar plugin was built from source `d510aa1` on the same Dell and
+Omarchy/Hyprland versions above. Mouse checks passed for DAY/NIGHT, brightness
+fader dragging, ZAP OFF, Settings, login startup and Extreme Dim toggles. The
+main panel, Settings and daily schedule editor retained the same rounded frame.
+A real plugin rescan resumed the schedule engine OFF and watching future starts.
+
+Automated checks include the existing isolated Cairo/tray suite, a headless
+engine with a private CTM server, an offscreen native QML load using installed
+Omarchy modules, and deterministic local-time schedule/DST cases. The engine
+checks cover invalid commands, preset coefficients at protocol precision,
+manual holds, unchanged saves, OFF, restart, write-failure reporting and cleanup.
+These are software checks; they do not add physical PWM, optical, suspend,
+hotplug, HDR or broad hardware coverage. Follow-up lifecycle tests additionally
+model a killed shell child and a delayed retiring engine before replacement.
+
 ## Open reliability findings
 
 The September 6 audit found the following issues in the X11/GNOME/Plasma/Sway
