@@ -124,6 +124,27 @@ def plugin_ipc(prefix, *args):
     return result.returncode == 0 and result.stdout.strip() in ("", "ok")
 
 
+def require_unlocked_session(prefix):
+    if prefix:
+        return
+    detector = shutil.which("omarchy-hyprland-session-locked")
+    if detector:
+        result = subprocess.run([detector], timeout=8, capture_output=True)
+        if result.returncode == 1:
+            return
+        if result.returncode == 0:
+            raise RuntimeError("Unlock the screen before installing, updating or removing TAP ZAP.")
+        raise RuntimeError(
+            "Cannot determine the session lock state. Retry from an unlocked desktop."
+        )
+    if shutil.which("omarchy-shell"):
+        # Older hosts without the compositor check cannot distinguish an orphaned
+        # lock from an unlocked shell. Do not risk destroying a live lock client.
+        raise RuntimeError(
+            "Cannot verify the session lock state; update Omarchy before changing TAP ZAP."
+        )
+
+
 def install_plugin(config, app_root, prefix):
     target = plugin_path(config)
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -160,6 +181,7 @@ def install(prefix=None, package=ROOT):
     native = (package / "payload/plugin/manifest.json").is_file()
     if native:
         check_plugin_owner(config, app_root)
+        require_unlocked_session(prefix)
     files = {
         p.relative_to(package / "payload"): p
         for p in (package / "payload").rglob("*")
@@ -208,6 +230,8 @@ def install(prefix=None, package=ROOT):
     )
     desktop_path = data / "applications/tapzap-omarchy.desktop"
     owned_desktop = desktop_path.is_file() and str(app_root) in desktop_path.read_text()
+    if native:
+        require_unlocked_session(prefix)
     checked_write(
         data / "icons/hicolor/scalable/apps/tapzap-omarchy.svg",
         (package / "integration/tapzap-omarchy.svg").read_text(),
@@ -248,6 +272,8 @@ def uninstall(prefix=None):
     data, config, bin_dir = paths(prefix)
     app_root = data / "tapzap-omarchy-trial"
     exe = app_root / "current/tapzap-omarchy"
+    if plugin_path(config).is_symlink():
+        require_unlocked_session(prefix)
     if not prefix and exe.exists():
         subprocess.run([str(exe), "quit"], timeout=8, check=False, capture_output=True)
     remove_plugin(config, app_root, prefix)

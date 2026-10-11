@@ -111,6 +111,82 @@ class OmarchyInstallTests(unittest.TestCase):
         self.assertEqual("OTHER PLUGIN", marker.read_text())
         self.assertFalse((self.prefix / "data").exists())
 
+    def live_installer(self):
+        spec = importlib.util.spec_from_file_location("live_installer", VARIANT / "install.py")
+        installer = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(installer)
+        return installer
+
+    def test_locked_session_refuses_install_before_changes(self):
+        self.native_package()
+        installer = self.live_installer()
+        with (
+            patch.object(installer.platform, "system", return_value="Linux"),
+            patch.object(installer.platform, "machine", return_value="x86_64"),
+            patch.object(
+                installer,
+                "paths",
+                return_value=(self.prefix / "data", self.prefix / "config", self.prefix / "bin"),
+            ),
+            patch.object(
+                installer.shutil, "which", return_value="/usr/bin/omarchy-hyprland-session-locked"
+            ),
+            patch.object(
+                installer.subprocess,
+                "run",
+                return_value=subprocess.CompletedProcess([], 0, stdout="", stderr=""),
+            ),
+        ):
+            with self.assertRaisesRegex(RuntimeError, "Unlock"):
+                installer.install(package=self.package)
+        self.assertFalse(self.prefix.exists())
+
+    def test_locked_session_refuses_uninstall_without_touching_install(self):
+        self.native_package()
+        self.assertEqual(0, self.run_installer("--archive", self.archive).returncode)
+        installer = self.live_installer()
+        launcher = self.prefix / "bin/tapzap"
+        before = launcher.resolve()
+        with (
+            patch.object(
+                installer,
+                "paths",
+                return_value=(self.prefix / "data", self.prefix / "config", self.prefix / "bin"),
+            ),
+            patch.object(
+                installer.shutil, "which", return_value="/usr/bin/omarchy-hyprland-session-locked"
+            ),
+            patch.object(
+                installer.subprocess,
+                "run",
+                return_value=subprocess.CompletedProcess([], 0, stdout="", stderr=""),
+            ),
+        ):
+            with self.assertRaisesRegex(RuntimeError, "Unlock"):
+                installer.uninstall()
+        self.assertEqual(before, launcher.resolve())
+        self.assertTrue((self.prefix / "config/omarchy/plugins/app.tapzap").is_symlink())
+
+    def test_session_check_refuses_unknown_state_and_allows_unlocked(self):
+        installer = self.live_installer()
+        for code in (1, 2):
+            with (
+                self.subTest(code=code),
+                patch.object(
+                    installer.shutil,
+                    "which",
+                    return_value="/usr/bin/omarchy-hyprland-session-locked",
+                ),
+                patch.object(
+                    installer.subprocess, "run", return_value=subprocess.CompletedProcess([], code)
+                ),
+            ):
+                if code == 1:
+                    installer.require_unlocked_session(None)
+                else:
+                    with self.assertRaisesRegex(RuntimeError, "Cannot determine"):
+                        installer.require_unlocked_session(None)
+
     def test_one_command_installs_archive_and_short_launcher(self):
         result = self.run_installer("--archive", self.archive)
         self.assertEqual(0, result.returncode, result.stderr)

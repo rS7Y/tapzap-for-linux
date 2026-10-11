@@ -29,6 +29,10 @@ the archive and its `.sha256` file together, then run from the repository root:
 python3 src/omarchy-hyprland/install.py --archive /path/to/tapzap-omarchy-0.3.0-linux-x86_64.tar.gz
 ```
 
+Install, update and remove TAP ZAP from an unlocked desktop. The installer refuses
+a locked or undetermined session because Omarchy 4 plugin rescans also reload its
+lock service. Do not lock the screen until installation finishes.
+
 No administrator access is needed. The installer checks the download and its
 contents, adds the application launcher and `tapzap` command, and installs
 `app.tapzap` in the user's Omarchy plugin directory. It enables the bar widget
