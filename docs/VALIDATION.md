@@ -23,13 +23,30 @@ main panel, Settings and daily schedule editor retained the same rounded frame.
 A real plugin rescan resumed the schedule engine OFF and watching future starts.
 
 Automated checks include the existing isolated Cairo/tray suite, a headless
-engine with a private CTM server, an offscreen native QML load using installed
-Omarchy modules, and deterministic local-time schedule/DST cases. The engine
+engine with a private CTM server, a hidden native QML load using installed
+Omarchy modules and a Wayland display, and deterministic local-time schedule/DST
+cases. Set `WAYLAND_DISPLAY` for the QML check; its IPC and D-Bus are isolated,
+and the closed panel never maps or takes focus. The engine
 checks cover invalid commands, preset coefficients at protocol precision,
 manual holds, unchanged saves, OFF, restart, write-failure reporting and cleanup.
 These are software checks; they do not add physical PWM, optical, suspend,
 hotplug, HDR or broad hardware coverage. Follow-up lifecycle tests additionally
 model a killed shell child and a delayed retiring engine before replacement.
+
+### Classic UI refinements
+
+Source `ac5538f` was installed and checked on the same Dell. The square outer
+frame, larger Settings gear without a close button, shared bar/button bolt,
+Mac-style PWM status row and readable schedule text were visually inspected.
+All three time pickers saved changes: DAY via typed digits (08:15), EVENING via
+mouse increment (18:01), and NIGHT via keyboard arrow (22:01). Schedule ON/OFF,
+PWM ON/OFF with hardware-brightness readback at 100%, outside-click dismissal
+and programmatic reopening passed. Support launched Chromium with the GitHub
+issue chooser URL; GitHub required sign-in. No report was submitted.
+
+Original filter, brightness, PWM and schedule preferences were restored after
+testing. These checks establish the tested controls and software readback on
+this Dell; they do not establish physical PWM reduction or multi-monitor behavior.
 
 ## Open reliability findings
 
