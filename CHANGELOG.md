@@ -5,8 +5,9 @@ predate the public source snapshot are not treated as releases of this source.
 
 ## Unreleased
 
-- Add the native Omarchy bar plugin with rounded console C, original TAP ZAP
-  typography and colors, two vertical faders, presets and keyboard controls.
+- Keep the classic compact TAP ZAP layout in the native Omarchy bar plugin, with
+  square outer edges, a vector ZAP bolt, vertical faders and original typography.
+  Schedule and Settings controls remain available under the gear button.
 - Refuse native plugin installation, updates and removal while the compositor is
   locked or its lock state cannot be determined; Omarchy rescans reload its locker.
 - Make native popup commands wait for plugin discovery after installation.

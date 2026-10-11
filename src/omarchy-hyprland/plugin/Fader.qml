@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 import QtQuick
 
-Rectangle {
+Item {
     id: root
     property string label: "WARMTH"
     property string readout: "0K"
@@ -16,10 +16,6 @@ Rectangle {
     property bool filterEnabled: false
     property bool dragging: false
     signal edited(real nextValue)
-    color: "#101010"
-    radius: 6
-    border.color: activeFocus ? "#777777" : "#303030"
-    border.width: 1
     activeFocusOnTab: true
     Accessible.role: Accessible.Slider
     Accessible.name: label
@@ -45,19 +41,19 @@ Rectangle {
         event.accepted = true;
     }
     Text {
-        x: 14
-        y: 15
+        anchors.horizontalCenter: parent.horizontalCenter
+        y: 0
         text: root.label
         font.family: root.brandFont
-        font.pixelSize: 12
+        font.pixelSize: 14
         font.bold: true
         color: root.signalColor
     }
     Rectangle {
-        x: 13
-        y: 42
-        width: parent.width - 26
-        height: 36
+        anchors.horizontalCenter: parent.horizontalCenter
+        y: 242
+        width: root.label === "WARMTH" ? 84 : 64
+        height: 24
         color: "#050505"
         radius: 4
         border.width: 1
@@ -67,64 +63,48 @@ Rectangle {
             text: root.readout
             color: root.signalColor
             font.family: root.monoFont
-            font.pixelSize: 23
+            font.pixelSize: 12
         }
     }
     Item {
         id: lane
-        x: 12
-        y: 96
-        width: parent.width - 24
-        height: parent.height - 116
-        Text {
-            y: -7
-            anchors.right: parent.right
-            text: root.topLabel
-            font.family: root.monoFont
-            font.pixelSize: 8
-            color: "#777777"
-        }
-        Text {
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-            text: root.bottomLabel
-            font.family: root.monoFont
-            font.pixelSize: 8
-            color: "#777777"
-        }
+        x: 0
+        y: 46
+        width: parent.width
+        height: 176
         Item {
             id: travel
             x: 0
-            y: 18
+            y: 0
             width: parent.width
-            height: parent.height - 36
+            height: parent.height
             Repeater {
-                model: 11
+                model: 21
                 Item {
                     required property int index
-                    y: index * travel.height / 10
+                    y: index * travel.height / 20
                     width: travel.width
                     height: 1
                     Rectangle {
                         anchors.right: parent.horizontalCenter
                         anchors.rightMargin: 14
-                        width: index % 5 === 0 ? 20 : 10
+                        width: index % 10 === 0 ? 20 : 10
                         height: 1
-                        color: index % 5 === 0 ? "#777777" : "#343434"
+                        color: index % 10 === 0 ? "#777777" : "#343434"
                     }
                     Rectangle {
                         anchors.left: parent.horizontalCenter
                         anchors.leftMargin: 14
-                        width: index % 5 === 0 ? 20 : 10
+                        width: index % 10 === 0 ? 20 : 10
                         height: 1
-                        color: index % 5 === 0 ? "#777777" : "#343434"
+                        color: index % 10 === 0 ? "#777777" : "#343434"
                     }
                 }
             }
             Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter
                 y: -4
-                width: 16
+                width: 14
                 height: travel.height + 8
                 radius: 4
                 color: "#050505"
@@ -150,8 +130,8 @@ Rectangle {
                 id: cap
                 anchors.horizontalCenter: parent.horizontalCenter
                 y: (1 - root.value) * travel.height - height / 2
-                width: 72
-                height: 35
+                width: 52
+                height: 28
                 radius: 5
                 border.width: 1
                 border.color: "#606060"
@@ -175,7 +155,7 @@ Rectangle {
                 }
                 Rectangle {
                     anchors.centerIn: parent
-                    width: 32
+                    width: 24
                     height: 3
                     radius: 1
                     color: root.signalColor
@@ -184,14 +164,14 @@ Rectangle {
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     y: 9
-                    width: 32
+                    width: 24
                     height: 1
                     color: "#555555"
                 }
                 Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    y: 25
-                    width: 32
+                    y: 20
+                    width: 24
                     height: 1
                     color: "#555555"
                 }

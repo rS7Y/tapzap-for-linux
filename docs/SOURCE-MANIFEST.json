@@ -230,18 +230,25 @@
       "source_sha256": "932b3f02ddacefd9f2b734308e55abfd345af3595d47794b6035bfd5c110d045"
     },
     {
+      "path": "src/omarchy-hyprland/plugin/Bolt.qml",
+      "source_snapshot": "public-authored-2026-10-11",
+      "source_sha256": "5e0064962246ac306ae0af290b1e3ec92320e907db411183884d01f69b62e4ef",
+      "bytes": 748,
+      "sha256": "5e0064962246ac306ae0af290b1e3ec92320e907db411183884d01f69b62e4ef"
+    },
+    {
       "path": "src/omarchy-hyprland/plugin/Fader.qml",
       "source_snapshot": "public-authored-2026-10-11",
       "source_sha256": "fe3933be414f82bb6b6ec642514cce54d4c32f652300e9669898a012424e28b6",
-      "bytes": 7447,
-      "sha256": "34cb7544534bfae5f0c32d33705566e46ac11acb62eab64bbccc08bae66136ba"
+      "bytes": 6960,
+      "sha256": "6dd6d0590f6eb5cb8d513d9878bcc830882e3daab679c3f06d5721bb4ba89fce"
     },
     {
       "path": "src/omarchy-hyprland/plugin/Panel.qml",
       "source_snapshot": "public-authored-2026-10-11",
       "source_sha256": "49117813fa9c7014f3da1dcd0a3000e0b2d3f8a6113ccc731a657b2b19ac8ca3",
-      "bytes": 28383,
-      "sha256": "428b257720f3206f0a104f7a7695a3f111dd25dca725c51cca3f61e4d674a1ec"
+      "bytes": 27264,
+      "sha256": "f0aec0eaa4d50023f2931126c1af87a2a4bd6114d062b804f9a89267dc8edea1"
     },
     {
       "path": "src/omarchy-hyprland/plugin/Service.qml",
@@ -254,8 +261,8 @@
       "path": "src/omarchy-hyprland/plugin/TapButton.qml",
       "source_snapshot": "public-authored-2026-10-11",
       "source_sha256": "43a40391510887d21c8bae0638d019ce9cb2a7a5351b66b6b8cff00199c84006",
-      "bytes": 1584,
-      "sha256": "a703d113c4e3d5cb979c5c1c058b84bb125183c0641ae063a68edeb29f630f91"
+      "bytes": 2260,
+      "sha256": "a2402479d63ddf994d2733dd77c0e1861eb04e8ce9dc40325a6d8117ba4afe29"
     },
     {
       "path": "src/omarchy-hyprland/plugin/manifest.json",

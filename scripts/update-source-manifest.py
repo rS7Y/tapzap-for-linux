@@ -38,6 +38,7 @@ PUBLIC_AUTHORED = {
             "plugin/Panel.qml",
             "plugin/Service.qml",
             "plugin/Fader.qml",
+            "plugin/Bolt.qml",
             "plugin/TapButton.qml",
         )
     },

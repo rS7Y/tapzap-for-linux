@@ -1,7 +1,7 @@
 # TAP ZAP for Omarchy
 
 TAP ZAP is a native Omarchy bar plugin. Open its lightning icon to use two
-vertical faders, DAY / EVENING / NIGHT presets and the ZAP switch. The rounded
+vertical faders, DAY / EVENING / NIGHT presets and the ZAP switch. The square-edged
 panel keeps TAP ZAP's dark surfaces, red warmth channel, white brightness
 channel, Anybody headings and metallic fader caps. Clicking outside closes
 the panel while the filter keeps running. Quit restores the display.

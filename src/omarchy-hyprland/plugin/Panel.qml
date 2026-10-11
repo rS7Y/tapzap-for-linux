@@ -1,6 +1,6 @@
 // Copyright (C) 2026 Tap Zap.
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Console C: original TAP ZAP brand, two vertical channel strips, native popup.
+// Classic TAP ZAP layout with native Omarchy integration and shared schedules.
 import QtQuick
 import QtQuick.Controls
 import Quickshell
@@ -257,9 +257,20 @@ OmarchyUi.Panel {
         id: barButton
         anchors.fill: parent
         bar: root.bar
-        text: "ϟ"
+        text: " "
         fontFamily: anybody.name
         fontSize: 21
+        iconComponent: Component {
+            Item {
+                Bolt {
+                    anchors.centerIn: parent
+                    width: 12
+                    height: 18
+                    color: root.barForeground
+                    opacity: root.snapshot.enabled ? 1 : .45
+                }
+            }
+        }
         foreground: root.barForeground
         dimmed: !root.snapshot.enabled
         tooltipText: root.snapshot.enabled ? "TAP ZAP · ON" : "TAP ZAP · OFF"
@@ -273,11 +284,11 @@ OmarchyUi.Panel {
         color: "transparent"
         surfaceFormat.opaque: false
         readonly property real scale: Math.max(.45, Math.min(.8 * Style.font.baseSize / 12, screen
-                                                             ? (screen.height - 70) / 550 : 1,
-                                                             screen ? (screen.width - 24) / 400 :
+                                                             ? (screen.height - 70) / 540 : 1,
+                                                             screen ? (screen.width - 24) / 320 :
                                                                       1))
-        implicitWidth: Math.ceil(400 * scale)
-        implicitHeight: Math.ceil(550 * scale)
+        implicitWidth: Math.ceil(320 * scale)
+        implicitHeight: Math.ceil(540 * scale)
         anchor.window: barButton.QsWindow.window
         anchor.adjustment: PopupAdjustment.Slide
         anchor.edges: Edges.Top | Edges.Left
@@ -310,56 +321,15 @@ OmarchyUi.Panel {
             windows: barButton.QsWindow.window ? [popup, barButton.QsWindow.window] : [popup]
             onCleared: root.close()
         }
-        // Rounded input mask matches the visible enclosure, including its corners.
-        mask: Region {
-            x: 16 * popup.scale
-            y: 0
-            width: popup.width - 32 * popup.scale
-            height: popup.height
-            Region {
-                x: 0
-                y: 16 * popup.scale
-                width: popup.width
-                height: popup.height - 32 * popup.scale
-            }
-            Region {
-                x: 0
-                y: 0
-                width: 32 * popup.scale
-                height: 32 * popup.scale
-                shape: RegionShape.Ellipse
-            }
-            Region {
-                x: popup.width - 32 * popup.scale
-                y: 0
-                width: 32 * popup.scale
-                height: 32 * popup.scale
-                shape: RegionShape.Ellipse
-            }
-            Region {
-                x: 0
-                y: popup.height - 32 * popup.scale
-                width: 32 * popup.scale
-                height: 32 * popup.scale
-                shape: RegionShape.Ellipse
-            }
-            Region {
-                x: popup.width - 32 * popup.scale
-                y: popup.height - 32 * popup.scale
-                width: 32 * popup.scale
-                height: 32 * popup.scale
-                shape: RegionShape.Ellipse
-            }
-        }
         Rectangle {
             id: body
-            width: 400
-            height: 550
+            width: 320
+            height: 540
             scale: popup.scale
             transformOrigin: Item.TopLeft
-            radius: 16
+            radius: 0
             color: "#0d0d0d"
-            border.width: 1.5
+            border.width: 0
             border.color: "#484848"
             focus: true
             Keys.onEscapePressed: {
@@ -370,33 +340,40 @@ OmarchyUi.Panel {
                     root.close();
             }
             Rectangle {
-                x: 1
-                y: 1
-                width: 398
-                height: 54
-                radius: 15
+                width: 320
+                height: 56
                 color: "#1a1a1a"
-                Rectangle {
-                    y: 30
-                    width: parent.width
-                    height: 24
-                    color: parent.color
-                }
+            }
+            Rectangle {
+                visible: root.view === 0
+                y: 356
+                width: 320
+                height: 184
+                color: "#1a1a1a"
+            }
+            Rectangle {
+                visible: root.view === 0
+                x: 159
+                y: 110
+                width: 2
+                height: 190
+                color: "#000000"
             }
             Text {
-                x: 22
-                y: 19
+                x: 24
+                y: 21
                 text: root.view === 0 ? "TAP ZAP" : root.view === 1 ? "SETTINGS" : "AUTO SCHEDULE"
                 font.family: anybody.name
-                font.pixelSize: 13
+                font.pixelSize: 11
                 font.letterSpacing: 1
-                color: "#c9c9c9"
+                color: "#686868"
             }
             TapButton {
-                x: 310
+                x: 230
                 y: 13
                 width: 40
                 height: 30
+                quiet: true
                 text: root.view === 0 ? "⚙︎" : "BACK"
                 fontFamily: root.mono
                 onClicked: {
@@ -407,26 +384,27 @@ OmarchyUi.Panel {
                 }
             }
             TapButton {
-                x: 355
+                x: 280
                 y: 13
                 width: 26
                 height: 30
+                quiet: true
                 text: "×"
                 textSize: 16
                 onClicked: root.close()
             }
             Item {
                 visible: root.view === 0
-                x: 20
+                x: 4
                 y: 70
-                width: 360
+                width: 312
                 height: 465
                 Row {
-                    spacing: 16
+                    spacing: 0
                     Fader {
                         id: warmth
-                        width: 172
-                        height: 286
+                        width: 156
+                        height: 270
                         brandFont: anybody.name
                         monoFont: root.mono
                         label: "WARMTH"
@@ -441,8 +419,8 @@ OmarchyUi.Panel {
                     }
                     Fader {
                         id: brightness
-                        width: 172
-                        height: 286
+                        width: 156
+                        height: 270
                         brandFont: anybody.name
                         monoFont: root.mono
                         label: "BRIGHTNESS"
@@ -459,16 +437,17 @@ OmarchyUi.Panel {
                     }
                 }
                 Rectangle {
-                    y: 300
-                    width: 360
-                    height: 42
+                    x: 20
+                    y: 295
+                    width: 272
+                    height: 30
                     radius: 4
                     color: "#141414"
                     border.width: root.snapshot.error || root.notice ? 1 : 0
                     border.color: "#ff0000"
                     Text {
                         anchors.centerIn: parent
-                        width: 340
+                        width: 252
                         text: root.snapshot.error || root.notice || (!root.connected
                                                                      ? "CONNECTING TO TAP ZAP…" :
                                                                        root.snapshot.pwmError
@@ -496,15 +475,16 @@ OmarchyUi.Panel {
                     }
                 }
                 Row {
-                    y: 354
-                    spacing: 10
+                    x: 20
+                    y: 350
+                    spacing: 12
                     Repeater {
                         model: ["DAY", "EVENING", "NIGHT"]
                         TapButton {
                             required property int index
                             required property string modelData
-                            width: 113.33
-                            height: 34
+                            width: 82.66
+                            height: 36
                             text: modelData
                             fontFamily: anybodyBold.name
                             selected: Math.abs(root.snapshot.intensity - [1 - 4000 / 6500, 1 - 2700 / 6500,
@@ -514,68 +494,57 @@ OmarchyUi.Panel {
                     }
                 }
                 TapButton {
-                    y: 400
-                    width: 360
-                    height: 44
-                    text: "ϟ   ZAP " + (root.snapshot.enabled ? "ON" : "OFF")
+                    x: 20
+                    y: 406
+                    width: 272
+                    height: 48
+                    bolt: true
+                    text: "ZAP"
+                    textColor: root.snapshot.enabled ? "#ffffff" : "#8e8e93"
                     fontFamily: anybody.name
                     textSize: 14
                     danger: root.snapshot.enabled
                     onClicked: root.send(["toggle"])
                 }
             }
-            TapButton {
-                visible: root.view === 0
-                x: 20
-                y: 520
-                width: 360
-                height: 24
-                text: "AUTO SCHEDULE   " + root.scheduleSummary()
-                fontFamily: root.mono
-                textSize: 9
-                onClicked: {
-                    root.settingsPage();
-                    root.view = 2;
-                }
-            }
             Item {
                 visible: root.view === 1
-                x: 22
+                x: 16
                 y: 76
-                width: 356
+                width: 288
                 height: 450
                 Column {
                     spacing: 12
                     TapButton {
-                        width: 356
+                        width: 288
                         height: 44
                         text: "AUTO SCHEDULE   " + root.scheduleSummary()
                         fontFamily: root.mono
                         onClicked: root.view = 2
                     }
                     TapButton {
-                        width: 356
+                        width: 288
                         height: 44
                         text: "LAUNCH AT LOGIN   " + (root.snapshot.login ? "ON" : "OFF")
                         fontFamily: root.mono
                         onClicked: root.send(["set", "login", root.snapshot.login ? "0" : "1"])
                     }
                     TapButton {
-                        width: 356
+                        width: 288
                         height: 44
                         text: "ALLOW EXTREME DIM   " + (root.snapshot.extreme ? "ON" : "OFF")
                         fontFamily: root.mono
                         onClicked: root.send(["set", "extreme", root.snapshot.extreme ? "0" : "1"])
                     }
                     TapButton {
-                        width: 356
+                        width: 288
                         height: 44
                         text: "COPY FEEDBACK FOR SUPPORT"
                         fontFamily: root.mono
                         onClicked: feedback.running = true
                     }
                     TapButton {
-                        width: 356
+                        width: 288
                         height: 44
                         text: "EMERGENCY STOP (QUIT)"
                         danger: true
@@ -588,7 +557,7 @@ OmarchyUi.Panel {
                 }
                 Text {
                     y: 300
-                    width: 356
+                    width: 288
                     text: root.notice || root.snapshot.error
                     font.family: root.mono
                     font.pixelSize: 10
@@ -625,12 +594,12 @@ OmarchyUi.Panel {
             }
             Item {
                 visible: root.view === 2
-                x: 22
+                x: 16
                 y: 76
-                width: 356
+                width: 288
                 height: 450
                 TapButton {
-                    width: 356
+                    width: 288
                     height: 40
                     text: "AUTO SCHEDULE   " + (root.snapshot.schedule.enabled ? "ON" : "OFF")
                     fontFamily: root.mono
@@ -647,12 +616,12 @@ OmarchyUi.Panel {
                         Item {
                             id: timeRow
                             required property int index
-                            width: 356
+                            width: 288
                             height: 64
                             property bool chosen: root.draftSelected[index]
                             property alias timeText: timeInput.text
                             TapButton {
-                                width: 118
+                                width: 100
                                 height: 54
                                 text: ["DAY", "EVENING", "NIGHT"][index] + (timeRow.chosen ? "  ON" :
                                                                                              "  OFF")
@@ -661,8 +630,8 @@ OmarchyUi.Panel {
                                 onClicked: timeRow.chosen = !timeRow.chosen
                             }
                             Rectangle {
-                                x: 136
-                                width: 220
+                                x: 116
+                                width: 172
                                 height: 54
                                 radius: 5
                                 color: "#050505"
@@ -691,7 +660,7 @@ OmarchyUi.Panel {
                 }
                 TapButton {
                     y: 296
-                    width: 356
+                    width: 288
                     height: 44
                     text: "SAVE TIMES"
                     fontFamily: anybody.name
@@ -699,7 +668,7 @@ OmarchyUi.Panel {
                 }
                 Text {
                     y: 354
-                    width: 356
+                    width: 288
                     text: root.notice || (root.snapshot.schedule.review
                                           ? "REVIEW SAVED TIMES BEFORE ENABLING" :
                                             root.scheduleSummary())
@@ -711,7 +680,7 @@ OmarchyUi.Panel {
                 }
                 Text {
                     y: 402
-                    width: 356
+                    width: 288
                     text: "FADES TAKE ONE MINUTE.\nMANUAL WARMTH HOLDS UNTIL THE NEXT START."
                     font.family: root.mono
                     font.pixelSize: 9
