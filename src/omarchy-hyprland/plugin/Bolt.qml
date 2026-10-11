@@ -5,6 +5,8 @@ import QtQuick
 
 Canvas {
     id: root
+    implicitWidth: 12
+    implicitHeight: 16
     property color color: "white"
     onColorChanged: requestPaint()
     onWidthChanged: requestPaint()
@@ -12,7 +14,9 @@ Canvas {
     onPaint: {
         var ctx = getContext("2d");
         ctx.reset();
-        ctx.scale(width / 18, height / 24);
+        var scale = Math.min(width / 18, height / 24);
+        ctx.translate((width - 18 * scale) / 2, (height - 24 * scale) / 2);
+        ctx.scale(scale, scale);
         ctx.beginPath();
         ctx.moveTo(11.8, 0.8);
         ctx.lineTo(1.6, 13.4);

@@ -233,8 +233,8 @@
       "path": "src/omarchy-hyprland/plugin/Bolt.qml",
       "source_snapshot": "public-authored-2026-10-11",
       "source_sha256": "5e0064962246ac306ae0af290b1e3ec92320e907db411183884d01f69b62e4ef",
-      "bytes": 748,
-      "sha256": "5e0064962246ac306ae0af290b1e3ec92320e907db411183884d01f69b62e4ef"
+      "bytes": 913,
+      "sha256": "f96f87220e281f868f320c78106835f39c2ac3e18df112908018566446bd0433"
     },
     {
       "path": "src/omarchy-hyprland/plugin/Fader.qml",
@@ -247,8 +247,8 @@
       "path": "src/omarchy-hyprland/plugin/Panel.qml",
       "source_snapshot": "public-authored-2026-10-11",
       "source_sha256": "49117813fa9c7014f3da1dcd0a3000e0b2d3f8a6113ccc731a657b2b19ac8ca3",
-      "bytes": 27264,
-      "sha256": "f0aec0eaa4d50023f2931126c1af87a2a4bd6114d062b804f9a89267dc8edea1"
+      "bytes": 27755,
+      "sha256": "891b6f57d51c4c46ea62259953edc530709471e9e561eb729f2d0ff961d97eaf"
     },
     {
       "path": "src/omarchy-hyprland/plugin/Service.qml",
@@ -261,8 +261,15 @@
       "path": "src/omarchy-hyprland/plugin/TapButton.qml",
       "source_snapshot": "public-authored-2026-10-11",
       "source_sha256": "43a40391510887d21c8bae0638d019ce9cb2a7a5351b66b6b8cff00199c84006",
-      "bytes": 2260,
-      "sha256": "a2402479d63ddf994d2733dd77c0e1861eb04e8ce9dc40325a6d8117ba4afe29"
+      "bytes": 2322,
+      "sha256": "e71284a82bb40a77934692da34a7553e4f1fed140d56a209927493e0fedfcc4e"
+    },
+    {
+      "path": "src/omarchy-hyprland/plugin/TimeEditor.qml",
+      "source_snapshot": "public-authored-2026-10-11",
+      "source_sha256": "eeef7a904a33378f07001a3749d675ddc70b7ffcfe3d7b2e25a1a9391cad5589",
+      "bytes": 4497,
+      "sha256": "d851bb804e393c2a485f0935ce9696b0be7190dbf2a067c8a272ec61dcf6fd7a"
     },
     {
       "path": "src/omarchy-hyprland/plugin/manifest.json",
@@ -481,8 +488,8 @@
       "path": "src/omarchy-hyprland/tests/qml.py",
       "source_snapshot": "public-authored-2026-10-11",
       "source_sha256": "be9f4d4da3b0deed68483b6fadf2432d85258d89d89533c3559149770dd092a5",
-      "bytes": 2432,
-      "sha256": "be9f4d4da3b0deed68483b6fadf2432d85258d89d89533c3559149770dd092a5"
+      "bytes": 4174,
+      "sha256": "68d33cd50c0a415c4728cc08be8eb39338e14b0a8238a29ced98d2202a6271e3"
     },
     {
       "path": "src/omarchy-hyprland/tests/service.py",

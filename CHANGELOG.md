@@ -5,6 +5,11 @@ predate the public source snapshot are not treated as releases of this source.
 
 ## Unreleased
 
+- Enlarge the Settings gear and remove the redundant close button. Match the
+  PWM-Safe row to the Mac UI and keep the bar and ZAP bolts in the same proportions.
+- Open schedule clocks in an hour/minute picker with mouse and keyboard controls;
+  enlarge schedule copy and report invalid drafts before saving.
+- Route Settings support to GitHub's issue-report chooser.
 - Keep the classic compact TAP ZAP layout in the native Omarchy bar plugin, with
   square outer edges, a vector ZAP bolt, vertical faders and original typography.
   Schedule and Settings controls remain available under the gear button.

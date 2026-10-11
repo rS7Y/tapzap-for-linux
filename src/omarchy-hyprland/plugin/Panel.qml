@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Classic TAP ZAP layout with native Omarchy integration and shared schedules.
 import QtQuick
-import QtQuick.Controls
 import Quickshell
 import Quickshell.Io
 import Quickshell.Hyprland
@@ -15,29 +14,30 @@ OmarchyUi.Panel {
     ipcTarget: "app.tapzap"
     readonly property string launcher: Quickshell.env("HOME") + "/.local/bin/tapzap-omarchy"
     property var snapshot: ({
-                                enabled: false,
-                                intensity: 1,
-                                brightness: .7,
-                                extreme: false,
-                                login: false,
-                                pwmAvailable: false,
-                                pwmRequested: false,
-                                pwmVerified: false,
-                                hardwarePercent: -1,
-                                error: "",
-                                schedule: {
-                                    enabled: false,
-                                    review: false,
-                                    minutes: [420, 1080, 1320],
-                                    selected: [true, true, true],
-                                    next: 0
-                                }
-                            })
+            enabled: false,
+            intensity: 1,
+            brightness: .7,
+            extreme: false,
+            login: false,
+            pwmAvailable: false,
+            pwmRequested: false,
+            pwmVerified: false,
+            hardwarePercent: -1,
+            error: "",
+            schedule: {
+                enabled: false,
+                review: false,
+                minutes: [420, 1080, 1320],
+                selected: [true, true, true],
+                next: 0
+            }
+        })
     property var queue: []
     property string currentKey: ""
     property string notice: ""
     property bool connected: false
     property int view: 0
+    property int editingPhase: -1
     property var draftMinutes: [420, 1080, 1320]
     property var draftSelected: [true, true, true]
     implicitWidth: barButton.implicitWidth
@@ -62,7 +62,7 @@ OmarchyUi.Panel {
             if (!value.ok)
                 notice = value.error || "Could not apply this change.";
             else if (actionReply)
-                notice = "";
+                notice = currentKey === "schedule-save" ? "Times saved" : "";
             if (!warmth.dragging && !hasPending("warmth"))
                 warmth.value = value.intensity;
             if (!brightness.dragging && !hasPending("brightness"))
@@ -89,10 +89,10 @@ OmarchyUi.Panel {
                 key: key
             };
         else
-        next.push({
-                      args: args,
-                      key: key || ""
-                  });
+            next.push({
+                args: args,
+                key: key || ""
+            });
         queue = next;
         flush.start();
     }
@@ -112,15 +112,16 @@ OmarchyUi.Panel {
     function settingsPage() {
         draftMinutes = snapshot.schedule.minutes.slice();
         draftSelected = snapshot.schedule.selected.slice();
-        for (var i = 0; i < 3; i++) {
-            var row = timeRows.itemAt(i), minute = draftMinutes[i];
-            row.chosen = draftSelected[i];
-            row.timeText = String(Math.floor(minute / 60)).padStart(2, "0") + ":" + String(minute
-                                                                                           % 60).padStart(
-                        2, "0");
-        }
+        editingPhase = -1;
         notice = "";
         view = 1;
+    }
+    function editTime(index) {
+        editingPhase = index;
+        timeEditor.minutes = draftMinutes[index];
+    }
+    function formatTime(minutes) {
+        return String(Math.floor(minutes / 60)).padStart(2, "0") + ":" + String(minutes % 60).padStart(2, "0");
     }
     function scheduleSummary() {
         var s = snapshot.schedule;
@@ -130,33 +131,23 @@ OmarchyUi.Panel {
             return "OFF";
         if (!s.next)
             return "DAILY TIMES";
-        var when = new Date(s.next * 1000), hh = String(when.getHours()).padStart(2, "0"), mm = String(
-                                                                                               when.getMinutes(
-                                                                                                   )).padStart(
-                                                                                               2, "0");
+        var when = new Date(s.next * 1000), hh = String(when.getHours()).padStart(2, "0"), mm = String(when.getMinutes()).padStart(2, "0");
         return (s.holding ? "MANUAL UNTIL " : s.waiting ? "NEXT " : "NEXT ") + hh + ":" + mm;
     }
     function saveTimes() {
-        var values = [], chosen = [], times = [];
+        editingPhase = -1;
+        var values = draftMinutes.slice(), chosen = draftSelected.slice(), times = [];
         for (var i = 0; i < 3; i++) {
-            var row = timeRows.itemAt(i), text = row.timeText.trim();
-            if (!/^(?:[01][0-9]|2[0-3]):[0-5][0-9]$/.test(text)) {
-                notice = "ENTER VALID TIMES: HH:MM";
-                return;
-            }
-            var parts = text.split(":"), minute = Number(parts[0]) * 60 + Number(parts[1]);
-            values.push(minute);
-            chosen.push(row.chosen);
-            if (row.chosen) {
-                if (times.indexOf(minute) >= 0) {
-                    notice = "SELECTED TIMES MUST BE DIFFERENT";
+            if (chosen[i]) {
+                if (times.indexOf(values[i]) >= 0) {
+                    notice = "Choose a different start time for each preset.";
                     return;
                 }
-                times.push(minute);
+                times.push(values[i]);
             }
         }
-        if (snapshot.schedule.enabled && !times.length) {
-            notice = "SELECT AT LEAST ONE PRESET";
+        if (!times.length) {
+            notice = "Choose at least one preset to schedule.";
             return;
         }
         var args = ["schedule", "save"];
@@ -164,11 +155,12 @@ OmarchyUi.Panel {
             args.push(String(values[i]), chosen[i] ? "1" : "0");
         draftMinutes = values;
         draftSelected = chosen;
-        send(args);
+        send(args, "schedule-save");
     }
     onOpenedChanged: {
         if (opened) {
             view = 0;
+            editingPhase = -1;
             starter.running = true;
             retry.start();
             refresh();
@@ -198,7 +190,7 @@ OmarchyUi.Panel {
         repeat: true
         property int attempts: 0
         onRunningChanged: if (running)
-                              attempts = 0
+            attempts = 0
         onTriggered: {
             root.refresh();
             if (root.connected || ++attempts >= 20)
@@ -239,20 +231,6 @@ OmarchyUi.Panel {
             Qt.callLater(root.drain);
         }
     }
-    Process {
-        id: feedback
-        command: ["wl-copy"]
-        stdinEnabled: true
-        onStarted: {
-            write("TAP ZAP Omarchy 0.3.0\n" + JSON.stringify(root.snapshot, null, 2));
-            stdinEnabled = false;
-        }
-        onExited: function (code, status) {
-            root.notice = code === 0 ? "COPIED — PASTE INTO YOUR SUPPORT EMAIL" :
-                                       "COPY FAILED — TRY AGAIN";
-            stdinEnabled = true;
-        }
-    }
     OmarchyUi.BarIconButton {
         id: barButton
         anchors.fill: parent
@@ -265,7 +243,7 @@ OmarchyUi.Panel {
                 Bolt {
                     anchors.centerIn: parent
                     width: 12
-                    height: 18
+                    height: 16
                     color: root.barForeground
                     opacity: root.snapshot.enabled ? 1 : .45
                 }
@@ -283,10 +261,7 @@ OmarchyUi.Panel {
         visible: root.opened
         color: "transparent"
         surfaceFormat.opaque: false
-        readonly property real scale: Math.max(.45, Math.min(.8 * Style.font.baseSize / 12, screen
-                                                             ? (screen.height - 70) / 540 : 1,
-                                                             screen ? (screen.width - 24) / 320 :
-                                                                      1))
+        readonly property real scale: Math.max(.45, Math.min(.8 * Style.font.baseSize / 12, screen ? (screen.height - 70) / 540 : 1, screen ? (screen.width - 24) / 320 : 1))
         implicitWidth: Math.ceil(320 * scale)
         implicitHeight: Math.ceil(540 * scale)
         anchor.window: barButton.QsWindow.window
@@ -299,8 +274,7 @@ OmarchyUi.Panel {
             var window = barButton.QsWindow.window;
             if (!window)
                 return;
-            var p = window.contentItem.mapFromItem(barButton, barButton.width / 2 - popup.implicitWidth
-                                                   / 2, barButton.height + 12);
+            var p = window.contentItem.mapFromItem(barButton, barButton.width / 2 - popup.implicitWidth / 2, barButton.height + 12);
             if (root.bar && root.bar.position === "bottom")
                 p.y = -popup.implicitHeight - 12;
             if (root.bar && root.bar.position === "left") {
@@ -333,8 +307,10 @@ OmarchyUi.Panel {
             border.color: "#484848"
             focus: true
             Keys.onEscapePressed: {
-                if (root.view !== 0) {
-                    root.view = 0;
+                if (root.editingPhase >= 0)
+                    root.editingPhase = -1;
+                else if (root.view !== 0) {
+                    root.view = root.view === 2 ? 1 : 0;
                     warmth.forceActiveFocus();
                 } else
                     root.close();
@@ -369,29 +345,23 @@ OmarchyUi.Panel {
                 color: "#686868"
             }
             TapButton {
-                x: 230
-                y: 13
-                width: 40
-                height: 30
+                x: 252
+                y: 6
+                width: 52
+                height: 44
                 quiet: true
                 text: root.view === 0 ? "⚙︎" : "BACK"
+                textSize: root.view === 0 ? 26 : 12
+                Accessible.name: root.view === 0 ? "Settings" : "Back"
                 fontFamily: root.mono
                 onClicked: {
                     if (root.view === 0)
                         root.settingsPage();
-                    else
-                        root.view = 0;
+                    else {
+                        root.editingPhase = -1;
+                        root.view = root.view === 2 ? 1 : 0;
+                    }
                 }
-            }
-            TapButton {
-                x: 280
-                y: 13
-                width: 26
-                height: 30
-                quiet: true
-                text: "×"
-                textSize: 16
-                onClicked: root.close()
             }
             Item {
                 visible: root.view === 0
@@ -408,8 +378,7 @@ OmarchyUi.Panel {
                         brandFont: anybody.name
                         monoFont: root.mono
                         label: "WARMTH"
-                        readout: Math.round(6500 * (1 - value)).toLocaleString(Qt.locale("en_US"),
-                                                                               "f", 0) + "K"
+                        readout: Math.round(6500 * (1 - value)).toLocaleString(Qt.locale("en_US"), "f", 0) + "K"
                         value: 1
                         signalColor: "#ff0000"
                         filterEnabled: root.snapshot.enabled
@@ -437,42 +406,74 @@ OmarchyUi.Panel {
                     }
                 }
                 Rectangle {
+                    id: pwmRow
                     x: 20
-                    y: 295
+                    y: 293
                     width: 272
-                    height: 30
-                    radius: 4
-                    color: "#141414"
-                    border.width: root.snapshot.error || root.notice ? 1 : 0
-                    border.color: "#ff0000"
+                    height: 34
+                    readonly property bool toggleAvailable: root.connected && root.snapshot.pwmAvailable && !root.snapshot.error
+                    readonly property bool showMessage: !toggleAvailable || !!root.snapshot.pwmError
+                    readonly property color indicatorColor: root.snapshot.pwmVerified ? "#ffffff" : root.snapshot.pwmRequested ? "#ffcc00" : "#ffffff"
+                    color: "#0e0e0e"
+                    border.width: 1
+                    border.color: root.snapshot.error || root.snapshot.pwmError ? "#ff5555" : root.snapshot.pwmRequested ? Qt.alpha(indicatorColor, .4) : "#2a2a2a"
+                    Rectangle {
+                        visible: !pwmRow.showMessage
+                        x: 10
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: 8
+                        height: 8
+                        radius: 4
+                        color: pwmRow.indicatorColor
+                        opacity: root.snapshot.pwmRequested ? 1 : .25
+                    }
                     Text {
+                        visible: !pwmRow.showMessage
+                        x: 26
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "PWM-SAFE MODE"
+                        color: root.snapshot.pwmRequested ? "#f2f2f2" : "#808080"
+                        font.family: root.mono
+                        font.pixelSize: 10
+                        font.bold: true
+                        font.letterSpacing: .8
+                    }
+                    Text {
+                        visible: !pwmRow.showMessage
+                        anchors.right: parent.right
+                        anchors.rightMargin: 10
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: root.snapshot.pwmVerified ? "ON" : root.snapshot.pwmRequested ? "…" : "OFF"
+                        color: pwmRow.indicatorColor
+                        opacity: root.snapshot.pwmRequested ? 1 : .4
+                        font.family: root.mono
+                        font.pixelSize: 10
+                        font.bold: true
+                    }
+                    Text {
+                        visible: pwmRow.showMessage
                         anchors.centerIn: parent
                         width: 252
-                        text: root.snapshot.error || root.notice || (!root.connected
-                                                                     ? "CONNECTING TO TAP ZAP…" :
-                                                                       root.snapshot.pwmError
-                                                                       ? root.snapshot.pwmError :
-                                                                         root.snapshot.pwmAvailable
-                                                                         ? "PWM-SAFE MODE   " + (
-                                                                               root.snapshot.pwmVerified
-                                                                               ? "ON" : "OFF") :
-                                                                           root.snapshot.hardwarePercent
-                                                                           >= 0 ? "DISPLAY BRIGHTNESS  "
-                                                                                  + root.snapshot.hardwarePercent
-                                                                                  + "%" : "CHECK DISPLAY BRIGHTNESS")
-                        color: root.snapshot.error || root.notice ? "#ff5555" : "#aaaaaa"
+                        text: root.snapshot.error || (!root.connected ? "CONNECTING TO TAP ZAP…" : root.snapshot.pwmError ? root.snapshot.pwmError : root.snapshot.hardwarePercent >= 0 ? "DISPLAY BRIGHTNESS " + root.snapshot.hardwarePercent + "%" : "CHECK DISPLAY BRIGHTNESS")
+                        color: root.snapshot.error || root.snapshot.pwmError ? "#ff5555" : "#aaaaaa"
                         font.family: root.mono
-                        font.pixelSize: 9
+                        font.pixelSize: 10
                         wrapMode: Text.Wrap
                         textFormat: Text.PlainText
                         horizontalAlignment: Text.AlignHCenter
                     }
                     MouseArea {
                         anchors.fill: parent
-                        enabled: root.snapshot.pwmAvailable && !root.snapshot.error
+                        enabled: pwmRow.toggleAvailable
                         cursorShape: Qt.PointingHandCursor
                         onClicked: root.send(["set", "pwm", root.snapshot.pwmRequested ? "0" : "1"])
                     }
+                    activeFocusOnTab: toggleAvailable
+                    Accessible.role: Accessible.CheckBox
+                    Accessible.name: "PWM-Safe Mode"
+                    Accessible.checked: root.snapshot.pwmRequested
+                    Keys.onSpacePressed: if (toggleAvailable)
+                        root.send(["set", "pwm", root.snapshot.pwmRequested ? "0" : "1"])
                 }
                 Row {
                     x: 20
@@ -487,8 +488,7 @@ OmarchyUi.Panel {
                             height: 36
                             text: modelData
                             fontFamily: anybodyBold.name
-                            selected: Math.abs(root.snapshot.intensity - [1 - 4000 / 6500, 1 - 2700 / 6500,
-                                                                          1][index]) < .02
+                            selected: Math.abs(root.snapshot.intensity - [1 - 4000 / 6500, 1 - 2700 / 6500, 1][index]) < .02
                             onClicked: root.send(["preset", ["day", "evening", "night"][index]])
                         }
                     }
@@ -539,9 +539,12 @@ OmarchyUi.Panel {
                     TapButton {
                         width: 288
                         height: 44
-                        text: "COPY FEEDBACK FOR SUPPORT"
+                        text: "REPORT A BUG / GET SUPPORT"
                         fontFamily: root.mono
-                        onClicked: feedback.running = true
+                        onClicked: {
+                            Quickshell.execDetached(["xdg-open", "https://github.com/rS7Y/tapzap-for-linux/issues/new/choose"]);
+                            root.close();
+                        }
                     }
                     TapButton {
                         width: 288
@@ -604,8 +607,7 @@ OmarchyUi.Panel {
                     text: "AUTO SCHEDULE   " + (root.snapshot.schedule.enabled ? "ON" : "OFF")
                     fontFamily: root.mono
                     selected: root.snapshot.schedule.enabled
-                    onClicked: root.send(["schedule", "enabled", root.snapshot.schedule.enabled
-                                          ? "0" : "1"])
+                    onClicked: root.send(["schedule", "enabled", root.snapshot.schedule.enabled ? "0" : "1"])
                 }
                 Column {
                     y: 62
@@ -619,41 +621,35 @@ OmarchyUi.Panel {
                             width: 288
                             height: 64
                             property bool chosen: root.draftSelected[index]
-                            property alias timeText: timeInput.text
                             TapButton {
                                 width: 100
                                 height: 54
-                                text: ["DAY", "EVENING", "NIGHT"][index] + (timeRow.chosen ? "  ON" :
-                                                                                             "  OFF")
+                                text: ["DAY", "EVENING", "NIGHT"][index] + (timeRow.chosen ? "  ON" : "  OFF")
                                 fontFamily: anybodyBold.name
+                                textSize: 11
                                 selected: timeRow.chosen
-                                onClicked: timeRow.chosen = !timeRow.chosen
+                                onClicked: {
+                                    var selected = root.draftSelected.slice();
+                                    selected[index] = !selected[index];
+                                    root.draftSelected = selected;
+                                    root.notice = "";
+                                }
                             }
-                            Rectangle {
+                            TapButton {
                                 x: 116
                                 width: 172
                                 height: 54
-                                radius: 5
+                                quiet: true
                                 color: "#050505"
+                                opacity: timeRow.chosen ? 1 : .4
+                                enabled: timeRow.chosen
                                 border.width: 1
-                                border.color: timeInput.activeFocus ? "#999999" : "#3a3a3a"
-                                TextInput {
-                                    id: timeInput
-                                    anchors.centerIn: parent
-                                    width: 150
-                                    text: String(Math.floor(root.draftMinutes[index] / 60)).padStart(
-                                              2, "0") + ":" + String(root.draftMinutes[index]
-                                                                     % 60).padStart(2, "0")
-                                    font.family: root.mono
-                                    font.pixelSize: 25
-                                    color: "#eeeeee"
-                                    horizontalAlignment: Text.AlignHCenter
-                                    inputMask: "99:99"
-                                    selectByMouse: true
-                                    activeFocusOnTab: true
-                                    Accessible.name: ["Day", "Evening", "Night"][index]
-                                    + " start time"
-                                }
+                                border.color: activeFocus ? "#999999" : "#3a3a3a"
+                                text: root.formatTime(root.draftMinutes[index])
+                                fontFamily: root.mono
+                                textSize: 25
+                                Accessible.name: ["Day", "Evening", "Night"][index] + " start time " + text
+                                onClicked: root.editTime(index)
                             }
                         }
                     }
@@ -669,23 +665,47 @@ OmarchyUi.Panel {
                 Text {
                     y: 354
                     width: 288
-                    text: root.notice || (root.snapshot.schedule.review
-                                          ? "REVIEW SAVED TIMES BEFORE ENABLING" :
-                                            root.scheduleSummary())
+                    text: root.notice || (root.snapshot.schedule.review ? "Review saved times before enabling." : root.snapshot.schedule.enabled ? root.scheduleSummary() : "Schedule off")
                     font.family: root.mono
-                    font.pixelSize: 10
-                    color: root.notice || root.snapshot.schedule.review ? "#ff5555" : "#cccccc"
+                    font.pixelSize: 12
+                    color: (root.notice && root.notice !== "Times saved") || root.snapshot.schedule.review ? "#ff5555" : "#cccccc"
                     wrapMode: Text.Wrap
                     textFormat: Text.PlainText
                 }
                 Text {
-                    y: 402
+                    y: 400
                     width: 288
-                    text: "FADES TAKE ONE MINUTE.\nMANUAL WARMTH HOLDS UNTIL THE NEXT START."
+                    text: "Warmth fades over 60 seconds.\nManual changes hold until the next start."
                     font.family: root.mono
-                    font.pixelSize: 9
-                    color: "#777777"
-                    wrapMode: Text.Wrap
+                    font.pixelSize: 11
+                    color: "#999999"
+                    wrapMode: Text.WordWrap
+                    textFormat: Text.PlainText
+                }
+                Rectangle {
+                    anchors.fill: parent
+                    visible: root.editingPhase >= 0
+                    color: "#dd0d0d0d"
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: root.editingPhase = -1
+                    }
+                }
+                TimeEditor {
+                    id: timeEditor
+                    y: 84
+                    visible: root.editingPhase >= 0
+                    phaseName: ["DAY", "EVENING", "NIGHT"][Math.max(0, root.editingPhase)]
+                    fontFamily: root.mono
+                    onEdited: function (minutes) {
+                        if (root.editingPhase < 0)
+                            return;
+                        var draft = root.draftMinutes.slice();
+                        draft[root.editingPhase] = minutes;
+                        root.draftMinutes = draft;
+                        root.notice = "";
+                    }
+                    onDone: root.editingPhase = -1
                 }
             }
         }

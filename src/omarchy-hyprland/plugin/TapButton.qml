@@ -20,8 +20,14 @@ Rectangle {
     gradient: quiet ? null : danger ? zapGradient : neutralGradient
     Gradient {
         id: neutralGradient
-        GradientStop { position: 0; color: root.selected ? "#404040" : "#303030" }
-        GradientStop { position: 1; color: root.selected ? "#333333" : "#242424" }
+        GradientStop {
+            position: 0
+            color: root.selected ? "#404040" : "#303030"
+        }
+        GradientStop {
+            position: 1
+            color: root.selected ? "#333333" : "#242424"
+        }
     }
     Gradient {
         id: zapGradient
@@ -49,8 +55,8 @@ Rectangle {
         spacing: root.bolt ? 8 : 0
         Bolt {
             visible: root.bolt
-            width: root.bolt ? 12 : 0
-            height: 16
+            width: root.bolt ? 18 : 0
+            height: 24
             anchors.verticalCenter: parent.verticalCenter
             color: root.textColor
         }

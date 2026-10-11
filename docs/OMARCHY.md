@@ -4,7 +4,8 @@ TAP ZAP is a native Omarchy bar plugin. Open its lightning icon to use two
 vertical faders, DAY / EVENING / NIGHT presets and the ZAP switch. The square-edged
 panel keeps TAP ZAP's dark surfaces, red warmth channel, white brightness
 channel, Anybody headings and metallic fader caps. Clicking outside closes
-the panel while the filter keeps running. Quit restores the display.
+the panel while the filter keeps running. The large gear opens Settings;
+there is no separate close button. Quit restores the display.
 
 One managed engine serves all monitors. It exits when the plugin is unloaded
 or the shell exits; a lifetime guardian lets it flush preferences and restore
@@ -81,7 +82,9 @@ compatible. Preferences live in the user's config directory
 Settings → Auto Schedule lets you select DAY, EVENING and NIGHT start times in
 24-hour local time. Defaults are 07:00, 18:00 and 22:00. Selected times must be
 unique, and at least one preset must be selected before enabling scheduling.
-Save Times commits the draft; unchanged saves preserve a manual hold.
+Click a clock to open its hour/minute picker. Use the +/− buttons, type the
+digits, or use the Up/Down keys in a field. Done returns to the schedule;
+Save Times commits the draft. Unchanged saves preserve a manual hold.
 
 Each start fades warmth to its preset over one minute. Manual warmth or a
 preset holds until the next selected start. Brightness remains under manual
@@ -105,8 +108,10 @@ tapzap schedule enabled 1
 Warmth is intensity from 0 (6500K) to 1 (red-only 0K). The default brightness
 floor is 10%; Extreme Dim unlocks 0%. PWM-Safe is offered only when the system
 has a supported backlight. Its status reports the hardware readback, not a
-physical flicker measurement. Copy Feedback prepares diagnostics locally for
-you to paste into a support message.
+physical flicker measurement. The PWM row follows the Mac UI with a status
+dot and separate OFF, pending and ON states. **Report a bug / Get support** in
+Settings opens the repository's GitHub issue-report chooser. It does not
+submit a report or upload diagnostics automatically.
 
 ## Build a package
 

@@ -40,6 +40,30 @@ ShellRoot {
             if(panel.notice!=="INVALID TIMES") {console.error("Status erased validation"); Qt.exit(1); return}
             panel.applyState(JSON.stringify(state),true)
             if(panel.notice!=="") {console.error("Action failed to clear notice"); Qt.exit(1); return}
+            var clockComponent=Qt.createComponent("Plugin/TimeEditor.qml")
+            if(clockComponent.status!==Component.Ready) {console.error("Clock picker is missing: "+clockComponent.errorString()); Qt.exit(1); return}
+            var clock=clockComponent.createObject(null,{minutes:1439})
+            clock.adjust("hour",1)
+            if(clock.minutes!==59) {console.error("Hour must wrap from 23 to 00"); Qt.exit(1); return}
+            clock.adjust("minute",1)
+            if(clock.minutes!==0) {console.error("Minute must wrap from 59 to 00"); Qt.exit(1); return}
+            clock.adjust("minute",-1)
+            if(clock.minutes!==59) {console.error("Minute decrement must wrap"); Qt.exit(1); return}
+            clock.minutes=420
+            if(clock.commit("hour","24") || clock.minutes!==420) {console.error("Invalid hour changed the draft"); Qt.exit(1); return}
+            if(!clock.commit("minute","15") || clock.minutes!==435) {console.error("Typed minute did not enter the draft"); Qt.exit(1); return}
+            clock.destroy()
+            panel.settingsPage()
+            panel.draftMinutes=[435,1080,1320]
+            panel.saveTimes()
+            if(panel.queue.length!==1 || panel.queue[0].args[2]!=="435") {console.error("Picker draft did not reach Save Times"); Qt.exit(1); return}
+            panel.queue=[]
+            panel.draftMinutes=[435,435,1320]
+            panel.saveTimes()
+            if(panel.queue.length || !panel.notice) {console.error("Duplicate selected times were saved"); Qt.exit(1); return}
+            panel.draftSelected=[false,false,false]
+            panel.saveTimes()
+            if(panel.queue.length || !panel.notice) {console.error("An empty schedule was saved"); Qt.exit(1); return}
             console.log("PASS: native QML components, assets and persistent validation notices")
             Qt.quit()
         }
