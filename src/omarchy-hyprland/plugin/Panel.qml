@@ -5,6 +5,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Hyprland
+import Quickshell.Wayland
 import qs.Ui as OmarchyUi
 import qs.Commons
 
@@ -164,7 +165,9 @@ OmarchyUi.Panel {
             starter.running = true;
             retry.start();
             refresh();
-            warmth.forceActiveFocus();
+            Qt.callLater(function () {
+                warmth.forceActiveFocus();
+            });
         } else {
             if (bar && bar.activePopout === root)
                 bar.releasePopout(root);
@@ -256,43 +259,64 @@ OmarchyUi.Panel {
             root.toggle();
         }
     }
-    PopupWindow {
+    PanelWindow {
         id: popup
         visible: root.opened
-        // The default tooltip surface cannot receive keyboard input. Request a
-        // real popup grab so clock fields and keyboard controls can take focus.
-        grabFocus: true
-        onClosed: root.close()
         color: "transparent"
         surfaceFormat.opaque: false
+        exclusionMode: ExclusionMode.Ignore
+        readonly property var anchorWindow: barButton.QsWindow.window
+        screen: anchorWindow ? anchorWindow.screen : null
         readonly property real scale: Math.max(.45, Math.min(.8 * Style.font.baseSize / 12, screen ? (screen.height - 70) / 540 : 1, screen ? (screen.width - 24) / 320 : 1))
         implicitWidth: Math.ceil(320 * scale)
         implicitHeight: Math.ceil(540 * scale)
-        anchor.window: barButton.QsWindow.window
-        anchor.adjustment: PopupAdjustment.Slide
-        anchor.edges: Edges.Top | Edges.Left
-        anchor.gravity: Edges.Bottom | Edges.Right
-        anchor.rect.width: 1
-        anchor.rect.height: 1
-        anchor.onAnchoring: {
-            var window = barButton.QsWindow.window;
-            if (!window)
-                return;
-            var p = window.contentItem.mapFromItem(barButton, barButton.width / 2 - popup.implicitWidth / 2, barButton.height + 12);
-            if (root.bar && root.bar.position === "bottom")
-                p.y = -popup.implicitHeight - 12;
-            if (root.bar && root.bar.position === "left") {
-                p.x = barButton.width + 12;
-                p.y = 0;
+        anchors.top: true
+        anchors.left: true
+        margins.left: origin.x
+        margins.top: origin.y
+        WlrLayershell.namespace: "tapzap-panel"
+        WlrLayershell.layer: WlrLayer.Overlay
+        // Match Omarchy's keyboard panels: acquire focus when mapped, then
+        // allow normal pointer routing while the outside-click grab is active.
+        property bool focusPrimed: false
+        WlrLayershell.keyboardFocus: !root.opened ? WlrKeyboardFocus.None : focusPrimed ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.Exclusive
+        onVisibleChanged: {
+            focusPrimed = false;
+            if (visible)
+                focusPrime.restart();
+        }
+        onBackingWindowVisibleChanged: if (backingWindowVisible)
+            Qt.callLater(function () {
+                warmth.forceActiveFocus();
+            })
+        Timer {
+            id: focusPrime
+            interval: 80
+            onTriggered: popup.focusPrimed = true
+        }
+        TransformWatcher {
+            id: anchorWatcher
+            a: popup.anchorWindow ? popup.anchorWindow.contentItem : null
+            b: barButton
+        }
+        readonly property point origin: {
+            anchorWatcher.transform;
+            var window = anchorWindow;
+            if (!window || !screen)
+                return Qt.point(12, 38);
+            var p = window.contentItem.mapFromItem(barButton, barButton.width / 2 - implicitWidth / 2, barButton.height + 12);
+            var position = root.bar ? root.bar.position : "top";
+            if (position === "bottom")
+                p.y = screen.height - window.height - implicitHeight - 12;
+            if (position === "left") {
+                p.x = window.width + 12;
+                p.y = barButton.mapToItem(window.contentItem, 0, 0).y;
             }
-            if (root.bar && root.bar.position === "right") {
-                p.x = -popup.implicitWidth - 12;
-                p.y = 0;
+            if (position === "right") {
+                p.x = screen.width - window.width - implicitWidth - 12;
+                p.y = barButton.mapToItem(window.contentItem, 0, 0).y;
             }
-            if (!root.bar || root.bar.position === "top" || root.bar.position === "bottom")
-                p.x = Math.max(12, Math.min(p.x, window.width - popup.implicitWidth - 12));
-            anchor.rect.x = Math.round(p.x);
-            anchor.rect.y = Math.round(p.y);
+            return Qt.point(Math.round(Math.max(12, Math.min(p.x, screen.width - implicitWidth - 12))), Math.round(Math.max(12, Math.min(p.y, screen.height - implicitHeight - 12))));
         }
         HyprlandFocusGrab {
             active: root.opened

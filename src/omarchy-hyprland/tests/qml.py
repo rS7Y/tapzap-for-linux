@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 # Copyright (C) 2026 Tap Zap.
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""Load the native panel offscreen with installed Omarchy modules and local assets."""
+"""Load the hidden native panel with installed Omarchy modules and local assets."""
 
 import os
 from pathlib import Path
 import shutil
+import signal
 import subprocess
 import tempfile
 
@@ -14,6 +15,17 @@ shell = Path(os.environ.get("OMARCHY_PATH", "/usr/share/omarchy")) / "shell"
 if not (shell / "Ui/Panel.qml").is_file():
     print("SKIP: native QML check requires the installed Omarchy shell")
     raise SystemExit(0)
+
+# PanelWindow requires a real window backend. The panel remains closed: this
+# check never maps a surface or takes keyboard focus. Isolate its IPC and D-Bus.
+wayland = Path(os.environ.get("WAYLAND_DISPLAY", ""))
+if not str(os.environ.get("WAYLAND_DISPLAY", "")):
+    print("SKIP: native QML check requires WAYLAND_DISPLAY")
+    raise SystemExit(0)
+if not wayland.is_absolute():
+    wayland = Path(os.environ.get("XDG_RUNTIME_DIR", "")) / wayland
+if not wayland.is_socket():
+    raise SystemExit("Native QML check: Wayland display is unavailable")
 
 with tempfile.TemporaryDirectory(prefix="tapzap-qml-test-") as temporary:
     root = Path(temporary)
@@ -70,15 +82,27 @@ ShellRoot {
     }
 }
 """)
-    env = dict(os.environ, QT_QPA_PLATFORM="offscreen", XDG_RUNTIME_DIR=str(runtime))
-    result = subprocess.run(
+    env = dict(
+        os.environ,
+        QT_QPA_PLATFORM="wayland",
+        WAYLAND_DISPLAY=str(wayland),
+        XDG_RUNTIME_DIR=str(runtime),
+    )
+    process = subprocess.Popen(
         ["dbus-run-session", "--", "qs", "-p", str(root), "--no-color"],
         env=env,
-        capture_output=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
         text=True,
-        timeout=10,
+        start_new_session=True,
     )
-    output = result.stdout + result.stderr
-    assert result.returncode == 0 and "PASS:" in output, output
+    try:
+        stdout, stderr = process.communicate(timeout=10)
+    except subprocess.TimeoutExpired:
+        os.killpg(process.pid, signal.SIGKILL)
+        stdout, stderr = process.communicate()
+        raise AssertionError("Native QML check timed out:\n" + stdout + stderr)
+    output = stdout + stderr
+    assert process.returncode == 0 and "PASS:" in output, output
     assert "Cannot load font" not in output and "ERROR" not in output, output
     print("PASS: native QML components, assets and persistent validation notices")
