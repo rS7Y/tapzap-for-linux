@@ -9,19 +9,33 @@
 namespace tapzap {
 
 class HeadlessBackend : public IGammaBackend {
-public:
-    std::string name() const override { return "headless"; }
-    int outputCount() const override { return 1; }
-    bool init(std::string&) override { return true; }
-    bool setFilter(double intensity, double brightness, std::string&) override {
+  public:
+    std::string name() const override {
+        return "headless";
+    }
+    int outputCount() const override {
+        return 1;
+    }
+    bool init(std::string &) override {
+        return true;
+    }
+    bool setFilter(double intensity, double brightness, std::string &) override {
         last_ = buildRamp(intensity, brightness, kSize);
         active_ = true;
         return true;
     }
-    bool restore(std::string&) override { active_ = false; return true; }
-    const GammaRamp& lastRamp() const { return last_; }
-    bool active() const { return active_; }
-private:
+    bool restore(std::string &) override {
+        active_ = false;
+        return true;
+    }
+    const GammaRamp &lastRamp() const {
+        return last_;
+    }
+    bool active() const {
+        return active_;
+    }
+
+  private:
     static constexpr int kSize = 256;
     GammaRamp last_{kSize};
     bool active_ = false;

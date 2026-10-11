@@ -6,6 +6,25 @@ compile does not prove that the compositor, GPU, physical display, recovery
 path, or tray integration works on your machine. All variants remain
 experimental while the documented recovery findings are unresolved.
 
+## Native build prerequisites
+
+The root command `make build VARIANT=<variant>` requires the native backend,
+Cairo UI, and tray helper, rather than accepting a headless fallback. For X11,
+GNOME, Plasma, and Sway on Debian/Ubuntu, start with:
+
+```sh
+sudo apt-get install --no-install-recommends \
+  build-essential make pkg-config python3 python3-venv \
+  libx11-dev libxrandr-dev libxext-dev libxfixes-dev \
+  libcairo2-dev libfreetype6-dev libdbus-1-dev \
+  libgtk-3-dev libayatana-appindicator3-dev
+```
+
+GNOME and Sway also need `libwayland-dev libwayland-bin`; GNOME's helper
+needs `python3-gi`. Plasma's helper needs `liblcms2-dev` and `kscreen-doctor`
+(provided by `libkf5screen-bin` on Ubuntu 24.04). Package names can vary by
+distribution. Omarchy/Hyprland has its own requirements below.
+
 ## Common test
 
 From the repository root:

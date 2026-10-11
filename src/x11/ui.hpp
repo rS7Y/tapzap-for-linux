@@ -4,4 +4,4 @@
 // a stub elsewhere. `tapzap gui` runs the live window; `tapzap gui --shot ...` renders
 // one UI frame offscreen to a PPM (same draw code as the live window).
 #pragma once
-int runGui(int argc, char** argv);
+int runGui(int argc, char **argv);

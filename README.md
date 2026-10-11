@@ -25,6 +25,35 @@ See [the full matrix](docs/SUPPORT-MATRIX.md) for prerequisites and evidence.
 ARM64, HDR, other GPU/driver combinations, and many hotplug or suspend/resume
 paths are unverified.
 
+## Start here
+
+```sh
+git clone https://github.com/rS7Y/tapzap-for-linux.git
+cd tapzap-for-linux
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements-dev.txt
+make help
+make test
+```
+
+These tests need Python 3.10+ and a C++17 compiler; they do not connect to a
+display. On Debian/Ubuntu, install `git make g++ python3-venv` first.
+For a native Linux build, install the [backend dependencies](docs/BUILDING.md),
+then run `make build VARIANT=x11` (or the matching variant from the table).
+`make check` also needs [Gitleaks](CONTRIBUTING.md#secret-checks).
+
+## Find your way around
+
+| Location | Contents |
+|---|---|
+| [`src/`](src/) | Five desktop-session implementations and their required assets |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Code map, backend boundaries, and where to start reading |
+| [`docs/COMMANDS.md`](docs/COMMANDS.md) | Development commands and application CLI reference |
+| [`tests/`](tests/) | Color-core, licensing, documentation, and source-integrity tests |
+| [`scripts/`](scripts/) | Native CI builds and source-manifest maintenance |
+| [`THIRD-PARTY-NOTICES/`](THIRD-PARTY-NOTICES/README.md) | Font and protocol licenses |
+
 ## Build and install
 
 There is not yet a binary release built and verified from this public source

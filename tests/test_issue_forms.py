@@ -15,9 +15,15 @@ TEMPLATES = ROOT / ".github" / "ISSUE_TEMPLATE"
 class IssueFormTests(unittest.TestCase):
     def test_three_distinct_forms_with_valid_fields(self):
         forms = sorted(TEMPLATES.glob("*.yml"))
-        self.assertEqual([f.name for f in forms], [
-            "bug_report.yml", "compatibility.yml", "config.yml", "feature_request.yml",
-        ])
+        self.assertEqual(
+            [f.name for f in forms],
+            [
+                "bug_report.yml",
+                "compatibility.yml",
+                "config.yml",
+                "feature_request.yml",
+            ],
+        )
         seen_names = set()
         for path in forms:
             if path.name == "config.yml":
@@ -32,26 +38,30 @@ class IssueFormTests(unittest.TestCase):
                 self.assertGreaterEqual(len(form["body"]), 3)
                 ids = [field.get("id") for field in form["body"] if "id" in field]
                 self.assertEqual(len(ids), len(set(ids)))
-                self.assertTrue(any(
-                    field["type"] == "checkboxes" and field.get("id") == "privacy"
-                    for field in form["body"]
-                ))
+                self.assertTrue(
+                    any(
+                        field["type"] == "checkboxes" and field.get("id") == "privacy"
+                        for field in form["body"]
+                    )
+                )
                 for field in form["body"]:
-                    self.assertIn(field["type"], {"markdown", "input", "textarea", "dropdown", "checkboxes"})
+                    self.assertIn(
+                        field["type"], {"markdown", "input", "textarea", "dropdown", "checkboxes"}
+                    )
                     self.assertIn("attributes", field)
                     if field["type"] == "dropdown":
-                        self.assertTrue(all(
-                            isinstance(option, str)
-                            for option in field["attributes"]["options"]
-                        ))
+                        self.assertTrue(
+                            all(
+                                isinstance(option, str) for option in field["attributes"]["options"]
+                            )
+                        )
 
     def test_chooser_disables_blank_public_issues_and_offers_private_route(self):
         config = yaml.safe_load((TEMPLATES / "config.yml").read_text())
         self.assertIs(config["blank_issues_enabled"], False)
-        self.assertTrue(any(
-            link["url"] == "https://tapzap.app/contact"
-            for link in config["contact_links"]
-        ))
+        self.assertTrue(
+            any(link["url"] == "https://tapzap.app/contact" for link in config["contact_links"])
+        )
 
     def test_bug_form_identifies_the_affected_control(self):
         form = yaml.safe_load((TEMPLATES / "bug_report.yml").read_text())
