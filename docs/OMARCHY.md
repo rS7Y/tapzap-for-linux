@@ -54,6 +54,12 @@ No sudo or pkexec is required. The installer checks payload hashes and adds
 **TAP ZAP** to the launcher, the `tapzap` command and the `app.tapzap` bar widget.
 If another application owns `tapzap`, use `tapzap-omarchy` for these commands.
 
+The optional repository-root `install-omarchy.sh` shortcut downloads its Python
+installer from the fixed 0.3.0 source commit and checks an embedded SHA-256 before
+executing it. It then selects the latest published Omarchy archive and verifies
+that archive separately. A changed installer download is rejected before it runs.
+Review the shortcut itself before running it; its checksum is not a signature.
+
 Install, update and remove from an unlocked desktop. The installer refuses a
 locked or undetermined session because Omarchy 4 plugin rescans can reload its
 lock service. Do not lock the screen until installation finishes. Native updates

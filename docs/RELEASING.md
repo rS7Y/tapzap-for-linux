@@ -29,6 +29,11 @@ backend snapshots retain their separate experimental status.
 7. Download the public assets again, compare hashes, and run the documented
    setup/update path. Do not replace a published archive silently; publish a
    new version for a changed payload.
+8. If updating the root `install-omarchy.sh` bootstrap, pin `installer_commit`
+   to the full, published source commit and `installer_sha256` to that commit's
+   `src/omarchy-hyprland/install.py` SHA-256. Never fetch executable bootstrap
+   code from a moving branch. Run the bootstrap tests and verify its `--help`
+   path against the real download before publishing the shortcut change.
 
 The repository-root manifest is for Omarchy's Git manager. The package includes
 the same UI plus the native engine. Test both layouts and keep their plugin IDs
