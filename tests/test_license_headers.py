@@ -24,7 +24,11 @@ class LicenseBoundaryTests(unittest.TestCase):
             path
             for base in (ROOT / "src", ROOT / "tests")
             for path in base.rglob("*")
-            if path.is_file() and path.suffix in PROJECT_EXTENSIONS
+            if path.is_file()
+            and path.suffix in PROJECT_EXTENSIONS
+            and not {"build", "dist", "AppDir", "evidence"}.intersection(
+                path.relative_to(ROOT).parts
+            )
         ]
         self.assertTrue(files, "project source files should be present")
         missing = [

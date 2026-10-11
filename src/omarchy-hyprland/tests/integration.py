@@ -5,7 +5,7 @@
 
 import json, os, pathlib, signal, socket, subprocess, tempfile, time
 from gi.repository import Gio, GLib
-from Xlib import X, display, protocol
+from Xlib import X, display, error, protocol
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 TMP = pathlib.Path(tempfile.mkdtemp(prefix="tapzap-omarchy-test-"))
@@ -150,17 +150,34 @@ def start(hidden=False):
 
 
 try:
-    r, w = os.pipe()
+    # Do not use Xvfb's -displayfd auto-selection on a live Hyprland desktop:
+    # it can replace XWayland's filesystem socket despite its existing lock.
+    # Explicit displays honor X server locks. Keep well away from desktop :0.
+    display_number = next(
+        number
+        for number in range(100, 1000)
+        if not pathlib.Path(f"/tmp/.X{number}-lock").exists()
+        and not pathlib.Path(f"/tmp/.X11-unix/X{number}").exists()
+    )
+    ENV["DISPLAY"] = f":{display_number}"
     xvfb = subprocess.Popen(
-        ["Xvfb", "-displayfd", str(w), "-screen", "0", "1280x1024x24", "-nolisten", "tcp"],
-        pass_fds=(w,),
+        ["Xvfb", ENV["DISPLAY"], "-screen", "0", "1280x1024x24", "-nolisten", "tcp"],
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )
     processes.append(xvfb)
-    os.close(w)
-    with os.fdopen(r) as f:
-        ENV["DISPLAY"] = ":" + f.readline().strip()
+
+    def xserver_ready():
+        if xvfb.poll() is not None:
+            raise RuntimeError("private Xvfb failed to start")
+        try:
+            connection = display.Display(ENV["DISPLAY"])
+        except error.DisplayConnectionError:
+            return False
+        connection.close()
+        return True
+
+    wait(xserver_ready, "private X server ready")
     server = spawn(
         [ROOT / "build/test-ctm-server", "tapzap-test", TMP / "matrix.json"], name="wayland-server"
     )

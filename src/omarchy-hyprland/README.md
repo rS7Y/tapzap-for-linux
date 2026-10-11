@@ -7,8 +7,9 @@ official Omarchy package.
 Read the repository's [known issues](https://github.com/rS7Y/tapzap-for-linux/blob/main/docs/KNOWN-ISSUES.md),
 [validation limits](https://github.com/rS7Y/tapzap-for-linux/blob/main/docs/VALIDATION.md), and
 [safe recovery steps](https://github.com/rS7Y/tapzap-for-linux/blob/main/docs/TROUBLESHOOTING.md)
-before building. The physical filter-enable path and broad hardware
-compatibility are not verified.
+before building. Limited native GUI and CTM filter checks on one Dell are
+recorded in the validation notes; broad hardware compatibility and optical
+output measurements are not verified.
 
 ## Build and test
 

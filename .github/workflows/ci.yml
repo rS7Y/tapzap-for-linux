@@ -73,3 +73,5 @@ jobs:
             xvfb
       - name: Build the requested native variant and run its source self-test
         run: bash scripts/ci-build-variant.sh "${{ matrix.variant }}"
+      - name: Run repository checks with generated build outputs present
+        run: make test verify
