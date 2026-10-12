@@ -282,8 +282,8 @@
       "path": "src/omarchy-hyprland/plugin/manifest.json",
       "source_snapshot": "public-authored-2026-10-11",
       "source_sha256": "074d96432c9ffacc6ab141980e00f35dbf142b8f2bd337290563713a58a6e2a7",
-      "bytes": 441,
-      "sha256": "074d96432c9ffacc6ab141980e00f35dbf142b8f2bd337290563713a58a6e2a7"
+      "bytes": 429,
+      "sha256": "4c7345437d99ae8d61cb495e650b66a73cc5fecd473a00959aa32a6f4f32704c"
     },
     {
       "path": "src/omarchy-hyprland/src/linux/assets/Anybody-Bold.ttf",

@@ -1,52 +1,42 @@
-# TAP ZAP for Omarchy screenshots
+# Screenshots
 
-Real captures of TAP ZAP 0.3.0, taken on October 12, 2026 using Omarchy 4.0.2,
-Hyprland 0.56.2 and Quickshell 0.3.1. Images contain only the app or its bar icon.
-The Omarchy theme controls the bar icon's color; the panel retains TAP ZAP's
-dark surfaces, vertical faders and red warmth channel.
+TAP ZAP 0.3.0 on Omarchy. [Install guide](OMARCHY.md).
 
 ## Main panel
 
-Warmth, brightness, PWM-Safe status, presets and the ZAP switch. The gear opens
-Settings; clicking outside hides the panel while the filter keeps running.
+Adjust warmth and brightness, or choose DAY, EVENING or NIGHT.
 
-![Main TAP ZAP panel with the filter enabled](screenshots/omarchy/main.png)
+<img src="screenshots/omarchy/main.png" width="320" alt="TAP ZAP main panel">
 
 ## Settings
 
-Auto Schedule, optional launch at login, Extreme Dim, GitHub bug reporting and
-Quit. Quit stops the engine and restores display output.
+Schedules, launch at login, Extreme Dim and support.
 
-![Settings panel](screenshots/omarchy/settings.png)
+<img src="screenshots/omarchy/settings.png" width="320" alt="Settings">
 
 ## Auto Schedule
 
-Select the presets to schedule, edit their local start times, then Save Times.
-Manual warmth changes hold until the next selected start.
+Choose your presets and start times. Manual changes hold until the next start.
 
-![Auto Schedule panel](screenshots/omarchy/auto-schedule.png)
+<img src="screenshots/omarchy/auto-schedule.png" width="320" alt="Daily schedules">
 
 ## Time picker
 
-Each clock opens an hour/minute picker. Use the buttons, type digits or press
-Up/Down in a field. Done returns to the schedule; Save Times commits the draft.
+Set the hour and minute. Choose Done, then Save Times.
 
-![DAY hour and minute picker](screenshots/omarchy/time-picker.png)
+<img src="screenshots/omarchy/time-picker.png" width="320" alt="Hour and minute picker">
 
-## Filter OFF
+## Filter off
 
-The gray ZAP switch shows that filtering is OFF. Saved warmth and brightness
-remain available; an enabled schedule still watches for future selected starts.
+ZAP switches the filter on or off. Your settings are saved.
 
-![Main panel with filtering off](screenshots/omarchy/off.png)
+<img src="screenshots/omarchy/off.png" width="320" alt="Filter switched off">
 
-## Menu bar icon
+## Bar icon
 
-The native bar widget uses TAP ZAP's custom bolt artwork, shared with the Mac
-build and the ZAP switch.
+Open TAP ZAP from the lightning icon. Its color follows your Omarchy theme.
 
-![TAP ZAP menu bar icon](screenshots/omarchy/menu-bar.png)
+<img src="screenshots/omarchy/menu-bar.png" width="24" alt="TAP ZAP bar icon">
 
-Follow the [setup guide](OMARCHY.md) for verified installation, updates and
-removal, and [Validation](VALIDATION.md) for the tested hardware and limits.
-The images show the interface, not measured physical color or PWM output.
+Native QML renders at 3× resolution with example settings, made October 12, 2026
+using Omarchy 4.0.2 and Quickshell 0.3.1. See [Validation](VALIDATION.md) for display test results.

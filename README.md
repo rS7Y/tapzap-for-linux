@@ -1,45 +1,46 @@
-# Tap Zap for Linux
+# TAP ZAP for Linux
 
-Tap Zap for Linux is a free, experimental desktop display-control tool. This
-repository contains the Linux source under **GPL-3.0-or-later**; macOS and
-Windows editions remain separate paid products. Linux has five distinct
-session-specific implementations, so choose by display server/backend—not by
-distro name alone.
+Adjust screen warmth and brightness from your bar. Set daily schedules for
+DAY, EVENING and NIGHT.
 
-> **Beta:** restoration, backend-failure, and multi-display issues remain open.
-> Read the [support matrix](docs/SUPPORT-MATRIX.md),
-> [known issues](docs/KNOWN-ISSUES.md), and
-> [validation limits](docs/VALIDATION.md) before running a build.
-
-## Choose a build
-
-| Your session | Source directory | Status |
-|---|---|---|
-| X11 | [`src/x11/`](src/x11/) | Experimental; x86_64 evidence only |
-| GNOME on Wayland | [`src/gnome-wayland/`](src/gnome-wayland/) | Experimental; GNOME/Mutter-specific helper |
-| KDE Plasma on Wayland | [`src/plasma-wayland/`](src/plasma-wayland/) | Experimental; KWin-specific helper |
-| Sway / wlroots on Wayland | [`src/sway/`](src/sway/) | Experimental; requires the wlroots gamma protocol |
-| Omarchy / Hyprland | [`src/omarchy-hyprland/`](src/omarchy-hyprland/) | Experimental; Hyprland CTM v2, x86_64 |
-
-See [the full matrix](docs/SUPPORT-MATRIX.md) for prerequisites and evidence.
-For Omarchy, download [TAP ZAP 0.3.0](https://github.com/rS7Y/tapzap-for-linux/releases/tag/omarchy-v0.3.0)
-and follow the [native plugin setup guide](docs/OMARCHY.md) for verified installation,
-schedules, settings, updates and removal. The root `manifest.json` is the Omarchy
-plugin entry point; its native engine requires the manual setup in that guide.
-
-ARM64, HDR, other GPU/driver combinations, and many hotplug or suspend/resume
-paths are unverified.
-
-## Omarchy screenshots
+Free and open source. The native Omarchy plugin is available now; other Linux
+builds are experimental.
 
 | Main panel | Settings | Auto Schedule |
 |---|---|---|
-| ![TAP ZAP warmth and brightness faders](docs/screenshots/omarchy/main.png) | ![TAP ZAP settings](docs/screenshots/omarchy/settings.png) | ![Daily schedule controls](docs/screenshots/omarchy/auto-schedule.png) |
+| <img src="docs/screenshots/omarchy/main.png" width="256" alt="Warmth and brightness faders"> | <img src="docs/screenshots/omarchy/settings.png" width="256" alt="Settings"> | <img src="docs/screenshots/omarchy/auto-schedule.png" width="256" alt="Daily schedules"> |
 
-See the [screenshot gallery](docs/SCREENSHOTS.md) for the time picker, OFF state
-and menu bar icon. These captures show the native Omarchy 0.3.0 interface.
+[More screenshots](docs/SCREENSHOTS.md)
 
-## Start here
+## Install on Omarchy
+
+Download [TAP ZAP 0.3.0](https://github.com/rS7Y/tapzap-for-linux/releases/tag/omarchy-v0.3.0)
+and follow the [setup guide](docs/OMARCHY.md). It covers installation, updates
+and removal. No sudo is needed.
+
+The marketplace installs the interface; the native engine needs the manual
+setup in that guide.
+
+**Beta:** tested on Omarchy 4.0.2, Hyprland 0.56.2 and one Intel SDR laptop.
+Other GPUs, ARM64, HDR, multiple displays, hotplug and suspend remain unverified.
+See [tested limits](docs/VALIDATION.md) and [known issues](docs/KNOWN-ISSUES.md).
+
+## Other Linux desktops
+
+Choose the build for your desktop session:
+
+| Session | Source |
+|---|---|
+| X11 | [src/x11](src/x11/) |
+| GNOME Wayland | [src/gnome-wayland](src/gnome-wayland/) |
+| KDE Plasma Wayland | [src/plasma-wayland](src/plasma-wayland/) |
+| Sway / wlroots | [src/sway](src/sway/) |
+| Omarchy / Hyprland | [src/omarchy-hyprland](src/omarchy-hyprland/) |
+
+Read the [support matrix](docs/SUPPORT-MATRIX.md) and [build guide](docs/BUILDING.md)
+first. Older website beta ZIPs are not source-matched to this repository.
+
+## Development
 
 ```sh
 git clone https://github.com/rS7Y/tapzap-for-linux.git
@@ -51,73 +52,25 @@ make help
 make test
 ```
 
-These tests need Python 3.10+ and a C++17 compiler; they do not connect to a
-display. On Debian/Ubuntu, install `git make g++ python3-venv` first.
-For a native Linux build, install the [backend dependencies](docs/BUILDING.md),
-then run `make build VARIANT=x11` (or the matching variant from the table).
-`make check` also needs [Gitleaks](CONTRIBUTING.md#secret-checks).
+Tests need Python 3.10+ and a C++17 compiler. They do not access your display.
+See [Contributing](CONTRIBUTING.md) for dependencies and checks.
 
-## Find your way around
-
-| Location | Contents |
-|---|---|
-| [`src/`](src/) | Five desktop-session implementations and their required assets |
-| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Code map, backend boundaries, and where to start reading |
-| [`docs/COMMANDS.md`](docs/COMMANDS.md) | Development commands and application CLI reference |
-| [`docs/OMARCHY.md`](docs/OMARCHY.md) | Omarchy native plugin, schedules, install, update and uninstall |
-| [`docs/SCREENSHOTS.md`](docs/SCREENSHOTS.md) | Native Omarchy panel, Settings and schedule screenshots |
-| [`tests/`](tests/) | Color-core, licensing, documentation, and source-integrity tests |
-| [`scripts/`](scripts/) | Native CI builds and source-manifest maintenance |
-| [`THIRD-PARTY-NOTICES/`](THIRD-PARTY-NOTICES/README.md) | Font and protocol licenses |
-
-## Build and install
-
-The [Omarchy 0.3.0 release](https://github.com/rS7Y/tapzap-for-linux/releases/tag/omarchy-v0.3.0)
-contains an x86_64 package built from its tagged public source. Its archive records
-the full source commit and payload hashes, and includes its checksum, license,
-notices and setup guide. See [release validation](docs/VALIDATION.md#release-correspondence).
-The older X11/GNOME/Plasma/Sway ZIPs on the website are **not source-matched** to
-this repository. This Omarchy release does not replace those other builds.
-
-To build locally, use the commands in [Building](docs/BUILDING.md), then follow
-the [installation and safe first-run steps](docs/INSTALLING.md). Do not install
-system-wide or use `sudo` for the preserved per-user installer. Check
-[Troubleshooting](docs/TROUBLESHOOTING.md) before experimenting with display
-settings.
+- [Code map](docs/ARCHITECTURE.md)
+- [Commands](docs/COMMANDS.md)
+- [Changes](CHANGELOG.md)
+- [Troubleshooting](docs/TROUBLESHOOTING.md)
 
 ## Report a problem
 
-Search [existing reports](https://github.com/rS7Y/tapzap-for-linux/issues), then
-[choose a GitHub report form](https://github.com/rS7Y/tapzap-for-linux/issues/new/choose):
-
-- [Bug report](https://github.com/rS7Y/tapzap-for-linux/issues/new?template=bug_report.yml)
-- [Compatibility report](https://github.com/rS7Y/tapzap-for-linux/issues/new?template=compatibility.yml)
-- [Feature request](https://github.com/rS7Y/tapzap-for-linux/issues/new?template=feature_request.yml)
-
-Include the app/build version, distro and version, desktop and session,
-GPU/driver, display/HDR context, exact steps, and expected versus actual
-behavior. Issues are public: remove license keys, usernames, hostnames,
-home-directory paths, and unreviewed logs or screenshots. See
-[`SECURITY.md`](SECURITY.md) for private security reports.
-
-## Project links
-
-- [Linux beta guide and current downloads](https://tapzap.app/linux-beta/)
-- [Linux source repository on GitHub](https://github.com/rS7Y/tapzap-for-linux)
-- [Changes](CHANGELOG.md)
-- [Contributing](CONTRIBUTING.md)
-- [Third-party notices](THIRD-PARTY-NOTICES/README.md)
-- [GitHub releases](https://github.com/rS7Y/tapzap-for-linux/releases) — Omarchy packages and checksums
-
-After the Linux setup and support information: need Tap Zap for
-[macOS or Windows](https://tapzap.app/download)? Those editions are paid;
-Linux remains free. The paid link is optional and does not gate Linux source or
-downloads.
+[Report a bug or request a feature](https://github.com/rS7Y/tapzap-for-linux/issues/new/choose).
+Include your version, desktop, GPU and steps to reproduce it.
+Remove license keys, personal details and private logs before posting.
+For security reports, see [SECURITY.md](SECURITY.md).
 
 ## License
 
-Tap Zap-authored Linux code, documentation, and project artwork are licensed
-under [GPL-3.0-or-later](LICENSE). Third-party fonts and protocol definitions
-retain their separate licenses as recorded in
-[`THIRD-PARTY-NOTICES/`](THIRD-PARTY-NOTICES/README.md). No macOS or Windows
-implementation is part of this repository.
+[GPL-3.0-or-later](LICENSE). Fonts and protocols have their own
+[licenses](THIRD-PARTY-NOTICES/README.md).
+
+[macOS and Windows](https://tapzap.app/download) are separate paid editions.
+Linux is free.

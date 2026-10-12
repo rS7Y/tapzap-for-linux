@@ -4,7 +4,7 @@
   "name": "TAP ZAP",
   "version": "0.3.0",
   "author": "Rusty",
-  "description": "Vertical screen-warmth and brightness faders with daily presets",
+  "description": "Screen warmth and brightness, with daily schedules.",
   "kinds": ["bar-widget", "service"],
   "entryPoints": {
     "barWidget": "Omarchy.qml",

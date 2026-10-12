@@ -131,7 +131,7 @@ compatible. Preferences live in the user's config directory
 
 ## Daily schedules
 
-![Auto Schedule with DAY, EVENING and NIGHT start times](screenshots/omarchy/auto-schedule.png)
+<img src="screenshots/omarchy/auto-schedule.png" width="320" alt="Daily schedule start times">
 
 Settings → Auto Schedule lets you select DAY, EVENING and NIGHT start times in
 24-hour local time. Defaults are 07:00, 18:00 and 22:00. Selected times must be
@@ -140,7 +140,7 @@ Click a clock to open its hour/minute picker. Use the +/− buttons, type the
 digits, or use the Up/Down keys in a field. Done returns to the schedule;
 Save Times commits the draft. Unchanged saves preserve a manual hold.
 
-![Hour and minute picker for the DAY start](screenshots/omarchy/time-picker.png)
+<img src="screenshots/omarchy/time-picker.png" width="320" alt="Hour and minute picker">
 
 Each start fades warmth to its preset over one minute. Manual warmth or a
 preset holds until the next selected start. Brightness remains under manual
