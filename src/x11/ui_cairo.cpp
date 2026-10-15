@@ -1308,7 +1308,18 @@ int liveWindow(double i0, double b0, bool e0) {
                 XMapRaised(dpy, win);
                 if (popover) {
                     XMoveWindow(dpy, win, popoverX, popoverY);
-                    XSetInputFocus(dpy, win, RevertToParent, CurrentTime);
+                    // Mapping is asynchronous under a window manager. Let it activate the
+                    // popover after processing MapRequest; direct focus can raise BadMatch
+                    // while the window is still unmapped (for example under Cinnamon).
+                    XEvent activate{};
+                    activate.xclient.type = ClientMessage;
+                    activate.xclient.window = win;
+                    activate.xclient.message_type = XInternAtom(dpy, "_NET_ACTIVE_WINDOW", False);
+                    activate.xclient.format = 32;
+                    activate.xclient.data.l[0] = 1; // application source
+                    activate.xclient.data.l[1] = CurrentTime;
+                    XSendEvent(dpy, RootWindow(dpy, scr), False,
+                               SubstructureRedirectMask | SubstructureNotifyMask, &activate);
                 }
                 XFlush(dpy);
                 redraw();

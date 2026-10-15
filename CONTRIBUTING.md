@@ -41,6 +41,13 @@ them. Preserve upstream license files verbatim. Do not add binaries or describe
 an archive as source-matched without recording its exact source revision,
 build inputs, test evidence, notices, and checksum.
 
+For X11 popover changes, use a disposable X11 desktop with `python3-xlib`
+and the native tray helper. After `make build VARIANT=x11`, run
+`python3 scripts/test-x11-popover.py src/x11/build/tapzap`. This checks ten
+close-to-tray/reopen cycles, keyboard focus, and clean Quit using temporary
+settings. It changes the active desktop's focus, so it is separate from
+the display-free `make test` suite.
+
 After a change to the imported source tree, run
 `python3 scripts/update-source-manifest.py` and
 `python3 scripts/verify-source-release.py` before the unit tests.

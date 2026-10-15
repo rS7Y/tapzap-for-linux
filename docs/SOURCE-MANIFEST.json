@@ -932,8 +932,8 @@
     },
     {
       "path": "src/x11/ui_cairo.cpp",
-      "sha256": "a1db375acc7273cd7109e6fd0f35e11b072b7853f0572e4f71bd4552e23d3511",
-      "bytes": 55462,
+      "sha256": "48010b48ca7052330dc99d54a76eb605f4501ef6162efe85c950da3841720a28",
+      "bytes": 56251,
       "source_snapshot": "desktop-tests-20260906/x11",
       "source_sha256": "f3f0c4f16e1c97f93b6521ff760099fa0167af903d904aa49bd48d8f149c4a9b",
       "reviewed_change": "Removed private monorepo source filenames from explanatory comments."
