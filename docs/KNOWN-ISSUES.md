@@ -4,6 +4,15 @@ This list summarizes unresolved findings in the imported experimental source
 snapshots. Do not deliberately reproduce the failure modes. They remain open
 until a later change documents a reproduced fix and a relevant test.
 
+## Mint candidate status
+
+The [Mint 0.1.0 candidate](MINT.md) fixes a separate X11 popover reopening
+crash under Cinnamon: asking for focus before the window manager completed
+mapping could terminate the app with `BadMatch`. The fix uses window-manager
+activation; ten hide/reopen cycles with focus passed inside the Mint VM.
+This does not resolve the high-priority recovery/configuration findings below.
+Native Mint display testing is still pending.
+
 ## High priority
 
 - X11 shared code: gamma calibration/recovery after a crash; OFF ownership when

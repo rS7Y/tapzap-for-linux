@@ -5,6 +5,16 @@ predate the public source snapshot are not treated as releases of this source.
 
 ## Unreleased
 
+## Mint 0.1.0 — 2026-10-17
+
+Publish a source-matched experimental x86_64 candidate for Linux Mint 22.3
+Cinnamon X11, built from `5e4d0b8` inside Mint. Includes native XRandR/Cairo
+binaries, tray helper, exact source, licenses, checksums and test evidence.
+Fix the Cinnamon hide/reopen crash caused by requesting focus before mapping.
+Color self-test, 35 source tests, virtual gamma controls/restoration and ten
+popover reopening cycles passed. Native Mint physical-display, PWM, suspend
+and hotplug testing remain pending. See [Mint setup](docs/MINT.md).
+
 ## Omarchy 0.3.0 — 2026-10-12
 
 Source-matched experimental x86_64 native Omarchy release. Includes verified

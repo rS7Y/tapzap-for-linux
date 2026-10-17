@@ -14,7 +14,7 @@ GNOME, Plasma, and Sway on Debian/Ubuntu, start with:
 
 ```sh
 sudo apt-get install --no-install-recommends \
-  build-essential make pkg-config python3 python3-venv \
+  git build-essential make pkg-config python3 python3-venv \
   libx11-dev libxrandr-dev libxext-dev libxfixes-dev \
   libcairo2-dev libfreetype6-dev libdbus-1-dev \
   libgtk-3-dev libayatana-appindicator3-dev
@@ -37,6 +37,13 @@ The test compiles the C++17 color-core contract separately against each
 variant. Use a C++17 compiler (`g++` or `clang++`) and Python 3.
 
 ## X11
+
+The [Mint 22.3 Cinnamon candidate](MINT.md) was built with the prerequisites
+above, GCC 13.3 and glibc 2.39 inside Mint. From the repository root, use
+`make build VARIANT=x11` for the strict native build and color self-test.
+The optional live regression requires `python3-xlib` and a disposable X11
+desktop: `python3 scripts/test-x11-popover.py src/x11/build/tapzap`.
+That check changes focus and opens windows; `make test` remains display-free.
 
 ```sh
 cd src/x11

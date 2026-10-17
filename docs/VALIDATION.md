@@ -1,6 +1,6 @@
 # Linux validation and limits
 
-Updated 2026-10-12. Tap Zap for Linux is free and experimental. The checks
+Updated 2026-10-17. Tap Zap for Linux is free and experimental. The checks
 below describe the evidence available for these separate backend snapshots;
 they do not certify a general Linux release or guarantee that a filter can be
 restored after every compositor, driver, display, or process failure.
@@ -9,6 +9,8 @@ restored after every compositor, driver, display, or process failure.
 
 | Area | Environment / evidence | What it does not establish |
 |---|---|---|
+| Mint 22.3 Cinnamon X11 candidate | On October 15, public source `5e4d0b8` built inside a Linux Mint 22.3 live QEMU/KVM guest on the Dell, with Cinnamon 6.6.4, GCC 13.3, glibc 2.39 and one virtual display. Color self-test, all 35 source tests, GUI/tray registration, DAY 4000K, full red, 50% brightness, exact virtual gamma restoration after OFF/Quit and Quit/reopen passed. A reproduced Cinnamon focus/mapping crash was fixed; ten hide/reopen cycles including keyboard focus passed. | This is VM software/gamma readback, not native Mint physical display filtering, hardware brightness/PWM, HDR, suspend, hotplug, arbitrary crash restoration or broad GPU coverage. |
+| Fedora 44 session snapshots | On October 14, the operator confirmed whole-desktop warmth, full red, dimming and normal OFF appearance on GNOME Wayland, Plasma Wayland, Sway, Xfce X11 and Plasma X11 on the same Dell. | Those installed September candidates differ from the current public source and the Mint package. These confirmations are one-device visual checks, not measured optical/PWM evidence or source-matched release validation. |
 | X11, GNOME, Plasma, Sway snapshots | Saved September 5–6, 2026 work used Ubuntu 24.04 x86_64 on a Dell XPS 15 9570 with Intel UHD 630/i915, alongside Xvfb and isolated protocol/helper tests. | It is not new validation of the public source commit, every backend/session, other GPUs, HDR, hotplug, suspend/resume, or physical optical output. GNOME and Sway visual confirmation was still pending in the saved notes. |
 | Omarchy / Hyprland public source | On October 11, source `90d2720` built on a Dell XPS 15 9570 running Omarchy 4.0.2 / Hyprland 0.56.2, with one eDP-1 display at 3840×2160 and scale 3. Native checks passed for OFF startup, tray registration, DAY/EVENING/NIGHT presets, brightness slider, Settings navigation, hide/show, toggle, OFF, and quit. After quit, a new CTM owner acquired and released the real compositor successfully. The operator confirmed visible warm/red changes and their reversal. Original app settings and filter state were restored. | This establishes native GUI, visible tint changes, and compositor protocol behavior on that machine, not optical color measurements, PWM reduction, other GPUs/panels/Hyprland versions, HDR, hotplug, suspend/resume, or arbitrary crash recovery. Helper-failure and timeout recovery were tested only against the isolated protocol server. |
 | Source color-core contract | The repository test compiles and runs independently authored C++17 endpoint, range, monotonicity, and gamma-ramp checks against all five source variants. | A color-curve test is not a live backend, compositor, display, recovery, PWM, or visual test. |
@@ -110,6 +112,14 @@ Keep the documented OFF/quit and recovery steps accessible before testing;
 stop if the display does not return to the user's expected state.
 
 ## Release correspondence
+
+`mint-v0.1.0` publishes the unchanged Mint archive built and tested from
+`5e4d0b8303a8a03f1924d411ff70670b8dde7445`. Its `BUILD-INFO.json` records
+the revision, compiler, libc and per-binary hashes; `SOURCE.tar.gz` inside
+the archive contains that exact public source. `SHA256SUMS` verifies its
+payload and the adjacent `SHA256SUMS.txt` verifies the downloaded archive.
+The [Mint guide](MINT.md) records the VM-only scope, dependencies, shared
+settings path, hide-to-tray behavior and open X11 recovery findings.
 
 `omarchy-v0.3.0` identifies the first source-matched native Omarchy package.
 The release archive records the full tagged commit and source-manifest digest

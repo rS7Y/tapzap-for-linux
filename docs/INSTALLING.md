@@ -4,6 +4,8 @@ Omarchy has a [source-matched 0.3.0 release and native plugin installer](OMARCHY
 with verified downloads, optional login startup, daily schedules, updates and
 uninstall. Follow that guide from an unlocked Omarchy desktop. Marketplace/Git
 installs require the native engine as a manual dependency.
+Mint 22.3 Cinnamon X11 has a [source-matched experimental candidate](MINT.md),
+built and tested inside a Mint VM. Native Mint display testing is still pending.
 Other variants currently require source builds; older website beta ZIPs are not
 source-matched to this repository.
 

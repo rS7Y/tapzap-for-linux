@@ -1,7 +1,7 @@
 # TAP ZAP for Linux
 
-Adjust screen warmth and brightness from your bar. Set daily schedules for
-DAY, EVENING and NIGHT.
+Adjust screen warmth and brightness from your desktop. On Omarchy, set daily
+schedules for DAY, EVENING and NIGHT.
 
 Free and open source. The native Omarchy plugin is available now; other Linux
 builds are experimental.
@@ -24,6 +24,17 @@ setup in that guide.
 **Beta:** tested on Omarchy 4.0.2, Hyprland 0.56.2 and one Intel SDR laptop.
 Other GPUs, ARM64, HDR, multiple displays, hotplug and suspend remain unverified.
 See [tested limits](docs/VALIDATION.md) and [known issues](docs/KNOWN-ISSUES.md).
+
+## Linux Mint 22.3 Cinnamon (X11)
+
+Download the [Mint 0.1.0 experimental candidate](https://github.com/rS7Y/tapzap-for-linux/releases/tag/mint-v0.1.0)
+and follow the [Mint setup guide](docs/MINT.md). The x86_64 archive includes
+its exact source, native binaries, tray helper, licenses and checksums.
+
+Built and tested inside a Mint 22.3 / Cinnamon 6.6.4 virtual machine: warmth,
+red, dimming, virtual gamma restoration and tray reopening passed. Testing on
+a native Mint installation is still pending. This is an X11 candidate;
+Cinnamon Wayland, physical PWM and hardware recovery are not validated.
 
 ## Other Linux desktops
 
