@@ -1,7 +1,10 @@
-# Publishing an Omarchy release
+# Publishing Linux releases
 
-Only the Omarchy package has a source-matched public binary release. The other
-backend snapshots retain their separate experimental status.
+Omarchy and the Mint Cinnamon X11 candidate have source-matched public binary
+releases. Their release processes and test scopes are separate. Other backend
+snapshots retain their experimental status and older unmatched website ZIPs.
+
+## Omarchy
 
 1. Update the version in the root and packaged plugin manifests and in
    `src/omarchy-hyprland/package.sh`. Update the changelog and setup guide.
@@ -44,3 +47,25 @@ Marketplace submissions use the
 [official submission guide](https://github.com/omacom/omarchy-plugin-marketplace/blob/main/SUBMISSION.md).
 Mark the native engine as manual setup. Submission and automated checks are
 separate from maintainer approval and marketplace publication.
+
+## Mint Cinnamon X11 candidate
+
+Mint 0.1.0 uses the exact archive built from `5e4d0b8` inside Mint 22.3
+Cinnamon 6.6.4. See the [Mint guide](MINT.md) and [validation record](VALIDATION.md).
+Its tag identifies the tested build commit; later documentation commits do
+not change the archive's recorded source revision.
+
+For a future candidate, build on Mint from a clean exact revision with
+`make build VARIANT=x11`, run `make check`, and record compiler/libc versions.
+Exercise the GUI, tray, warmth/red/dimming, OFF/Quit restoration and reopening
+in the intended Mint session; run the disposable-desktop popover regression.
+State clearly whether evidence is virtual or physical.
+
+Include both native binaries, adjacent assets, exact source archive, licenses,
+component notices, build metadata and reviewed test evidence. Hash every
+payload file, then hash the completed archive. Create a separate
+`mint-v<VERSION>` GitHub **prerelease** at the tested source commit and keep
+the Omarchy release's latest status unchanged. Publish the same archive bytes
+on the website, update both choosers and guides, and verify public download
+hashes again. Do not offer the September terminal installer for this layout.
+Never silently replace a published payload; a changed payload needs a new version.
