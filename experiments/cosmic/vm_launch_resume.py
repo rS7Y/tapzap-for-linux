@@ -1,7 +1,11 @@
-import json,pathlib,subprocess
+import argparse,json,pathlib,subprocess
+parser=argparse.ArgumentParser(description='Launch the dedicated persistent Pop VM without replacing the host emulator')
+parser.add_argument('--qemu',default='qemu-system-x86_64',help='Separate emulator executable for lab-only QEMU patches')
+parser.add_argument('--firmware-directory',type=pathlib.Path,help='Installed QEMU firmware directory for a separately built emulator')
+options=parser.parse_args()
 p=pathlib.Path('/home/foton/TAPZAP-POP-20261017');(p/'captures').mkdir(exist_ok=True)
 assert not (p/'qemu.pid').exists(), 'An existing Pop VM pidfile needs investigation'
-args=['qemu-system-x86_64','-name','TAP ZAP Pop OS COSMIC VM',
+args=[options.qemu,'-name','TAP ZAP Pop OS COSMIC VM',
  '-machine','q35,accel=kvm,smm=on','-cpu','host','-smp','4','-m','4608',
  '-drive','if=pflash,format=raw,readonly=on,file=/usr/share/edk2/ovmf/OVMF_CODE.fd',
  '-drive',f'if=pflash,format=raw,file={p}/OVMF_VARS-resume.fd',
@@ -14,6 +18,8 @@ args=['qemu-system-x86_64','-name','TAP ZAP Pop OS COSMIC VM',
  '-netdev','user,id=net0,hostfwd=tcp:127.0.0.1:22250-:22','-device','virtio-net-pci,netdev=net0',
  '-qmp','tcp:127.0.0.1:22251,server=on,wait=off',
  '-serial',f'file:{p}/serial.log','-monitor','none','-pidfile',str(p/'qemu.pid')]
+if options.firmware_directory:
+ args[1:1]=['-L',str(options.firmware_directory)]
 (p/'resume-launch-arguments.json').write_text(json.dumps(args,indent=2)+'\n')
 with (p/'qemu.log').open('ab') as log:
     proc=subprocess.Popen(args,stdin=subprocess.DEVNULL,stdout=log,stderr=log,start_new_session=True)

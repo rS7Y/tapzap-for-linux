@@ -1,0 +1,13 @@
+test_colour_off_and_clean_close (__main__.BridgeTests.test_colour_off_and_clean_close) ... ok
+test_command_timeout_remains_short_after_greeting (__main__.BridgeTests.test_command_timeout_remains_short_after_greeting) ... ok
+test_expired_owner_cannot_reapply_after_render_stall (__main__.BridgeTests.test_expired_owner_cannot_reapply_after_render_stall) ... ok
+test_killed_client_restores (__main__.BridgeTests.test_killed_client_restores) ... ok
+test_off_during_render_stall_cancels_pending_filter (__main__.BridgeTests.test_off_during_render_stall_cancels_pending_filter) ... ok
+test_render_stall_does_not_lose_filter_or_heartbeat (__main__.BridgeTests.test_render_stall_does_not_lose_filter_or_heartbeat) ... ok
+test_startup_accepts_slow_compositor_greeting (__main__.BridgeTests.test_startup_accepts_slow_compositor_greeting) ... ok
+test_stopped_client_expires (__main__.BridgeTests.test_stopped_client_expires) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 18.688s
+
+OK

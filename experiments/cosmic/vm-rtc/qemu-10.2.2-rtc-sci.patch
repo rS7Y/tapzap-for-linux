@@ -1,0 +1,177 @@
+diff --git a/include/hw/rtc/mc146818rtc.h b/include/hw/rtc/mc146818rtc.h
+--- a/include/hw/rtc/mc146818rtc.h
++++ b/include/hw/rtc/mc146818rtc.h
+@@ -32,6 +32,7 @@
+     uint64_t last_update;
+     int64_t offset;
+     qemu_irq irq;
++    qemu_irq alarm;
+     int it_shift;
+     /* periodic timer */
+     QEMUTimer *periodic_timer;
+diff --git a/hw/rtc/mc146818rtc.c b/hw/rtc/mc146818rtc.c
+--- a/hw/rtc/mc146818rtc.c
++++ b/hw/rtc/mc146818rtc.c
+@@ -420,6 +420,10 @@
+         s->cmos_data[RTC_REG_C] |= REG_C_IRQF;
+         qemu_irq_raise(s->irq);
+     }
++    /* ACPI fixed RTC events must also reach a running/s2idle guest. */
++    if ((new_irqs & REG_C_AF) && (s->cmos_data[RTC_REG_B] & REG_B_AIE)) {
++        qemu_irq_pulse(s->alarm);
++    }
+     check_update_timer(s);
+ }
+ 
+@@ -429,6 +433,7 @@
+     MC146818RtcState *s = opaque;
+     uint32_t old_period;
+     bool update_periodic_timer;
++    bool new_alarm_irq;
+ 
+     if ((addr & 1) == 0) {
+         s->cmos_index = data & 0x7f;
+@@ -494,6 +499,9 @@
+             check_update_timer(s);
+             break;
+         case RTC_REG_B:
++            new_alarm_irq = !(s->cmos_data[RTC_REG_B] & REG_B_AIE) &&
++                            (data & REG_B_AIE) &&
++                            (s->cmos_data[RTC_REG_C] & REG_C_AF);
+             update_periodic_timer = (s->cmos_data[RTC_REG_B] ^ data)
+                                        & REG_B_PIE;
+             old_period = rtc_periodic_clock_ticks(s);
+@@ -524,6 +532,9 @@
+                 qemu_irq_lower(s->irq);
+             }
+             s->cmos_data[RTC_REG_B] = data;
++            if (new_alarm_irq) {
++                qemu_irq_pulse(s->alarm);
++            }
+ 
+             if (update_periodic_timer) {
+                 periodic_timer_update(s, qemu_clock_get_ns(rtc_clock),
+@@ -924,6 +935,7 @@
+     object_property_add_tm(OBJECT(s), "date", rtc_get_date);
+ 
+     qdev_init_gpio_out(dev, &s->irq, 1);
++    qdev_init_gpio_out_named(dev, &s->alarm, "alarm", 1);
+ }
+ 
+ MC146818RtcState *mc146818_rtc_init(ISABus *bus, int base_year,
+diff --git a/hw/isa/lpc_ich9.c b/hw/isa/lpc_ich9.c
+--- a/hw/isa/lpc_ich9.c
++++ b/hw/isa/lpc_ich9.c
+@@ -679,6 +679,17 @@
+     .endianness = DEVICE_LITTLE_ENDIAN
+ };
+ 
++static void ich9_rtc_alarm(void *opaque, int n, int level)
++{
++    ICH9LPCState *lpc = opaque;
++    ACPIREGS *regs = &lpc->pm.acpi_regs;
++
++    if (level) {
++        regs->pm1.evt.sts |= ACPI_BITMASK_RT_CLOCK_STATUS;
++        regs->tmr.update_sci(regs);
++    }
++}
++
+ static void ich9_lpc_initfn(Object *obj)
+ {
+     ICH9LPCState *lpc = ICH9_LPC_DEVICE(obj);
+@@ -687,6 +698,7 @@
+     static const uint8_t acpi_disable_cmd = ICH9_APM_ACPI_DISABLE;
+ 
+     object_initialize_child(obj, "rtc", &lpc->rtc, TYPE_MC146818_RTC);
++    qdev_init_gpio_in_named(DEVICE(lpc), ich9_rtc_alarm, "rtc-alarm", 1);
+ 
+     qdev_init_gpio_out_named(DEVICE(lpc), lpc->gsi, ICH9_GPIO_GSI,
+                              IOAPIC_NUM_PINS);
+@@ -767,6 +779,9 @@
+     pci_bus_set_route_irq_fn(pci_bus, ich9_route_intx_pin_to_irq);
+ 
+     ich9_lpc_pm_init(lpc);
++    qdev_connect_gpio_out_named(DEVICE(&lpc->rtc), "alarm", 0,
++                               qdev_get_gpio_in_named(DEVICE(lpc),
++                                                     "rtc-alarm", 0));
+ }
+ 
+ static bool ich9_rst_cnt_needed(void *opaque)
+diff --git a/tests/qtest/rtc-test.c b/tests/qtest/rtc-test.c
+--- a/tests/qtest/rtc-test.c
++++ b/tests/qtest/rtc-test.c
+@@ -684,6 +684,58 @@
+                     NANOSECONDS_PER_SECOND * 0.5);
+ }
+ 
++static void acpi_alarm(void)
++{
++    /* Enable ICH9 ACPI at PMBASE 0x600, including the RTC fixed event. */
++    outl(0xcf8, 0x8000f840);
++    outl(0xcfc, 0x601);
++    outl(0xcf8, 0x8000f844);
++    outb(0xcfc, 0x80);
++    outw(0x604, 1);
++    outw(0x600, 0x400);
++    outw(0x602, 0x400);
++    set_datetime(REG_B_24H, 0x02, 0x04, 0x58, 0x02, 0x02, 0x2011);
++    cmos_write(RTC_HOURS_ALARM, 0x02);
++    cmos_write(RTC_MINUTES_ALARM, 0x04);
++    cmos_write(RTC_SECONDS_ALARM, 0x59);
++    cmos_read(RTC_REG_C);
++    cmos_write(RTC_REG_B, REG_B_24H | REG_B_AIE);
++    clock_step(1000000000LL);
++    g_assert_cmphex(inw(0x600) & 0x400, ==, 0x400);
++    g_assert_true(get_irq(9));
++    cmos_write(RTC_REG_B, REG_B_24H);
++    cmos_read(RTC_REG_C);
++    outw(0x600, 0x400);
++    g_assert_false(get_irq(9));
++    outw(0x602, 0);
++
++    /* A masked fixed event still latches; enabling it asserts SCI. */
++    set_datetime(REG_B_24H, 0x02, 0x04, 0x58, 0x02, 0x02, 0x2011);
++    cmos_write(RTC_REG_B, REG_B_24H | REG_B_AIE);
++    clock_step(1000000000LL);
++    g_assert_cmphex(inw(0x600) & 0x400, ==, 0x400);
++    g_assert_false(get_irq(9));
++    outw(0x602, 0x400);
++    g_assert_true(get_irq(9));
++    cmos_write(RTC_REG_B, REG_B_24H);
++    cmos_read(RTC_REG_C);
++    outw(0x600, 0x400);
++
++    /* AF can latch before AIE is enabled, just as for the legacy IRQ. */
++    set_datetime(REG_B_24H, 0x02, 0x04, 0x58, 0x02, 0x02, 0x2011);
++    clock_step(1000000000LL);
++    g_assert_cmphex(inw(0x600) & 0x400, ==, 0);
++    g_assert_false(get_irq(9));
++    cmos_write(RTC_REG_B, REG_B_24H | REG_B_AIE);
++    g_assert_cmphex(inw(0x600) & 0x400, ==, 0x400);
++    g_assert_true(get_irq(9));
++    cmos_write(RTC_REG_B, REG_B_24H);
++    cmos_read(RTC_REG_C);
++    outw(0x600, 0x400);
++    g_assert_false(get_irq(9));
++    outw(0x602, 0);
++}
++
+ int main(int argc, char **argv)
+ {
+     QTestState *s;
+@@ -691,12 +743,13 @@
+ 
+     g_test_init(&argc, &argv, NULL);
+ 
+-    s = qtest_start("-rtc clock=vm");
++    s = qtest_start("-machine q35 -rtc clock=vm");
+     qtest_irq_intercept_in(s, "ioapic");
+ 
+     qtest_add_func("/rtc/check-time/bcd", bcd_check_time);
+     qtest_add_func("/rtc/check-time/dec", dec_check_time);
+     qtest_add_func("/rtc/alarm/interrupt", alarm_time);
++    qtest_add_func("/rtc/alarm/acpi-sci", acpi_alarm);
+     qtest_add_func("/rtc/alarm/am-pm", am_pm_alarm);
+     qtest_add_func("/rtc/basic/dec-24h", basic_24h_dec);
+     qtest_add_func("/rtc/basic/bcd-24h", basic_24h_bcd);

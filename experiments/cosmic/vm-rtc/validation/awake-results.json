@@ -1,0 +1,39 @@
+{
+  "completed": true,
+  "count": 5,
+  "host_injected_wake_events": 0,
+  "boot_id": "f5f6e824-d131-40ed-8fc2-6d0f394d9548",
+  "acpi_alarm": "Y",
+  "cases": [
+    {
+      "elapsed_seconds": 5.800629969999989,
+      "returncode": 0,
+      "acpi_rtc_before": 0,
+      "acpi_rtc_after": 1
+    },
+    {
+      "elapsed_seconds": 5.079995388000015,
+      "returncode": 0,
+      "acpi_rtc_before": 1,
+      "acpi_rtc_after": 2
+    },
+    {
+      "elapsed_seconds": 5.908378529999993,
+      "returncode": 0,
+      "acpi_rtc_before": 2,
+      "acpi_rtc_after": 3
+    },
+    {
+      "elapsed_seconds": 5.888904233999995,
+      "returncode": 0,
+      "acpi_rtc_before": 3,
+      "acpi_rtc_after": 4
+    },
+    {
+      "elapsed_seconds": 5.895413281999993,
+      "returncode": 0,
+      "acpi_rtc_before": 4,
+      "acpi_rtc_after": 5
+    }
+  ]
+}

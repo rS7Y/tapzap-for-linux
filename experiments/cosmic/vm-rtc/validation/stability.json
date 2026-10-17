@@ -1,0 +1,12 @@
+{
+  "completed": true,
+  "boot_id": "f5f6e824-d131-40ed-8fc2-6d0f394d9548",
+  "compositor_pid": 1679,
+  "seconds_since_final_kernel_wake": 120.78332823700003,
+  "same_compositor_hash": true,
+  "power_key_events": 0,
+  "mem_sleep": "s2idle [deep]",
+  "keyboard_wakeup": "disabled",
+  "rtc_alarm_cleared": true,
+  "suspend_success": 3
+}

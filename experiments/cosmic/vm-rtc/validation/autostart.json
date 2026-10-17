@@ -1,0 +1,164 @@
+{
+  "completed": true,
+  "app_launched_by_test": false,
+  "boot_id": "f5f6e824-d131-40ed-8fc2-6d0f394d9548",
+  "start": {
+    "pid": 2147,
+    "argv": [
+      "/opt/tapzap-cosmic-prototype/libexec/tapzap-cosmic",
+      "gui"
+    ],
+    "environment": {
+      "WAYLAND_DISPLAY": "wayland-1",
+      "DISPLAY": ":0",
+      "XDG_RUNTIME_DIR": "/run/user/1001"
+    }
+  },
+  "autostart-on": {
+    "max_rgb": [
+      178,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  "heartbeat-retains-on": {
+    "max_rgb": [
+      178,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  "off-restored": {
+    "max_rgb": [
+      255,
+      255,
+      255
+    ],
+    "passed": true
+  },
+  "baseline_samples": [
+    {
+      "point": [
+        64,
+        96
+      ],
+      "off": [
+        31,
+        29,
+        39
+      ],
+      "expected_on": [
+        21.7,
+        0,
+        0
+      ],
+      "actual_on": [
+        22,
+        0,
+        0
+      ]
+    },
+    {
+      "point": [
+        128,
+        160
+      ],
+      "off": [
+        38,
+        33,
+        39
+      ],
+      "expected_on": [
+        26.599999999999998,
+        0,
+        0
+      ],
+      "actual_on": [
+        27,
+        0,
+        0
+      ]
+    },
+    {
+      "point": [
+        256,
+        224
+      ],
+      "off": [
+        65,
+        51,
+        49
+      ],
+      "expected_on": [
+        45.5,
+        0,
+        0
+      ],
+      "actual_on": [
+        45,
+        0,
+        0
+      ]
+    },
+    {
+      "point": [
+        128,
+        320
+      ],
+      "off": [
+        52,
+        42,
+        42
+      ],
+      "expected_on": [
+        36.4,
+        0,
+        0
+      ],
+      "actual_on": [
+        36,
+        0,
+        0
+      ]
+    },
+    {
+      "point": [
+        64,
+        480
+      ],
+      "off": [
+        61,
+        54,
+        52
+      ],
+      "expected_on": [
+        42.699999999999996,
+        0,
+        0
+      ],
+      "actual_on": [
+        43,
+        0,
+        0
+      ]
+    }
+  ],
+  "on-again": {
+    "max_rgb": [
+      178,
+      0,
+      0
+    ],
+    "passed": true
+  },
+  "quit-restored": {
+    "max_rgb": [
+      255,
+      255,
+      255
+    ],
+    "passed": true
+  }
+}

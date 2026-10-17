@@ -1,0 +1,37 @@
+{
+  "qemu_version": "10.2.2",
+  "qemu_sha256": "20e895bc3a40778b4ba6175874e5e4df190af8e40a0bb393468d1e7d6f575224",
+  "qemu_patch_sha256": "ebe47272c03c99e2d5143f9013f1089af950d34a386bf047e3f90907e7685dc4",
+  "native_binaries_unchanged": true,
+  "host_qemu_replaced": false,
+  "physical_hardware_validated": false,
+  "boot_id": "f5f6e824-d131-40ed-8fc2-6d0f394d9548",
+  "tests": {
+    "q35_rtc": 16,
+    "legacy_rtc": 15,
+    "ich9": 1,
+    "tco": 11,
+    "controller": 16,
+    "bridge": 8,
+    "repository": 217,
+    "public_source": 35,
+    "awake_alarms": 5,
+    "lifecycle_runs": 3,
+    "cases_per_lifecycle": 13,
+    "drm_allocations_per_lifecycle": 256
+  },
+  "compile_options": [
+    "--target-list=x86_64-softmmu",
+    "--without-default-features",
+    "--enable-kvm",
+    "--disable-tcg",
+    "--enable-curl",
+    "--enable-slirp",
+    "--enable-pixman",
+    "--disable-fdt",
+    "--disable-docs",
+    "--disable-tools",
+    "--disable-werror",
+    "--disable-download"
+  ]
+}

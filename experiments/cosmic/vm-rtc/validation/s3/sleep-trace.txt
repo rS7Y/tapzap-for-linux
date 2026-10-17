@@ -1,0 +1,58 @@
+# tracer: nop
+#
+# entries-in-buffer/entries-written: 46/46   #P:4
+#
+#                                _-----=> irqs-off/BH-disabled
+#                               / _----=> need-resched
+#                              | / _---=> hardirq/softirq
+#                              || / _--=> preempt-depth
+#                              ||| / _-=> migrate-disable
+#                              |||| /     delay
+#           TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
+#              | |         |   |||||     |         |
+   systemd-sleep-4778    [000] .....   244.252725: suspend_resume: suspend_enter[3] begin
+   systemd-sleep-4778    [000] .....   244.252726: suspend_resume: sync_filesystems[0] begin
+   systemd-sleep-4778    [001] .....   244.380381: suspend_resume: sync_filesystems[0] end
+   systemd-sleep-4778    [001] .....   244.380503: suspend_resume: freeze_processes[0] begin
+   systemd-sleep-4778    [001] .....   244.463152: suspend_resume: freeze_processes[0] end
+   systemd-sleep-4778    [001] .....   244.463153: suspend_resume: suspend_enter[3] end
+   systemd-sleep-4778    [001] .....   244.463277: suspend_resume: dpm_prepare[2] begin
+   systemd-sleep-4778    [001] .....   244.463368: suspend_resume: dpm_prepare[2] end
+   systemd-sleep-4778    [001] .....   244.463369: suspend_resume: dpm_suspend[2] begin
+   systemd-sleep-4778    [003] .....   244.472436: suspend_resume: dpm_suspend[2] end
+   systemd-sleep-4778    [003] .....   244.472437: suspend_resume: dpm_suspend_late[2] begin
+   systemd-sleep-4778    [003] .....   244.472746: suspend_resume: dpm_suspend_late[2] end
+   systemd-sleep-4778    [003] .....   244.472822: suspend_resume: dpm_suspend_noirq[2] begin
+   systemd-sleep-4778    [002] .....   244.508418: suspend_resume: dpm_suspend_noirq[2] end
+   systemd-sleep-4778    [002] .....   244.508768: suspend_resume: CPU_OFF[3] begin
+   systemd-sleep-4778    [002] .l...   244.511609: suspend_resume: CPU_OFF[3] end
+   systemd-sleep-4778    [002] .l...   244.511610: suspend_resume: CPU_OFF[2] begin
+   systemd-sleep-4778    [000] .l...   244.514558: suspend_resume: CPU_OFF[2] end
+   systemd-sleep-4778    [000] .l...   244.514559: suspend_resume: CPU_OFF[1] begin
+   systemd-sleep-4778    [000] .l...   244.516893: suspend_resume: CPU_OFF[1] end
+   systemd-sleep-4778    [000] dl...   244.516894: suspend_resume: syscore_suspend[0] begin
+   systemd-sleep-4778    [000] dl...   244.516911: suspend_resume: syscore_suspend[0] end
+   systemd-sleep-4778    [000] dl...   244.516911: suspend_resume: machine_suspend[3] begin
+   systemd-sleep-4778    [000] dl...   244.516911: suspend_resume: acpi_suspend[3] begin
+   systemd-sleep-4778    [000] dl...   244.516911: suspend_resume: acpi_suspend[3] end
+   systemd-sleep-4778    [000] dl...   244.516911: suspend_resume: machine_suspend[3] end
+   systemd-sleep-4778    [000] dl...   244.516911: suspend_resume: syscore_resume[0] begin
+   systemd-sleep-4778    [000] dl...   252.206000: suspend_resume: syscore_resume[0] end
+   systemd-sleep-4778    [000] .....   252.206410: suspend_resume: CPU_ON[1] begin
+   systemd-sleep-4778    [000] .....   252.207779: suspend_resume: CPU_ON[1] end
+   systemd-sleep-4778    [000] .....   252.207782: suspend_resume: CPU_ON[2] begin
+   systemd-sleep-4778    [000] .....   252.208595: suspend_resume: CPU_ON[2] end
+   systemd-sleep-4778    [000] .....   252.208597: suspend_resume: CPU_ON[3] begin
+   systemd-sleep-4778    [000] .....   252.209405: suspend_resume: CPU_ON[3] end
+   systemd-sleep-4778    [000] .....   252.209756: suspend_resume: dpm_resume_noirq[16] begin
+   systemd-sleep-4778    [000] .....   252.221348: suspend_resume: dpm_resume_noirq[16] end
+   systemd-sleep-4778    [000] .....   252.221385: suspend_resume: dpm_resume_early[16] begin
+   systemd-sleep-4778    [000] .....   252.221645: suspend_resume: dpm_resume_early[16] end
+   systemd-sleep-4778    [000] .....   252.221647: suspend_resume: dpm_resume[16] begin
+   systemd-sleep-4778    [000] .....   252.229288: suspend_resume: dpm_resume[16] end
+   systemd-sleep-4778    [000] .....   252.229288: suspend_resume: dpm_complete[16] begin
+   systemd-sleep-4778    [000] .....   252.229379: suspend_resume: dpm_complete[16] end
+   systemd-sleep-4778    [000] .....   252.229379: suspend_resume: console_resume_all[3] begin
+   systemd-sleep-4778    [000] .....   252.231785: suspend_resume: console_resume_all[3] end
+   systemd-sleep-4778    [000] .....   252.231802: suspend_resume: thaw_processes[0] begin
+   systemd-sleep-4778    [003] .....   252.235464: suspend_resume: thaw_processes[0] end

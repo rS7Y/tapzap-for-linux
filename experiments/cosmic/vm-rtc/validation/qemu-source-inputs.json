@@ -1,0 +1,9 @@
+{
+  "gitlab_archive_sha256": "a047e169ddf82ee8b023b754e465ad9b2e632fa1aa52ff786eb9df72e5de7d40",
+  "official_archive_sha256": "784b296ff29c1417aa72323abcb2d2ea9ab9771724f577dcd785c3b04f21e176",
+  "original_changed_files": {
+    "hw/rtc/mc146818rtc.c": "6aa2d2b86170485be5b11f09e93507dbd5bee582225e3f48f56abe95f637deeb",
+    "hw/isa/lpc_ich9.c": "81a536c3939853b9ce97919eb18df92d4bdef47b16a912556fa5941d48fb485c",
+    "include/hw/rtc/mc146818rtc.h": "9fe4acf29fe78f4e1a0b4c66cb977094dfa672791fbcb7aefede59b29892af44"
+  }
+}

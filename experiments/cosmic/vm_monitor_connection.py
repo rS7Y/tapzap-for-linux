@@ -3,7 +3,7 @@
 GDB calls dpy_set_ui_info; no compositor memory or RGB values are modified.
 The QEMUUIInfo layout is from the exact QEMU 10.2.2 public console.h.
 """
-import argparse,json,pathlib,subprocess,tempfile,time
+import argparse,json,pathlib,re,subprocess,tempfile,time
 p=pathlib.Path('/home/foton/TAPZAP-POP-20261017')
 parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('state',choices=['connected','disconnected']);a=parser.parse_args()
 pid=int((p/'qemu.pid').read_text());argv=pathlib.Path('/proc',str(pid),'cmdline').read_bytes().split(b'\0')
@@ -11,7 +11,7 @@ assert any(str(p/'writable.img').encode() in x for x in argv), 'Not the dedicate
 assert b'tcp:127.0.0.1:22251,server=on,wait=off' in argv
 executable=pathlib.Path('/proc',str(pid),'exe').resolve()
 assert executable.name=='qemu-system-x86_64',executable
-assert 'version 10.2.2 ' in subprocess.check_output([str(executable),'--version'],text=True)
+assert re.search(r'\bversion 10\.2\.2(?:\s|$)',subprocess.check_output([str(executable),'--version'],text=True))
 w,h=(1280,800) if a.state=='connected' else (0,0)
 commands=f'''set pagination off
 set confirm off

@@ -7,7 +7,10 @@ parser.add_argument('--ipc-name',default='tapzap.sock')
 sleep=parser.add_mutually_exclusive_group()
 sleep.add_argument("--suspend",action="store_true",help="S3; requires the host wake watcher")
 sleep.add_argument("--s2idle",action="store_true",help="Freeze; requires an enabled lab PS/2 keyboard and host WakeUp key")
+parser.add_argument('--rtc-wake',action='store_true',help='Arm a guest RTC alarm instead of requiring a host wake event')
 options=parser.parse_args()
+if options.rtc_wake and not (options.suspend or options.s2idle):
+ parser.error('--rtc-wake requires --suspend or --s2idle')
 if socket.gethostname()!="tapzap-pop-vm" or pwd.getpwuid(os.getuid()).pw_name!="lab":
  raise RuntimeError("Run only as lab inside the dedicated Pop VM")
 from PIL import Image
@@ -119,8 +122,8 @@ try:
   success_before=int(pathlib.Path('/sys/power/suspend_stats/success').read_text())
   trace='/sys/kernel/tracing/instances/tapzap-'+capture_id
   subprocess.run(['sudo','sh','-c','mkdir '+trace+' && echo boot > '+trace+'/trace_clock && echo 1 > '+trace+'/events/power/suspend_resume/enable && echo 1 > '+trace+'/tracing_on'],check=True,timeout=5)
-  report['wake_method']='host keyboard WakeUp key' if options.s2idle else 'host QMP system_wakeup'
-  if options.s2idle:
+  report['wake_method']='guest RTC alarm' if options.rtc_wake else ('host keyboard WakeUp key' if options.s2idle else 'host QMP system_wakeup')
+  if options.s2idle and not options.rtc_wake:
    report['keyboard_wakeup']=pathlib.Path('/sys/devices/platform/i8042/serio0/power/wakeup').read_text().strip()
    assert report['keyboard_wakeup']=='enabled',report
   print('SUSPEND-REQUESTED',flush=True);(p/'suspend-requested').write_text(str(time.time()))
@@ -134,8 +137,16 @@ try:
   report['mem_sleep']={'before':original_mode,'selected':selected_mode}
   def sleep_journal():
    return subprocess.check_output(['sudo','journalctl','-k','--since','@'+str(wall),'--no-pager','-o','short-monotonic'],text=True,timeout=10)
+  rtc_armed=False
   try:
    subprocess.run(['sudo','sh','-c','echo '+selected_mode+' > /sys/power/mem_sleep'],check=True,timeout=5)
+   if options.rtc_wake:
+    rtc=pathlib.Path('/sys/class/rtc/rtc0')
+    assert (rtc/'device/power/wakeup').read_text().strip()=='enabled', 'RTC wake is disabled'
+    assert not (rtc/'wakealarm').read_text().strip(), 'Do not replace an existing lab alarm'
+    rtc_armed=True
+    subprocess.run(['sudo','rtcwake','-m','no','-s','8'],check=True,timeout=5)
+    report['rtc_alarm_epoch']=int((rtc/'wakealarm').read_text())
    subprocess.run(['sudo','systemctl','suspend'],check=True,timeout=30)
    # systemctl suspend only enqueues the operation. Keep the GUI alive and
    # wait for the actual kernel entry/exit before sampling a resumed frame.
@@ -149,16 +160,26 @@ try:
    elapsed=time.clock_gettime(time.CLOCK_BOOTTIME)-boot
    awake=time.monotonic()-mono
    report['sleep_timing']={'boottime_seconds':elapsed,'monotonic_seconds':awake,'suspended_seconds':elapsed-awake}
-   journal=sleep_journal()
-   (p/'sleep-kernel.log').write_text(journal)
-   subprocess.run(['sudo','sh','-c','echo 0 > '+trace+'/tracing_on'],check=True,timeout=5)
-   (p/'sleep-trace.txt').write_text(subprocess.check_output(['sudo','cat',trace+'/trace'],text=True,timeout=5))
-   subprocess.run(['sudo','rmdir',trace],check=True,timeout=5)
-   subprocess.run(['sudo','sh','-c','echo '+original_mode+' > /sys/power/mem_sleep'],check=True,timeout=5)
-   report['mem_sleep']['restored']=pathlib.Path('/sys/power/mem_sleep').read_text().strip()
+   try:
+    if rtc_armed:
+     subprocess.run(['sudo','rtcwake','-m','disable'],check=True,timeout=5)
+   finally:
+    try:
+     journal=sleep_journal()
+     (p/'sleep-kernel.log').write_text(journal)
+     subprocess.run(['sudo','sh','-c','echo 0 > '+trace+'/tracing_on'],check=True,timeout=5)
+     (p/'sleep-trace.txt').write_text(subprocess.check_output(['sudo','cat',trace+'/trace'],text=True,timeout=5))
+    finally:
+     try:
+      subprocess.run(['sudo','rmdir',trace],check=True,timeout=5)
+     finally:
+      subprocess.run(['sudo','sh','-c','echo '+original_mode+' > /sys/power/mem_sleep'],check=True,timeout=5)
+      report['mem_sleep']['restored']=pathlib.Path('/sys/power/mem_sleep').read_text().strip()
   report['suspend_success_before']=success_before
   report['suspend_success_after']=int(pathlib.Path('/sys/power/suspend_stats/success').read_text())
   assert report['suspend_success_after']==success_before+1,report
+  if options.rtc_wake:
+   assert report['sleep_timing']['boottime_seconds']<18, 'RTC did not resume within its alarm deadline'
   if options.s2idle:
    # No cpuidle driver: monotonic can advance while userspace is frozen.
    import re

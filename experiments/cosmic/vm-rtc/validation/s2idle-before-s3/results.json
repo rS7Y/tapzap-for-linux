@@ -1,0 +1,1834 @@
+{
+  "completed": true,
+  "capture": "QEMU virtio virtual scanout for each head",
+  "physical_hardware_validated": false,
+  "cases": [
+    {
+      "case": "both-outputs-red",
+      "heads": [
+        {
+          "head": 0,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            0,
+            0
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                0,
+                0
+              ],
+              "actual": [
+                31,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                0,
+                0
+              ],
+              "actual": [
+                38,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                0,
+                0
+              ],
+              "actual": [
+                65,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                0,
+                0
+              ],
+              "actual": [
+                52,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                0,
+                0
+              ],
+              "actual": [
+                61,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "head": 1,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            0,
+            0
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                0,
+                0
+              ],
+              "actual": [
+                31,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                0,
+                0
+              ],
+              "actual": [
+                38,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                0,
+                0
+              ],
+              "actual": [
+                65,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                0,
+                0
+              ],
+              "actual": [
+                52,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                0,
+                0
+              ],
+              "actual": [
+                61,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "secondary-disabled-primary-red",
+      "heads": [
+        {
+          "head": 0,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            0,
+            0
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                0,
+                0
+              ],
+              "actual": [
+                31,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                0,
+                0
+              ],
+              "actual": [
+                38,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                0,
+                0
+              ],
+              "actual": [
+                65,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                0,
+                0
+              ],
+              "actual": [
+                52,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                0,
+                0
+              ],
+              "actual": [
+                61,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "secondary-enabled-red",
+      "heads": [
+        {
+          "head": 0,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            0,
+            0
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                0,
+                0
+              ],
+              "actual": [
+                31,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                0,
+                0
+              ],
+              "actual": [
+                38,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                0,
+                0
+              ],
+              "actual": [
+                65,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                0,
+                0
+              ],
+              "actual": [
+                52,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                0,
+                0
+              ],
+              "actual": [
+                61,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "head": 1,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            0,
+            0
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                0,
+                0
+              ],
+              "actual": [
+                31,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                0,
+                0
+              ],
+              "actual": [
+                38,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                0,
+                0
+              ],
+              "actual": [
+                65,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                0,
+                0
+              ],
+              "actual": [
+                52,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                0,
+                0
+              ],
+              "actual": [
+                61,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "resized-primary-red",
+      "heads": [
+        {
+          "head": 0,
+          "size": [
+            1024,
+            768
+          ],
+          "max_rgb": [
+            255,
+            0,
+            0
+          ],
+          "samples": []
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "restored-mode-red",
+      "heads": [
+        {
+          "head": 0,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            0,
+            0
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                0,
+                0
+              ],
+              "actual": [
+                31,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                0,
+                0
+              ],
+              "actual": [
+                38,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                0,
+                0
+              ],
+              "actual": [
+                65,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                0,
+                0
+              ],
+              "actual": [
+                52,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                0,
+                0
+              ],
+              "actual": [
+                61,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "monitor-disconnected-primary-red",
+      "heads": [
+        {
+          "head": 0,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            0,
+            0
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                0,
+                0
+              ],
+              "actual": [
+                31,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                0,
+                0
+              ],
+              "actual": [
+                38,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                0,
+                0
+              ],
+              "actual": [
+                65,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                0,
+                0
+              ],
+              "actual": [
+                52,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                0,
+                0
+              ],
+              "actual": [
+                61,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "monitor-reconnected-both-red",
+      "heads": [
+        {
+          "head": 0,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            0,
+            0
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                0,
+                0
+              ],
+              "actual": [
+                31,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                0,
+                0
+              ],
+              "actual": [
+                38,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                0,
+                0
+              ],
+              "actual": [
+                65,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                0,
+                0
+              ],
+              "actual": [
+                52,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                0,
+                0
+              ],
+              "actual": [
+                61,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "head": 1,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            0,
+            0
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                0,
+                0
+              ],
+              "actual": [
+                31,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                0,
+                0
+              ],
+              "actual": [
+                38,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                0,
+                0
+              ],
+              "actual": [
+                65,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                0,
+                0
+              ],
+              "actual": [
+                52,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                0,
+                0
+              ],
+              "actual": [
+                61,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "resume-retains-red",
+      "heads": [
+        {
+          "head": 0,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            0,
+            0
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                0,
+                0
+              ],
+              "actual": [
+                31,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                0,
+                0
+              ],
+              "actual": [
+                38,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                0,
+                0
+              ],
+              "actual": [
+                65,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                0,
+                0
+              ],
+              "actual": [
+                52,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                0,
+                0
+              ],
+              "actual": [
+                61,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "head": 1,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            0,
+            0
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                0,
+                0
+              ],
+              "actual": [
+                31,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                0,
+                0
+              ],
+              "actual": [
+                38,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                0,
+                0
+              ],
+              "actual": [
+                65,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                0,
+                0
+              ],
+              "actual": [
+                52,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                0,
+                0
+              ],
+              "actual": [
+                61,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "resume-resize-red",
+      "heads": [
+        {
+          "head": 0,
+          "size": [
+            1024,
+            768
+          ],
+          "max_rgb": [
+            255,
+            0,
+            0
+          ],
+          "samples": []
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "resume-restored-mode-red",
+      "heads": [
+        {
+          "head": 0,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            0,
+            0
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                0,
+                0
+              ],
+              "actual": [
+                31,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                0,
+                0
+              ],
+              "actual": [
+                38,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                0,
+                0
+              ],
+              "actual": [
+                65,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                0,
+                0
+              ],
+              "actual": [
+                52,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                0,
+                0
+              ],
+              "actual": [
+                61,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "off-restores-both",
+      "heads": [
+        {
+          "head": 0,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            255,
+            255
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                29,
+                39
+              ],
+              "actual": [
+                31,
+                29,
+                39
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                33,
+                39
+              ],
+              "actual": [
+                38,
+                33,
+                39
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                51,
+                49
+              ],
+              "actual": [
+                65,
+                51,
+                49
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                42,
+                42
+              ],
+              "actual": [
+                52,
+                42,
+                42
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                54,
+                52
+              ],
+              "actual": [
+                61,
+                54,
+                52
+              ]
+            }
+          ]
+        },
+        {
+          "head": 1,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            255,
+            255
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                29,
+                39
+              ],
+              "actual": [
+                31,
+                29,
+                39
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                33,
+                39
+              ],
+              "actual": [
+                38,
+                33,
+                39
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                51,
+                49
+              ],
+              "actual": [
+                65,
+                51,
+                49
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                42,
+                42
+              ],
+              "actual": [
+                52,
+                42,
+                42
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                54,
+                52
+              ],
+              "actual": [
+                61,
+                54,
+                52
+              ]
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "on-again-both",
+      "heads": [
+        {
+          "head": 0,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            0,
+            0
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                0,
+                0
+              ],
+              "actual": [
+                31,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                0,
+                0
+              ],
+              "actual": [
+                38,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                0,
+                0
+              ],
+              "actual": [
+                65,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                0,
+                0
+              ],
+              "actual": [
+                52,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                0,
+                0
+              ],
+              "actual": [
+                61,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "head": 1,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            0,
+            0
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                0,
+                0
+              ],
+              "actual": [
+                31,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                0,
+                0
+              ],
+              "actual": [
+                38,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                0,
+                0
+              ],
+              "actual": [
+                65,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                0,
+                0
+              ],
+              "actual": [
+                52,
+                0,
+                0
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                0,
+                0
+              ],
+              "actual": [
+                61,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case": "quit-restores-both",
+      "heads": [
+        {
+          "head": 0,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            255,
+            255
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                29,
+                39
+              ],
+              "actual": [
+                31,
+                29,
+                39
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                33,
+                39
+              ],
+              "actual": [
+                38,
+                33,
+                39
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                51,
+                49
+              ],
+              "actual": [
+                65,
+                51,
+                49
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                42,
+                42
+              ],
+              "actual": [
+                52,
+                42,
+                42
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                54,
+                52
+              ],
+              "actual": [
+                61,
+                54,
+                52
+              ]
+            }
+          ]
+        },
+        {
+          "head": 1,
+          "size": [
+            1280,
+            800
+          ],
+          "max_rgb": [
+            255,
+            255,
+            255
+          ],
+          "samples": [
+            {
+              "point": [
+                64,
+                96
+              ],
+              "expected": [
+                31,
+                29,
+                39
+              ],
+              "actual": [
+                31,
+                29,
+                39
+              ]
+            },
+            {
+              "point": [
+                128,
+                160
+              ],
+              "expected": [
+                38,
+                33,
+                39
+              ],
+              "actual": [
+                38,
+                33,
+                39
+              ]
+            },
+            {
+              "point": [
+                256,
+                224
+              ],
+              "expected": [
+                65,
+                51,
+                49
+              ],
+              "actual": [
+                65,
+                51,
+                49
+              ]
+            },
+            {
+              "point": [
+                128,
+                320
+              ],
+              "expected": [
+                52,
+                42,
+                42
+              ],
+              "actual": [
+                52,
+                42,
+                42
+              ]
+            },
+            {
+              "point": [
+                64,
+                480
+              ],
+              "expected": [
+                61,
+                54,
+                52
+              ],
+              "actual": [
+                61,
+                54,
+                52
+              ]
+            }
+          ]
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "drm_device": "/dev/dri/card1",
+  "outputs": [
+    "Virtual-1",
+    "Virtual-2"
+  ],
+  "sleep_mode": "s2idle/freeze",
+  "acpi_before": {
+    "pmbase": 1537,
+    "acpi_control": 128
+  },
+  "wake_method": "guest RTC alarm",
+  "mem_sleep": {
+    "before": "deep",
+    "selected": "s2idle",
+    "restored": "s2idle [deep]"
+  },
+  "rtc_alarm_epoch": 1792267059,
+  "sleep_timing": {
+    "boottime_seconds": 8.971348782000007,
+    "monotonic_seconds": 8.971354913999988,
+    "suspended_seconds": -6.1319999815623305e-06
+  },
+  "suspend_success_before": 0,
+  "suspend_success_after": 1,
+  "kernel_sleep_trace_seconds": 6.508607000000012,
+  "acpi_after": {
+    "pmbase": 1537,
+    "acpi_control": 128
+  },
+  "lab_scene_unlock_session": "1",
+  "drm_allocations_after_resume": 256
+}

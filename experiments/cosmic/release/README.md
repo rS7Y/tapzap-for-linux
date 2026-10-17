@@ -44,9 +44,12 @@ For a QEMU VM, place virtio-GPU behind a PCIe root port and enable
 resources during sleep. Use UEFI/OVMF with SMM enabled; the tested BIOS VM lost
 its ACPI PM registers after S3. The VM has no CPU idle driver, so s2idle tests
 use kernel trace and success-counter evidence rather than assuming its
-monotonic clock stops. S2idle uses the virtual keyboard WakeUp key, with its wake capability enabled
-for the lab. The ACPI power button also requested a delayed desktop shutdown;
-the virtual RTC alarm alone did not wake the guest. Both modes are selected
+monotonic clock stops. The original stock-QEMU s2idle validation used the virtual
+keyboard WakeUp key with its lab wake capability enabled. The ACPI power button
+also requested a delayed desktop shutdown; the original RTC alarm did not wake
+the guest. The [isolated QEMU RTC follow-up](../vm-rtc/README.md) fixes that virtual
+alarm delivery and passes both sleep modes using only guest RTC alarms. TAP ZAP's
+published native binaries are unchanged. Both modes are selected
 through mem_sleep and systemctl suspend, then the prior mode is restored. VM capture uses bounded HTTP on host loopback; a 9p
 capture mount can hang across sleep. These are VM configuration requirements,
 not changes to a customer's kernel or stock COSMIC package.

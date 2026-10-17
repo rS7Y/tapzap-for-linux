@@ -1,0 +1,41 @@
+TAP version 13
+# random seed: R02S355f611e73cd09f501c822db99d7880e
+1..11
+# Start of x86_64 tests
+# Start of tco tests
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-11203.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-11203.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -machine q35 -global ICH9-LPC.noreboot=true  -accel qtest
+ok 1 /x86_64/tco/defaults
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-11203.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-11203.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -machine q35 -global ICH9-LPC.noreboot=true  -accel qtest
+ok 2 /x86_64/tco/counter
+# Start of timeout tests
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-11203.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-11203.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -machine q35 -global ICH9-LPC.noreboot=true  -accel qtest
+ok 3 /x86_64/tco/timeout/no_action
+# Start of no_action tests
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-11203.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-11203.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -machine q35 -global ICH9-LPC.noreboot=true  -accel qtest
+ok 4 /x86_64/tco/timeout/no_action/max
+# End of no_action tests
+# End of timeout tests
+# Start of second_timeout tests
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-11203.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-11203.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -machine q35  -watchdog-action pause -accel qtest
+ok 5 /x86_64/tco/second_timeout/pause
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-11203.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-11203.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -machine q35  -watchdog-action reset -accel qtest
+ok 6 /x86_64/tco/second_timeout/reset
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-11203.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-11203.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -machine q35  -watchdog-action shutdown -accel qtest
+ok 7 /x86_64/tco/second_timeout/shutdown
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-11203.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-11203.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -machine q35  -watchdog-action none -accel qtest
+ok 8 /x86_64/tco/second_timeout/none
+# End of second_timeout tests
+# Start of tco1_control tests
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-11203.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-11203.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -machine q35 -global ICH9-LPC.noreboot=true  -accel qtest
+ok 9 /x86_64/tco/tco1_control/bits
+# End of tco1_control tests
+# Start of tco1_status tests
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-11203.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-11203.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -machine q35 -global ICH9-LPC.noreboot=true  -accel qtest
+ok 10 /x86_64/tco/tco1_status/bits
+# End of tco1_status tests
+# Start of tco2_status tests
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-11203.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-11203.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -machine q35 -global ICH9-LPC.noreboot=true  -accel qtest
+ok 11 /x86_64/tco/tco2_status/bits
+# End of tco2_status tests
+# End of tco tests
+# End of x86_64 tests

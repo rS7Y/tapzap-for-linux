@@ -1,0 +1,6 @@
+{
+  "completed": true,
+  "host_injected_wake_events": 0,
+  "run": "pop-rtc-s2idle-after-s3",
+  "mode": "s2idle"
+}

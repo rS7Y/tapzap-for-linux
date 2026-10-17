@@ -1,0 +1,20 @@
+
+running 16 tests
+test confirmed_sleep_preserves_only_the_remaining_awake_lease ... ok
+test connection_applies_and_disconnect_restores ... ok
+test consumed_sleep_count_cannot_cover_a_later_stall ... ok
+test invalid_values_are_rejected ... ok
+test new_client_can_connect_immediately_after_previous_owner_closes ... ok
+test invalid_and_oversized_input_restore_neutral ... ok
+test ping_retains_gains_and_off_restores_identity ... ok
+test partial_commands_do_not_change_output ... ok
+test resumed_owner_can_heartbeat_and_off_still_cancels ... ok
+test set_applies_finite_rgb_gains ... ok
+test second_owner_is_rejected ... ok
+test unconfirmed_gaps_and_old_sleep_counts_do_not_extend_ownership ... ok
+test worker_shutdown_closes_owner_and_removes_only_its_socket ... ok
+test heartbeat_timeout_restores_even_if_client_remains_alive ... ok
+test nonexpired_resume_waits_before_consuming_the_sleep_gap ... ok
+test short_sleep_waits_for_late_counter_when_lease_would_expire ... ok
+
+test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.40s

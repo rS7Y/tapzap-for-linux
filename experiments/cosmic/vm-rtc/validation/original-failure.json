@@ -1,0 +1,12 @@
+{
+  "completed_diagnostic": true,
+  "passed": false,
+  "awake_timeout_exit_code": 124,
+  "awake_elapsed_seconds": 12.03251616099999,
+  "awake_alarm_seconds": 5,
+  "awake_fixed_events_before": 0,
+  "awake_fixed_events_after": 0,
+  "s2idle_required_host_wake": true,
+  "s2idle_elapsed_seconds": 21.522222723000027,
+  "s2idle_fixed_events_after": 0
+}

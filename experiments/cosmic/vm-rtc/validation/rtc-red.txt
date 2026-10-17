@@ -1,0 +1,10 @@
+TAP version 13
+# random seed: R02Sfc4e01cf4367992ea93217e44289987a
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-10804.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-10804.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -machine q35 -rtc clock=vm -accel qtest
+# Start of x86_64 tests
+# Start of rtc tests
+# Start of alarm tests
+**
+ERROR:../qemu-rtc-source/tests/qtest/rtc-test.c:704:acpi_alarm: assertion failed (inw(0x600) & 0x400 == 0x400): (0x00000000 == 0x00000400)
+not ok /x86_64/rtc/alarm/acpi-sci - ERROR:../qemu-rtc-source/tests/qtest/rtc-test.c:704:acpi_alarm: assertion failed (inw(0x600) & 0x400 == 0x400): (0x00000000 == 0x00000400)
+Bail out!

@@ -1,0 +1,37 @@
+TAP version 13
+# random seed: R02Sbc554731ebe1d4624df76616fd828546
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-11319.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-11319.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -rtc clock=vm -accel qtest
+1..15
+# Start of x86_64 tests
+# Start of rtc tests
+# Start of check-time tests
+ok 1 /x86_64/rtc/check-time/bcd
+ok 2 /x86_64/rtc/check-time/dec
+# End of check-time tests
+# Start of alarm tests
+ok 3 /x86_64/rtc/alarm/interrupt
+ok 4 /x86_64/rtc/alarm/am-pm
+# End of alarm tests
+# Start of basic tests
+ok 5 /x86_64/rtc/basic/dec-24h
+ok 6 /x86_64/rtc/basic/bcd-24h
+ok 7 /x86_64/rtc/basic/dec-12h
+ok 8 /x86_64/rtc/basic/bcd-12h
+# End of basic tests
+# Start of set-year tests
+ok 9 /x86_64/rtc/set-year/20xx
+ok 10 /x86_64/rtc/set-year/1980
+# End of set-year tests
+# Start of update tests
+ok 11 /x86_64/rtc/update/register_b_set_flag
+ok 12 /x86_64/rtc/update/divider-reset
+ok 13 /x86_64/rtc/update/uip-stuck
+# End of update tests
+# Start of misc tests
+ok 14 /x86_64/rtc/misc/fuzz-registers
+# End of misc tests
+# Start of periodic tests
+ok 15 /x86_64/rtc/periodic/interrupt
+# End of periodic tests
+# End of rtc tests
+# End of x86_64 tests

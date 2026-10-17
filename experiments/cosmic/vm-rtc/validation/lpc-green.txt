@@ -1,0 +1,9 @@
+TAP version 13
+# random seed: R02S0ee3362b0d5224a5be72595d64f6ca9c
+1..1
+# Start of x86_64 tests
+# Start of ich9 tests
+# starting QEMU: exec ./qemu-system-x86_64 -qtest unix:/tmp/qtest-11196.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-11196.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -run-with exit-with-parent=on -M pc-q35-5.0 -nographic -monitor none -serial none -accel qtest
+ok 1 /x86_64/ich9/test_lp1878642_pci_bus_get_irq_level_assert
+# End of ich9 tests
+# End of x86_64 tests

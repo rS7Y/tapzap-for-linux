@@ -1,0 +1,8 @@
+cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+7.0.11-76070011-generic
+NAME="Pop!_OS"
+VERSION="24.04 LTS"
+ID=pop
+Python 3.12.3
+20e895bc3a40778b4ba6175874e5e4df190af8e40a0bb393468d1e7d6f575224  /home/lab/qemu-rtc-build/qemu-system-x86_64
+7f3875c8c5d98585418e6da5c67e21fa2b19eeb49384434af6645bcbdfdc0cfd  /home/lab/prototype/control.rs
