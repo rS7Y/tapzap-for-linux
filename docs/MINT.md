@@ -27,11 +27,11 @@ Download the TAR.GZ, `SHA256SUMS.txt` and `BUILD-INFO.json` together from the [M
 From the folder containing the download:
 
 ```sh
-sha256sum -c SHA256SUMS.txt
-tar -xzf tapzap-linux-mint-22.3-cinnamon-x86_64-20261015.tar.gz
-cd tapzap-linux-mint-22.3-cinnamon-x86_64
-sha256sum -c SHA256SUMS
-./bin/tapzap selftest
+sha256sum -c SHA256SUMS.txt &&
+tar -xzf tapzap-linux-mint-22.3-cinnamon-x86_64-20261015.tar.gz &&
+cd tapzap-linux-mint-22.3-cinnamon-x86_64 &&
+sha256sum -c SHA256SUMS &&
+./bin/tapzap selftest &&
 ./bin/tapzap gui
 ```
 
