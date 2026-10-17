@@ -1,0 +1,11 @@
+{
+  "completed": true,
+  "runtime_tested_deb_sha256": "c3bd4a3faac9832029b5efb2c495925342b5caf62b7aaace5468640309c1b4c3",
+  "distribution_deb_sha256": "bba3956e5e8b085876fd8672eb3ca7cf24f8a1d156ab2121c54a22e56ca33a88",
+  "changed_payloads": [
+    "./usr/share/doc/tapzap-cosmic-prototype/COSMIC-SESSION-COPYRIGHT",
+    "./usr/share/doc/tapzap-cosmic-prototype/README.md"
+  ],
+  "all_other_payloads_and_modes_identical": true,
+  "control_metadata_identical": true
+}

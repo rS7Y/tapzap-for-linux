@@ -6,7 +6,7 @@ parser.add_argument('--binary',default='/home/lab/out/tapzap-cosmic')
 parser.add_argument('--ipc-name',default='tapzap.sock')
 sleep=parser.add_mutually_exclusive_group()
 sleep.add_argument("--suspend",action="store_true",help="S3; requires the host wake watcher")
-sleep.add_argument("--s2idle",action="store_true",help="Freeze; requires host ACPI power-button wake after five seconds")
+sleep.add_argument("--s2idle",action="store_true",help="Freeze; requires an enabled lab PS/2 keyboard and host WakeUp key")
 options=parser.parse_args()
 if socket.gethostname()!="tapzap-pop-vm" or pwd.getpwuid(os.getuid()).pw_name!="lab":
  raise RuntimeError("Run only as lab inside the dedicated Pop VM")
@@ -119,17 +119,24 @@ try:
   success_before=int(pathlib.Path('/sys/power/suspend_stats/success').read_text())
   trace='/sys/kernel/tracing/instances/tapzap-'+capture_id
   subprocess.run(['sudo','sh','-c','mkdir '+trace+' && echo boot > '+trace+'/trace_clock && echo 1 > '+trace+'/events/power/suspend_resume/enable && echo 1 > '+trace+'/tracing_on'],check=True,timeout=5)
-  report['wake_method']='host ACPI power button' if options.s2idle else 'host QMP system_wakeup'
+  report['wake_method']='host keyboard WakeUp key' if options.s2idle else 'host QMP system_wakeup'
+  if options.s2idle:
+   report['keyboard_wakeup']=pathlib.Path('/sys/devices/platform/i8042/serio0/power/wakeup').read_text().strip()
+   assert report['keyboard_wakeup']=='enabled',report
   print('SUSPEND-REQUESTED',flush=True);(p/'suspend-requested').write_text(str(time.time()))
+  # Let the existing SSH stdout stream deliver the host coordination marker
+  # before freezing SSH itself. A new SSH request cannot observe a frozen guest.
+  time.sleep(1)
   wall=time.time();mono=time.monotonic();boot=time.clock_gettime(time.CLOCK_BOOTTIME)
   expected='PM: suspend entry (s2idle)' if options.s2idle else 'PM: suspend entry (deep)'
+  original_mode=pathlib.Path('/sys/power/mem_sleep').read_text().split('[')[1].split(']')[0]
+  selected_mode='s2idle' if options.s2idle else 'deep'
+  report['mem_sleep']={'before':original_mode,'selected':selected_mode}
   def sleep_journal():
    return subprocess.check_output(['sudo','journalctl','-k','--since','@'+str(wall),'--no-pager','-o','short-monotonic'],text=True,timeout=10)
   try:
-   if options.s2idle:
-    subprocess.run(['sudo','sh','-c','echo freeze > /sys/power/state'],check=True,timeout=30)
-   else:
-    subprocess.run(['sudo','systemctl','suspend'],check=True,timeout=30)
+   subprocess.run(['sudo','sh','-c','echo '+selected_mode+' > /sys/power/mem_sleep'],check=True,timeout=5)
+   subprocess.run(['sudo','systemctl','suspend'],check=True,timeout=30)
    # systemctl suspend only enqueues the operation. Keep the GUI alive and
    # wait for the actual kernel entry/exit before sampling a resumed frame.
    deadline=time.monotonic()+30
@@ -147,6 +154,8 @@ try:
    subprocess.run(['sudo','sh','-c','echo 0 > '+trace+'/tracing_on'],check=True,timeout=5)
    (p/'sleep-trace.txt').write_text(subprocess.check_output(['sudo','cat',trace+'/trace'],text=True,timeout=5))
    subprocess.run(['sudo','rmdir',trace],check=True,timeout=5)
+   subprocess.run(['sudo','sh','-c','echo '+original_mode+' > /sys/power/mem_sleep'],check=True,timeout=5)
+   report['mem_sleep']['restored']=pathlib.Path('/sys/power/mem_sleep').read_text().strip()
   report['suspend_success_before']=success_before
   report['suspend_success_after']=int(pathlib.Path('/sys/power/suspend_stats/success').read_text())
   assert report['suspend_success_after']==success_before+1,report
@@ -154,15 +163,23 @@ try:
    # No cpuidle driver: monotonic can advance while userspace is frozen.
    import re
    trace_text=(p/'sleep-trace.txt').read_text()
-   events=re.findall(r'(\d+\.\d+): suspend_resume: s2idle_enter\[\d+\] (begin|end)',trace_text)
+   events=re.findall(r'(\d+\.\d+): suspend_resume: machine_suspend\[\d+\] (begin|end)',trace_text)
    assert len(events)==2 and [event[1] for event in events]==['begin','end'],trace_text
-   report['s2idle_trace_seconds']=float(events[1][0])-float(events[0][0])
-   assert report['s2idle_trace_seconds']>=3,report
+   report['kernel_sleep_trace_seconds']=float(events[1][0])-float(events[0][0])
+   assert report['kernel_sleep_trace_seconds']>=3,report
   else:
    assert report['sleep_timing']['suspended_seconds']>=3, report['sleep_timing']
   assert expected in journal and 'PM: suspend exit' in journal, journal
   report['acpi_after']=acpi_registers()
   assert report['acpi_after']==report['acpi_before'],report
+  if options.suspend or options.s2idle:
+   # systemd suspend legitimately locks COSMIC. Restore this lab's desktop
+   # scene before comparing against its desktop pixels; do not loosen RGB gates.
+   rows=subprocess.check_output(['loginctl','list-sessions','--no-legend','--no-pager'],text=True,timeout=5).splitlines()
+   sessions=[row.split()[0] for row in rows if len(row.split())>=4 and row.split()[1]==str(os.getuid()) and row.split()[3]=='seat0']
+   assert len(sessions)==1,rows
+   subprocess.run(['sudo','loginctl','unlock-session',sessions[0]],check=True,timeout=5)
+   report['lab_scene_unlock_session']=sessions[0]
   # A live ON request and its lease should survive whole-guest suspend.
   measure('resume-retains-red',True)
   with (p/'drm-queue-probe.log').open('w') as probe:

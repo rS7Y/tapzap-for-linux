@@ -1,0 +1,11 @@
+{
+  "completed": true,
+  "no_arguments_launches_gui": true,
+  "dedicated_ipc_socket": true,
+  "package_files_confined": true,
+  "uninstall_removes_session": true,
+  "uninstall_retains_user_preferences": true,
+  "legacy_autostart_unchanged": true,
+  "stock_compositor_and_launcher_hashes_unchanged": true,
+  "reinstalled": true
+}

@@ -15,6 +15,7 @@ parser.add_argument('--cosmic', type=Path, required=True)
 parser.add_argument('--tapzap', type=Path, required=True)
 parser.add_argument('--tapzap-source', type=Path, required=True)
 parser.add_argument('--start-cosmic', type=Path, default=Path('/usr/bin/start-cosmic'))
+parser.add_argument('--session-copyright', type=Path, default=Path('/usr/share/doc/cosmic-session/copyright'))
 parser.add_argument('--output', type=Path, required=True)
 args = parser.parse_args()
 assert platform.system() == 'Linux' and platform.machine() == 'x86_64'
@@ -52,6 +53,7 @@ shutil.copy2(args.tapzap_source / 'src/omarchy-hyprland/integration/tapzap-omarc
 doc = root / 'usr/share/doc/tapzap-cosmic-prototype'
 doc.mkdir(parents=True)
 shutil.copy2(HERE / 'README.md', doc / 'README.md')
+shutil.copy2(args.session_copyright, doc / 'COSMIC-SESSION-COPYRIGHT')
 shutil.copy2(args.tapzap_source / 'LICENSE', doc / 'GPL-3')
 shutil.copy2(args.tapzap_source / 'src/sway/assets/OFL.txt', doc / 'OFL.txt')
 (doc / 'copyright').write_text('TAP ZAP: GPL-3.0-or-later. Patched cosmic-comp: GPL-3.0-only.\nAnybody fonts: SIL OFL 1.1. No shared system libraries are bundled.\nSee GPL-3, OFL.txt and the adjacent complete source archive with Cargo vendor sources and their original license notices.\n')

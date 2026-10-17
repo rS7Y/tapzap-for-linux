@@ -1,0 +1,12 @@
+{
+  "filename": "tapzap-cosmic-prototype_0.1.0_amd64.deb",
+  "sha256": "bba3956e5e8b085876fd8672eb3ca7cf24f8a1d156ab2121c54a22e56ca33a88",
+  "bytes": 20410812,
+  "native_binaries": {
+    "cosmic-comp": "65817c6e2704606683cf8bd4952ba159a76e2efe079e84dbbf8be04be5196674",
+    "tapzap-cosmic": "efaad27a1d7ab9e25019e3dd83b470cc858d693e0703f29dbc7c6cf9d8053aa2"
+  },
+  "runtime_dependencies": "libc6 (>= 2.39), libcairo2 (>= 1.2.4), libdisplay-info1 (>= 0.1.1), libfreetype6 (>= 2.2.1), libgbm1 (>= 21.3.0~rc1), libgcc-s1 (>= 4.2), libinput10 (>= 1.19.1), libpixman-1-0 (>= 0.30.0), libseat1 (>= 0.5.0), libstdc++6 (>= 5.2), libudev1 (>= 183), libx11-6, libxext6, libxfixes3, libxkbcommon0 (>= 0.5.0), libxrandr2, cosmic-session, cosmic-comp",
+  "prototype": true,
+  "physical_hardware_validated": false
+}

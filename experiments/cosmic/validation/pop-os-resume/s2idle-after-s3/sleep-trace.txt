@@ -1,0 +1,40 @@
+# tracer: nop
+#
+# entries-in-buffer/entries-written: 28/28   #P:4
+#
+#                                _-----=> irqs-off/BH-disabled
+#                               / _----=> need-resched
+#                              | / _---=> hardirq/softirq
+#                              || / _--=> preempt-depth
+#                              ||| / _-=> migrate-disable
+#                              |||| /     delay
+#           TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
+#              | |         |   |||||     |         |
+   systemd-sleep-5182    [001] .....   280.601096: suspend_resume: suspend_enter[1] begin
+   systemd-sleep-5182    [001] .....   280.601100: suspend_resume: sync_filesystems[0] begin
+   systemd-sleep-5182    [001] .....   280.676059: suspend_resume: sync_filesystems[0] end
+   systemd-sleep-5182    [001] .....   280.676843: suspend_resume: freeze_processes[0] begin
+   systemd-sleep-5182    [001] .....   280.711471: suspend_resume: freeze_processes[0] end
+   systemd-sleep-5182    [001] .....   280.711472: suspend_resume: suspend_enter[1] end
+   systemd-sleep-5182    [001] .....   280.711534: suspend_resume: dpm_prepare[2] begin
+   systemd-sleep-5182    [001] .....   280.711641: suspend_resume: dpm_prepare[2] end
+   systemd-sleep-5182    [001] .....   280.711641: suspend_resume: dpm_suspend[2] begin
+   systemd-sleep-5182    [000] .....   280.748708: suspend_resume: dpm_suspend[2] end
+   systemd-sleep-5182    [000] .....   280.748709: suspend_resume: dpm_suspend_late[2] begin
+   systemd-sleep-5182    [000] .....   280.748977: suspend_resume: dpm_suspend_late[2] end
+   systemd-sleep-5182    [000] .....   280.749124: suspend_resume: dpm_suspend_noirq[2] begin
+   systemd-sleep-5182    [000] .....   280.783288: suspend_resume: dpm_suspend_noirq[2] end
+   systemd-sleep-5182    [000] .....   280.783308: suspend_resume: machine_suspend[1] begin
+   systemd-sleep-5182    [000] .....   287.035067: suspend_resume: machine_suspend[1] end
+   systemd-sleep-5182    [000] .....   287.035079: suspend_resume: dpm_resume_noirq[16] begin
+   systemd-sleep-5182    [000] .....   287.049485: suspend_resume: dpm_resume_noirq[16] end
+   systemd-sleep-5182    [000] .....   287.049633: suspend_resume: dpm_resume_early[16] begin
+   systemd-sleep-5182    [000] .....   287.049870: suspend_resume: dpm_resume_early[16] end
+   systemd-sleep-5182    [000] .....   287.049873: suspend_resume: dpm_resume[16] begin
+   systemd-sleep-5182    [000] .....   287.057515: suspend_resume: dpm_resume[16] end
+   systemd-sleep-5182    [000] .....   287.057516: suspend_resume: dpm_complete[16] begin
+   systemd-sleep-5182    [000] .....   287.057633: suspend_resume: dpm_complete[16] end
+   systemd-sleep-5182    [000] .....   287.057634: suspend_resume: console_resume_all[1] begin
+   systemd-sleep-5182    [000] .l...   287.059993: suspend_resume: console_resume_all[1] end
+   systemd-sleep-5182    [000] .l...   287.059998: suspend_resume: thaw_processes[0] begin
+   systemd-sleep-5182    [000] .....   287.067169: suspend_resume: thaw_processes[0] end

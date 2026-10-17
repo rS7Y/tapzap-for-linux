@@ -1,0 +1,40 @@
+# tracer: nop
+#
+# entries-in-buffer/entries-written: 28/28   #P:4
+#
+#                                _-----=> irqs-off/BH-disabled
+#                               / _----=> need-resched
+#                              | / _---=> hardirq/softirq
+#                              || / _--=> preempt-depth
+#                              ||| / _-=> migrate-disable
+#                              |||| /     delay
+#           TASK-PID     CPU#  |||||  TIMESTAMP  FUNCTION
+#              | |         |   |||||     |         |
+   systemd-sleep-3640    [002] .....   205.104618: suspend_resume: suspend_enter[1] begin
+   systemd-sleep-3640    [002] .....   205.104623: suspend_resume: sync_filesystems[0] begin
+   systemd-sleep-3640    [000] .....   205.211248: suspend_resume: sync_filesystems[0] end
+   systemd-sleep-3640    [000] .....   205.211403: suspend_resume: freeze_processes[0] begin
+   systemd-sleep-3640    [000] .....   205.250109: suspend_resume: freeze_processes[0] end
+   systemd-sleep-3640    [000] .....   205.250110: suspend_resume: suspend_enter[1] end
+   systemd-sleep-3640    [000] .....   205.250139: suspend_resume: dpm_prepare[2] begin
+   systemd-sleep-3640    [000] .....   205.250237: suspend_resume: dpm_prepare[2] end
+   systemd-sleep-3640    [000] .....   205.250237: suspend_resume: dpm_suspend[2] begin
+   systemd-sleep-3640    [002] .....   205.280600: suspend_resume: dpm_suspend[2] end
+   systemd-sleep-3640    [002] .....   205.280601: suspend_resume: dpm_suspend_late[2] begin
+   systemd-sleep-3640    [002] .....   205.280835: suspend_resume: dpm_suspend_late[2] end
+   systemd-sleep-3640    [002] .....   205.280975: suspend_resume: dpm_suspend_noirq[2] begin
+   systemd-sleep-3640    [002] .....   205.321684: suspend_resume: dpm_suspend_noirq[2] end
+   systemd-sleep-3640    [002] .....   205.321702: suspend_resume: machine_suspend[1] begin
+   systemd-sleep-3640    [002] .....   209.107752: suspend_resume: machine_suspend[1] end
+   systemd-sleep-3640    [002] .....   209.107761: suspend_resume: dpm_resume_noirq[16] begin
+   systemd-sleep-3640    [002] .....   209.121921: suspend_resume: dpm_resume_noirq[16] end
+   systemd-sleep-3640    [002] .....   209.121994: suspend_resume: dpm_resume_early[16] begin
+   systemd-sleep-3640    [002] .....   209.122235: suspend_resume: dpm_resume_early[16] end
+   systemd-sleep-3640    [002] .....   209.122238: suspend_resume: dpm_resume[16] begin
+   systemd-sleep-3640    [000] .....   209.129219: suspend_resume: dpm_resume[16] end
+   systemd-sleep-3640    [000] .....   209.129220: suspend_resume: dpm_complete[16] begin
+   systemd-sleep-3640    [000] .....   209.129317: suspend_resume: dpm_complete[16] end
+   systemd-sleep-3640    [000] .....   209.129317: suspend_resume: console_resume_all[1] begin
+   systemd-sleep-3640    [000] .....   209.131722: suspend_resume: console_resume_all[1] end
+   systemd-sleep-3640    [000] .....   209.131726: suspend_resume: thaw_processes[0] begin
+   systemd-sleep-3640    [000] .....   209.135605: suspend_resume: thaw_processes[0] end

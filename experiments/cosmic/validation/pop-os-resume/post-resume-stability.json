@@ -1,0 +1,9 @@
+{
+  "completed": true,
+  "boot_id": "7287f3f4-db1e-4156-af9f-dfd24ec0c281",
+  "seconds_alive_after_last_resume": 154.189563443,
+  "same_compositor_pid": 1690,
+  "no_power_key_press_in_final_boot": true,
+  "keyboard_wakeup_restored": "disabled",
+  "mem_sleep_restored": "s2idle [deep]"
+}

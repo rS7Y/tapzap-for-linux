@@ -1,0 +1,23 @@
+{
+  "boot_id": "7287f3f4-db1e-4156-af9f-dfd24ec0c281",
+  "package_sha256": "c3bd4a3faac9832029b5efb2c495925342b5caf62b7aaace5468640309c1b4c3",
+  "processes": {
+    "cosmic-comp": {
+      "pid": 1690,
+      "sha256": "65817c6e2704606683cf8bd4952ba159a76e2efe079e84dbbf8be04be5196674",
+      "argv": [
+        "/opt/tapzap-cosmic-prototype/libexec/cosmic-comp"
+      ]
+    },
+    "tapzap-cosmic": {
+      "pid": 1938,
+      "sha256": "efaad27a1d7ab9e25019e3dd83b470cc858d693e0703f29dbc7c6cf9d8053aa2",
+      "argv": [
+        "/opt/tapzap-cosmic-prototype/libexec/tapzap-cosmic",
+        "gui"
+      ]
+    }
+  },
+  "efi": true,
+  "cpu_idle_driver": "none"
+}
