@@ -1,0 +1,31 @@
+--- a/ui_cairo.cpp
++++ b/ui_cairo.cpp
+@@ -811,0 +812,14 @@
++    auto backend = makeDefaultBackend();
++    std::string err;
++    const bool haveBackend = backend->init(err);
++    if (!haveBackend)
++        std::fprintf(stderr, "COSMIC compositor bridge unavailable: %s\n",
++                     err.c_str());
++    else
++        std::fprintf(stderr, "gamma backend: %s (%d output[s])\n", backend->name().c_str(),
++                     backend->outputCount());
++    // Probe before opening XWayland: mapping the first X11 window can stall
++    // compositor startup. An unavailable bridge must never show a live UI.
++    if (!haveBackend)
++        return 2;
++
+@@ -925,13 +938,0 @@
+-
+-    auto backend = makeDefaultBackend();
+-    std::string err;
+-    const bool haveBackend = backend->init(err);
+-    if (!haveBackend)
+-        std::fprintf(stderr, "gamma backend unavailable: %s (UI runs, no live tint)\n",
+-                     err.c_str());
+-    else
+-        std::fprintf(stderr, "gamma backend: %s (%d output[s])\n", backend->name().c_str(),
+-                     backend->outputCount());
+-    // The Plasma proof must never open an apparently working, unfiltered UI.
+-    if (!haveBackend && (std::getenv("TAPZAP_PLASMA_HELPER") || std::getenv("TAPZAP_WLR_ENABLE")))
+-        return 2;

@@ -1,0 +1,12 @@
+{
+  "cosmic": {
+    "revision": "742b800b518f0dafd89d0c1ace4de4935334ed18",
+    "archive_url": "https://api.github.com/repos/pop-os/cosmic-comp/tarball/742b800b518f0dafd89d0c1ace4de4935334ed18",
+    "archive_sha256": "facd7b80c196c74d898918067f56135346dc834f2f880d34dc06b2b5e6624b6d"
+  },
+  "tapzap": {
+    "revision": "982ddad7a9bbff36df1715d3cabada3cc5c10ac6",
+    "archive_url": "https://api.github.com/repos/rS7Y/tapzap-for-linux/tarball/982ddad7a9bbff36df1715d3cabada3cc5c10ac6",
+    "archive_sha256": "7bac1de2d532c8219791a86931899d28692c4ddde3ac5b89629acff538f56588"
+  }
+}

@@ -1,0 +1,5 @@
+--- a/ipc.hpp
++++ b/ipc.hpp
+@@ -18,1 +18,1 @@
+-    return base + "/tapzap.sock";
++    return base + "/tapzap-cosmic-prototype.sock";

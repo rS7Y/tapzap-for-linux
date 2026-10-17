@@ -1,0 +1,5 @@
+--- a/platform.hpp
++++ b/platform.hpp
+@@ -123,1 +123,1 @@
+-    return base + "/autostart/tapzap.desktop";
++    return base + "/autostart/tapzap-cosmic-prototype.desktop";

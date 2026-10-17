@@ -85,3 +85,11 @@ For security reports, see [SECURITY.md](SECURITY.md).
 
 [macOS and Windows](https://tapzap.app/download) are separate paid editions.
 Linux is free.
+
+## Patched COSMIC prototype
+
+A separate Pop!_OS 24.04 amd64 experiment adds a composed-desktop RGB filter
+through a patched COSMIC compositor. It requires its own selectable session;
+stock COSMIC does not expose this prototype channel. See the
+[COSMIC prototype build and setup guide](experiments/cosmic/README.md).
+Physical hardware, optical output, PWM and HDR remain unvalidated.

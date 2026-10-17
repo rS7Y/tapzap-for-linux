@@ -1,0 +1,47 @@
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -53,0 +54 @@
++pub mod tapzap;
+@@ -185,0 +187 @@
++    tapzap::init(&mut state)?;
+--- a/src/config/mod.rs
++++ b/src/config/mod.rs
+@@ -155,0 +156,3 @@
++    /// Runtime-only RGB transform supplied by the experimental TAP ZAP socket.
++    #[serde(skip)]
++    pub tapzap_rgb: Option<[f32; 3]>,
+@@ -160,0 +164 @@
++            && self.tapzap_rgb.is_none_or(|rgb| rgb == [1.0; 3])
+@@ -416,0 +421 @@
++            tapzap_rgb: None,
+@@ -754,0 +760,4 @@
++    }
++
++    pub fn set_tapzap_rgb(&mut self, rgb: [f32; 3]) {
++        self.accessibility_filter.1.tapzap_rgb = Some(rgb);
+--- a/src/backend/render/mod.rs
++++ b/src/backend/render/mod.rs
+@@ -423,0 +424 @@
++            UniformName::new("tapzap_rgb", UniformType::_3f),
+@@ -1290 +1291,2 @@
+-                    target.format().unwrap_or(Fourcc::Abgr8888),
++                    // Use a renderable RGBA intermediate even with a 24-bit nested window.
++                    Fourcc::Abgr8888,
+@@ -1363,0 +1366 @@
++                        Uniform::new("tapzap_rgb", screen_filter.filter.tapzap_rgb.unwrap_or([1.0; 3])),
+--- a/src/backend/render/shaders/offscreen.frag
++++ b/src/backend/render/shaders/offscreen.frag
+@@ -24,0 +25 @@
++uniform vec3 tapzap_rgb;
+@@ -85,0 +87,3 @@
++    // TAP ZAP multiplies channels without lifting black or changing alpha.
++    color.rgb *= tapzap_rgb;
++
+--- a/src/backend/kms/surface/mod.rs
++++ b/src/backend/kms/surface/mod.rs
+@@ -1896,0 +1897 @@
++                Uniform::new("tapzap_rgb", screen_filter.tapzap_rgb.unwrap_or([1.0; 3])),
+@@ -1931 +1932,2 @@
+-            Uniform::new("invert", if screen_filter.inverted { 1. } else { 0. }),
++            Uniform::new("tapzap_rgb", screen_filter.tapzap_rgb.unwrap_or([1.0; 3])),
++                Uniform::new("invert", if screen_filter.inverted { 1. } else { 0. }),

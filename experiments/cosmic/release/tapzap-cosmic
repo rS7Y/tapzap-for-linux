@@ -1,0 +1,13 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-or-later
+set -eu
+prefix=/opt/tapzap-cosmic-prototype
+config_base=${XDG_CONFIG_HOME:-"$HOME/.config"}
+export TAPZAP_DESKTOP_CONFIG_HOME="$config_base"
+export XDG_CONFIG_HOME="$config_base/tapzap-cosmic-prototype"
+export TAPZAP_LAUNCHER="$prefix/bin/tapzap-cosmic"
+export TAPZAP_ASSETS="$prefix/share/assets"
+if [ "$#" -eq 0 ]; then
+    set -- gui
+fi
+exec "$prefix/libexec/tapzap-cosmic" "$@"
