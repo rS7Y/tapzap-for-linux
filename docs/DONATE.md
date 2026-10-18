@@ -3,6 +3,17 @@
 TAP ZAP for Linux is free and open source. Optional donations help support
 Linux development, maintenance and testing. Any amount is welcome.
 
+## Bitcoin (BTC)
+
+Scan this QR code with your Bitcoin wallet, or copy the complete address below.
+Use **Bitcoin mainnet (on-chain)**.
+
+<img src="donations/bitcoin.png" width="240" height="240" alt="Bitcoin donation QR code">
+
+```text
+bc1qcxqx4rj8at43vd0fvj3qpedd6h4kjeem2l337e
+```
+
 ## Monero (XMR)
 
 Scan this QR code with your Monero wallet, or copy the complete address below.

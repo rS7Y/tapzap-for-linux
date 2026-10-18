@@ -8,10 +8,24 @@ builds are experimental.
 
 ## Support free Linux development
 
-**Donate Monero (XMR)** · [Donation guide](docs/DONATE.md#monero-xmr)
+**[Donate Bitcoin (BTC)](docs/DONATE.md#bitcoin-btc)** · **[Donate Monero (XMR)](docs/DONATE.md#monero-xmr)**
 
 Optional donations help support TAP ZAP for Linux development and testing.
-Scan with a Monero wallet, or copy the complete **Monero mainnet** address:
+Scan the matching QR code with your wallet, or copy the complete address.
+
+### Bitcoin (BTC)
+
+**Bitcoin mainnet · on-chain**
+
+<img src="docs/donations/bitcoin.png" width="180" height="180" alt="Bitcoin donation QR code">
+
+```text
+bc1qcxqx4rj8at43vd0fvj3qpedd6h4kjeem2l337e
+```
+
+### Monero (XMR)
+
+**Monero mainnet**
 
 <img src="docs/donations/monero.png" width="180" height="180" alt="Monero donation QR code">
 
