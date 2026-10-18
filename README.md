@@ -6,6 +6,19 @@ schedules for DAY, EVENING and NIGHT.
 Free and open source. The native Omarchy plugin is available now; other Linux
 builds are experimental.
 
+## Support free Linux development
+
+**Donate Monero (XMR)** · [Donation guide](docs/DONATE.md#monero-xmr)
+
+Optional donations help support TAP ZAP for Linux development and testing.
+Scan with a Monero wallet, or copy the complete **Monero mainnet** address:
+
+<img src="docs/donations/monero.png" width="180" height="180" alt="Monero donation QR code">
+
+```text
+84SfyWdAMJL9c5WWj6kDMjQxDSLujnpKqMxmnpUsGcqE9m5C7BCmADyHb4QKCs6iumjXYzdiwyNPRCFtVt3NuiLPEcAwfX5
+```
+
 | Main panel | Settings | Auto Schedule |
 |---|---|---|
 | <img src="docs/screenshots/omarchy/main.png" width="256" alt="Warmth and brightness faders"> | <img src="docs/screenshots/omarchy/settings.png" width="256" alt="Settings"> | <img src="docs/screenshots/omarchy/auto-schedule.png" width="256" alt="Daily schedules"> |
