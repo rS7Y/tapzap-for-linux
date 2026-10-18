@@ -8,7 +8,7 @@ builds are experimental.
 
 ## Support free Linux development
 
-**[Donate Bitcoin (BTC)](docs/DONATE.md#bitcoin-btc)** · **[Donate Monero (XMR)](docs/DONATE.md#monero-xmr)**
+**[Donate Bitcoin (BTC)](docs/DONATE.md#bitcoin-btc)** · **[Donate Monero (XMR)](docs/DONATE.md#monero-xmr)** · **[Donate via Lightning](docs/DONATE.md#lightning)**
 
 Optional donations help support TAP ZAP for Linux development and testing.
 Scan the matching QR code with your wallet, or copy the complete address.
@@ -32,6 +32,16 @@ bc1qcxqx4rj8at43vd0fvj3qpedd6h4kjeem2l337e
 ```text
 84SfyWdAMJL9c5WWj6kDMjQxDSLujnpKqMxmnpUsGcqE9m5C7BCmADyHb4QKCs6iumjXYzdiwyNPRCFtVt3NuiLPEcAwfX5
 ```
+
+### Lightning
+
+**Bitcoin over the Lightning Network**
+
+```text
+linenchicken8@primal.net
+```
+
+[Lightning QR code and wallet instructions](docs/DONATE.md#lightning)
 
 | Main panel | Settings | Auto Schedule |
 |---|---|---|

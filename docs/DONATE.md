@@ -25,5 +25,27 @@ Use **Monero mainnet**.
 84SfyWdAMJL9c5WWj6kDMjQxDSLujnpKqMxmnpUsGcqE9m5C7BCmADyHb4QKCs6iumjXYzdiwyNPRCFtVt3NuiLPEcAwfX5
 ```
 
+## Lightning
+
+Scan this reusable QR code with your Lightning wallet, or paste the Lightning
+address below. Use **Bitcoin over the Lightning Network**.
+
+<img src="donations/lightning.png" width="240" height="240" alt="Lightning donation QR code">
+
+```text
+linenchicken8@primal.net
+```
+
+The QR code uses LNURL-pay so you can choose the amount in your wallet.
+
+<details>
+<summary>LNURL for wallets that need it</summary>
+
+```text
+LNURL1DP68GURN8GHJ7URJD9KKZMPWDEJHGTEWWAJKCMPDDDHX7AMW9AKXUATJD3CZ7MRFDEJKUCMGD93KKETW8QZCVUHL
+```
+
+</details>
+
 No fixed donation amount. Donations are optional and do not purchase a license
 for the separate paid macOS or Windows editions.
