@@ -4,6 +4,15 @@ This list summarizes unresolved findings in the imported experimental source
 snapshots. Do not deliberately reproduce the failure modes. They remain open
 until a later change documents a reproduced fix and a relevant test.
 
+## COSMIC prototype status
+
+The [COSMIC 0.1.0 prototype](COSMIC.md) requires the separate patched login
+session on Pop!_OS 24.04 amd64; stock COSMIC lacks the filter channel. Native
+install, early login/autostart, OFF/Quit and both sleep modes passed in a VM
+with two virtual displays. Physical GPU/panel, optical output, PWM, HDR and
+physical hotplug remain unvalidated. The older backend findings below remain
+open for those snapshots and are not a new audit of the COSMIC prototype.
+
 ## Mint candidate status
 
 The [Mint 0.1.0 candidate](MINT.md) fixes a separate X11 popover reopening

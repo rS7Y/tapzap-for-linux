@@ -6,6 +6,15 @@ compile does not prove that the compositor, GPU, physical display, recovery
 path, or tray integration works on your machine. All variants remain
 experimental while the documented recovery findings are unresolved.
 
+## COSMIC prototype
+
+The Pop!_OS 24.04 amd64 prototype has a separate patched compositor and build
+pipeline; it is not a `make build VARIANT=cosmic` backend. See [COSMIC setup](COSMIC.md),
+the [complete source release](https://github.com/rS7Y/tapzap-for-linux/releases/tag/cosmic-v0.1.0)
+and its [tagged build guide](https://github.com/rS7Y/tapzap-for-linux/blob/cosmic-v0.1.0/experiments/cosmic/README.md).
+Keep this experiment isolated from stock COSMIC. VM checks do not establish
+physical GPU/panel, PWM, HDR or physical hotplug compatibility.
+
 ## Native build prerequisites
 
 The root command `make build VARIANT=<variant>` requires the native backend,

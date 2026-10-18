@@ -6,6 +6,7 @@ releases below; none certifies your system or general physical compatibility.
 
 | Build | Intended session/backend | Saved evidence | Important limits | Status |
 |---|---|---|---|---|
+| COSMIC prototype 0.1.0 | Pop!_OS 24.04 amd64, separate patched COSMIC Wayland session | Native DEB install, login/autostart, controls, OFF/Quit, two virtual displays and both s2idle/S3 passed in a Pop!_OS VM. See [COSMIC setup](COSMIC.md). | Stock COSMIC lacks the prototype channel. Physical GPU/panel, optical output, PWM, HDR and physical hotplug unvalidated. | Experimental, VM-tested prototype |
 | Mint 0.1.0 | Mint 22.3 Cinnamon 6.6.4, native X11/XRandR, x86_64 | Public source `5e4d0b8` built inside Mint; color self-test, 35 tests, GUI/tray, virtual warmth/red/dimming and exact OFF gamma restoration passed. Ten hide/reopen cycles including focus passed. See [Mint setup](MINT.md). | VM only. Native Mint panel, PWM, HDR, hotplug, suspend and broader GPU coverage untested; X11 recovery findings remain open. | Experimental, VM-tested candidate |
 | X11 | X11/XRandR | Earlier Ubuntu 24.04 x86_64 work; see [validation](VALIDATION.md). | Crash/recovery, external gamma ownership, backlight, UI, and IPC findings remain open. | Experimental; not broadly supported |
 | GNOME Wayland | GNOME/Mutter helper; optional wlroots protocol path | Earlier Ubuntu 24.04 x86_64 helper/protocol work. | Visual confirmation and general hardware coverage are not established; helper needs a GNOME session and GObject introspection. | Experimental; not broadly supported |
@@ -17,7 +18,7 @@ releases below; none certifies your system or general physical compatibility.
 
 - The saved desktop test machine was an Intel UHD 630/i915 Dell XPS 15 9570
   running Ubuntu 24.04 x86_64. It is one environment, not a compatibility
-  guarantee.
+  guarantee. The separate COSMIC row above describes its own VM environment.
 - No ARM64, HDR, broad GPU/driver, suspend/resume, or monitor hotplug matrix is
   established.
 - Software gamma/CTM changes are not the same as hardware backlight changes.

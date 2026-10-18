@@ -6,6 +6,8 @@ uninstall. Follow that guide from an unlocked Omarchy desktop. Marketplace/Git
 installs require the native engine as a manual dependency.
 Mint 22.3 Cinnamon X11 has a [source-matched experimental candidate](MINT.md),
 built and tested inside a Mint VM. Native Mint display testing is still pending.
+Pop!_OS 24.04 COSMIC Wayland has a [source-matched amd64 DEB prototype](COSMIC.md),
+VM-tested and requiring its separate **TAP ZAP COSMIC (prototype)** login session.
 Other variants currently require source builds; older website beta ZIPs are not
 source-matched to this repository.
 
@@ -30,5 +32,6 @@ and checksum-verified archive, not for the source directory itself; use its
 `--archive` option as described in the [Omarchy guide](OMARCHY.md).
 
 For the other experimental builds, leave launch-at-login disabled during
-evaluation. Keep all installations per-user. If the display does not return to its prior state,
+evaluation. Keep source-built app installations per-user. The COSMIC DEB installs its separate
+prototype session system-wide using the package manager; follow its own guide. If the display does not return to its prior state,
 stop and use [safe recovery steps](TROUBLESHOOTING.md).

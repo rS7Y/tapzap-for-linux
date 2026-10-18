@@ -36,6 +36,18 @@ red, dimming, virtual gamma restoration and tray reopening passed. Testing on
 a native Mint installation is still pending. This is an X11 candidate;
 Cinnamon Wayland, physical PWM and hardware recovery are not validated.
 
+## Pop!_OS 24.04 / COSMIC Wayland
+
+Download the [COSMIC prototype 0.1.0 DEB](https://github.com/rS7Y/tapzap-for-linux/releases/download/cosmic-v0.1.0/tapzap-cosmic-prototype_0.1.0_amd64.deb), then follow the
+[COSMIC setup guide](docs/COSMIC.md) for checksums, installation and removal.
+The [experimental release](https://github.com/rS7Y/tapzap-for-linux/releases/tag/cosmic-v0.1.0) includes complete matching source and licenses.
+
+**Requires the separate TAP ZAP COSMIC (prototype) login session.** Stock COSMIC
+does not expose the prototype filter channel; its ordinary session is retained.
+VM-tested on Pop!_OS 24.04 amd64: installation, early login/autostart, controls,
+OFF/Quit, two virtual displays and both s2idle and S3/deep suspend/resume passed.
+Physical GPU/panel, optical output, PWM, HDR and physical hotplug remain unvalidated.
+
 ## Other Linux desktops
 
 Choose the build for your desktop session:
