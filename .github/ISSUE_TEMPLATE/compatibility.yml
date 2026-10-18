@@ -13,6 +13,7 @@ body:
     attributes:
       label: Build you tried
       options:
+        - Pop!_OS 24.04 / COSMIC prototype
         - Omarchy / Hyprland
         - X11
         - GNOME Wayland
@@ -32,7 +33,7 @@ body:
     id: desktop
     attributes:
       label: Desktop, version, and session
-      description: Include X11 or Wayland if known. "Not sure" is fine.
+      description: Include X11 or Wayland if known. For COSMIC, name the selected login session.
       placeholder: e.g. KDE Plasma 6 on Wayland
     validations:
       required: true

@@ -1,8 +1,18 @@
 # Publishing Linux releases
 
-Omarchy and the Mint Cinnamon X11 candidate have source-matched public binary
-releases. Their release processes and test scopes are separate. Other backend
+Omarchy, the Mint Cinnamon X11 candidate and the COSMIC prototype have
+source-matched public binary releases. Their release processes and test scopes are separate. Other backend
 snapshots retain their experimental status and older unmatched website ZIPs.
+
+## COSMIC prototype
+
+[COSMIC 0.1.0](COSMIC.md) is a separate Pop!_OS 24.04 amd64 experimental
+prerelease with a DEB, complete matching source, checksums, install guide,
+validation and build information. Its experiment code stays on the dedicated
+branch/tag. Do not mark it as the latest Omarchy release or replace published
+payloads silently. The RTC follow-up changes the VM lab QEMU, not the released
+native app binaries. Preserve the distinction between original release reports,
+follow-up evidence and physical hardware testing.
 
 ## Omarchy
 

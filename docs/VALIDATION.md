@@ -1,9 +1,31 @@
 # Linux validation and limits
 
-Updated 2026-10-17. Tap Zap for Linux is free and experimental. The checks
+Updated 2026-10-18. Tap Zap for Linux is free and experimental. The checks
 below describe the evidence available for these separate backend snapshots;
 they do not certify a general Linux release or guarantee that a filter can be
 restored after every compositor, driver, display, or process failure.
+
+## COSMIC prototype release correspondence
+
+[COSMIC prototype 0.1.0](COSMIC.md) is a separate prerelease for Pop!_OS 24.04
+amd64. Tag `cosmic-v0.1.0` points to `3ecfdb5844ebb97e25771bea281f6711e0d5e8a3`.
+Its DEB SHA-256 is
+`bba3956e5e8b085876fd8672eb3ca7cf24f8a1d156ab2121c54a22e56ca33a88`.
+The release includes complete matching source, locked dependencies, build
+information and original validation reports. Experiment code remains on its
+branch/tag; this main-branch guide does not add a stock COSMIC backend.
+
+Native install/remove/reinstall, early-login/autostart, controls, OFF/Quit,
+two virtual displays and s2idle → S3/deep → s2idle passed in the Pop!_OS VM.
+The original release report used host-assisted wake; the later
+[RTC follow-up](https://github.com/rS7Y/tapzap-for-linux/blob/32502dafe05807f81c789324ef64af66b0ceff47/experiments/cosmic/vm-rtc/validation/SUMMARY.md)
+fixed the separate QEMU 10.2.2/Q35 RTC/SCI lab defect and passed five awake RTC
+alarms plus both sleep modes with unchanged app binaries and no host wake injection.
+That follow-up is separate from the original release assets. It does not change
+the prerelease tag or imply hardware suspend validation.
+
+These checks used virtual KMS and software rendering. Physical GPU/panel,
+optical output, PWM, HDR and physical hotplug remain unvalidated.
 
 ## Evidence available
 

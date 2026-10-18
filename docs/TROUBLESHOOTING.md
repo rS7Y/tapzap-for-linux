@@ -32,3 +32,12 @@ color shift would put you at risk.
 
 For help, file a concise report with the [GitHub issue forms](https://github.com/rS7Y/tapzap-for-linux/issues/new/choose).
 For security-sensitive details, use the private route in [SECURITY.md](../SECURITY.md).
+
+## Pop!_OS / COSMIC prototype
+
+Follow the [COSMIC guide](COSMIC.md). If the prototype channel is unavailable,
+check that the login screen selected **TAP ZAP COSMIC (prototype)**; ordinary
+COSMIC does not expose it. Use OFF or Quit if the display behaves unexpectedly.
+To return to stock COSMIC, log out and select its ordinary session. Remove the
+prototype package only from another session, as the guide describes. Include
+the package version and selected session in a reviewed, redacted bug report.

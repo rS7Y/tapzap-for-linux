@@ -14,6 +14,7 @@ body:
     attributes:
       label: Linux build
       options:
+        - Pop!_OS 24.04 / COSMIC prototype
         - Omarchy / Hyprland
         - X11
         - GNOME Wayland
@@ -26,7 +27,7 @@ body:
     id: release
     attributes:
       label: Release
-      description: Shown in the ZIP name, if known.
+      description: "Shown in the package name, if known (COSMIC prototype: 0.1.0)."
       placeholder: 20260907-beta1
   - type: input
     id: distro
@@ -39,7 +40,7 @@ body:
     id: desktop
     attributes:
       label: Desktop and session
-      description: Include the desktop version and X11 or Wayland if known.
+      description: "Include the desktop version and X11 or Wayland. COSMIC: name the selected login session."
       placeholder: e.g. GNOME 48 on Wayland
     validations:
       required: true

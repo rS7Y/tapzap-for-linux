@@ -5,6 +5,16 @@ predate the public source snapshot are not treated as releases of this source.
 
 ## Unreleased
 
+## COSMIC prototype 0.1.0 — 2026-10-17
+
+Publish a separate experimental Pop!_OS 24.04 amd64 DEB with patched compositor,
+complete matching source and checksums. Requires its own prototype login session;
+stock COSMIC is retained. VM checks cover installation, early login/autostart,
+controls, OFF/Quit, two virtual displays and both s2idle and S3/deep sleep.
+An October 18 RTC follow-up fixed the separate QEMU lab wake path with unchanged
+app binaries. Physical GPU/panel, optical output, PWM, HDR and physical hotplug
+remain unvalidated. [Download and setup](docs/COSMIC.md).
+
 ## Mint 0.1.0 — 2026-10-17
 
 Publish a source-matched experimental x86_64 candidate for Linux Mint 22.3
